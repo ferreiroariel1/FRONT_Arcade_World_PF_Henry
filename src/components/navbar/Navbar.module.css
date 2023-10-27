@@ -1,0 +1,39 @@
+.homeForm {
+  color: rgb(26, 51, 3);
+  font-weight: bold;
+  font-size: 20px;
+  
+}
+
+.navContent{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 2rem;
+  inline-size: 95vw;
+  block-size: 6vh;
+  margin-top: 1rem;
+  
+}
+.butn {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  margin-inline-end: 2rem; 
+  gap: 1rem;
+}
+
+.butn button {
+  font-size: 14px;
+  color:rgb(61, 40, 12);
+  background-color: rgb(214, 180, 135);
+  font-weight: bold;
+  border-radius: 0.5rem;
+  margin-inline-end: 1rem;
+  inline-size: 5rem;
+  block-size: 28px;
+}
+.butn button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}

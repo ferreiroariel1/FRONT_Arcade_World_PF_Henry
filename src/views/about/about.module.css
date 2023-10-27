@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .descrip {
+    margin: 20px;
+  }
+  
+  .mission, .vision {
+    flex-basis: 50%;
+    margin: 20px;
+    font-size: 15px;
+    border: solid black 2px;
+    background-color: rgb(209, 207, 207);
+  }
+  
+  .container > div:nth-child(2) {
+    display: flex;
+  }
