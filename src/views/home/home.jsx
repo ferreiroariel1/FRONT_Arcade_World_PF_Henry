@@ -11,13 +11,13 @@ import Paginate from "../../components/paginate/Paginate";
 
 const Home = () => {
   const dispatch = useDispatch()
-  const game = useSelector((g)=>g.games)
+  const game = useSelector((g)=>g?.games)
   useEffect(()=>{
    dispatch(getGames())
   },[])
-  const NewsGame =game.games.slice(0,6)
-  const DownloadsGame=game.games.slice(7,13)
-  const RatingGame = game.games.slice(14,20) 
+  const NewsGame =game?.games?.slice(0,6)
+  const DownloadsGame=game?.games?.slice(7,13)
+  const RatingGame = game?.games?.slice(14,20) 
   return (
     <div>
 <div>
@@ -26,14 +26,14 @@ const Home = () => {
        <div className="News">
         <h2>NEWS</h2>
        {
-        NewsGame.map((games)=>{
+        NewsGame?.map((games)=>{
           
           return(
             <News 
-              keys={games.id}
-              name={games.name}
-              image={games.image}
-              price={games.price}
+              keys={games?.id}
+              name={games?.name}
+              image={games?.image}
+              price={games?.price}
             />
           )
         })
@@ -42,13 +42,13 @@ const Home = () => {
        <div className="Downloads">
         <h2>DOWNLOADS</h2>
        {
-        DownloadsGame.map((games)=>{
+        DownloadsGame?.map((games)=>{
           return(
             <MoreDownload 
-              keys={games.id}
-              name={games.name}
-              image={games.image}
-              price={games.price}
+              keys={games?.id}
+              name={games?.name}
+              image={games?.image}
+              price={games?.price}
             />
           )
         })
@@ -57,13 +57,13 @@ const Home = () => {
        <div className="Rating">
         <h2>RATING</h2>
        {
-        RatingGame.map((games)=>{
+        RatingGame?.map((games)=>{
           return(
             <Rating 
-              keys={games.id}
-              name={games.name}
-              image={games.image}
-              price={games.price}
+              keys={games?.id}
+              name={games?.name}
+              image={games?.image}
+              price={games?.price}
             />
           )
         })
