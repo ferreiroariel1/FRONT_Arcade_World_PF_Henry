@@ -7,8 +7,7 @@ const initialState = {
   platforms:[],
   genres:[],
   selectedGenre: null,
-  selectedPlatform: null
-
+  selectedPlatform: null,
  }  
 
  const rootReducer = (state=initialState, action)=> {
