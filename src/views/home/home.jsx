@@ -5,17 +5,17 @@ import {useDispatch,useSelector}from 'react-redux'
 import { getGames } from "../../redux/actions"
 import { useEffect } from "react"
 import Carrusel from './components/Carrusel'
-import Paginate from "../../components/paginate/Paginate";
 import './style/StyleHome.css'
-
 
 
 const Home = () => {
   const dispatch = useDispatch()
   const game = useSelector((g)=>g?.games)
+  
   useEffect(()=>{
    dispatch(getGames())
-  },[])
+  },[dispatch])
+
   const NewsGame =game?.games?.slice(0,5)
   const DownloadsGame=game?.games?.slice(7,12)
   const RatingGame = game?.games?.slice(14,19) 
@@ -32,7 +32,7 @@ const Home = () => {
           
           return(
             <News 
-              keys={games?.id}
+              key={games?.id}
               name={games?.name}
               image={games?.image}
               price={games?.price}
@@ -47,7 +47,7 @@ const Home = () => {
         DownloadsGame?.map((games)=>{
           return(
             <MoreDownload 
-              keys={games?.id}
+              key={games?.id}
               name={games?.name}
               image={games?.image}
               price={games?.price}
@@ -62,7 +62,7 @@ const Home = () => {
         RatingGame?.map((games)=>{
           return(
             <Rating 
-              keys={games?.id}
+              key={games?.id}
               name={games?.name}
               image={games?.image}
               price={games?.price}
@@ -70,10 +70,7 @@ const Home = () => {
           )
         })
        }
-       <div>
-         <Paginate/>
-
-       </div>
+       
     </div>
   </div>
   )

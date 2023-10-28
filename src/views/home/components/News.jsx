@@ -1,4 +1,4 @@
-import React from 'react'
+
 import '../style/NewsStyle.css'
 
 function News({name,image,price}) {

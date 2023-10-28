@@ -26,12 +26,11 @@ function Navbar() {
             <Link to= '/cart'><h2>🛒</h2></Link>
             <Link to= '/auth'><button className={style.button} >Log In</button></Link>
           </div>
-          
-        </>
+         </>
       )}
       </div>
     </div>
-  )
+   )
 }
 
 export default Navbar;

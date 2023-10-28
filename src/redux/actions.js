@@ -14,7 +14,7 @@ export const getGames = ()=>{
    const dataGm = (await axios.get('http://localhost:3001/videogame')).data;
    return dispatch({
       type: GET_GAMES, 
-      payload: { games: dataGm }
+      payload: dataGm
     });
     
   } catch (error) {
