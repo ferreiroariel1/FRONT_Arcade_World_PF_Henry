@@ -3,8 +3,10 @@ import { About, Home, Library, Store, Detail } from './views/index.js';
 import Navbar from './components/navbar/navbar.jsx';
 import Cart from './components/cart/cart.jsx';
 import Auth from './components/auth/Auth.jsx';
+import Profile from './components/profile/Profile.jsx';
 
 import './App.css'
+
 
 function App() {
 
@@ -19,6 +21,7 @@ function App() {
         <Route path='/detail/:id' element={<Detail/>}></Route>
         <Route path="/cart" element={<Cart/>} />
         <Route path="/auth" element={<Auth/>} />
+        <Route path='/user/profile' element={<Profile/>}/>
       </Routes>
     </div>
   )

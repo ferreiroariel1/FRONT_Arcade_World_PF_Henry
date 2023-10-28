@@ -1,25 +1,31 @@
 import React, {useState}  from 'react'
-import { useForm,  } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import Swal from 'sweetalert2';
 import UploadImage from '../upload/UploadImage';
+import { postRegister } from "../../redux/actions";
+import { useDispatch } from "react-redux";
+
 import './auth.css'
 
 const Create = () => {
+    const dispatch = useDispatch();
     const [image, setImage] = useState('');
     const { register, handleSubmit, formState: { errors, isDirty }, reset, watch } = useForm();
 
     const onSubmit = handleSubmit((data)=> {
         data.image = image
         console.log('data', data);
-        Swal.fire({
-            position: 'top-center',
-            icon: 'success',
-            title: 'Welcome to arcade World',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        setImage('')
-        reset()
+        dispatch(postRegister(data)).then((response) => {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Welcome to arcade World',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            setImage('')
+            reset()
+        })
     });
     return ( 
         <div>
@@ -60,8 +66,8 @@ const Create = () => {
                         className='loginInput' 
                         type="text" 
                         placeholder='Last Name'
-                        name="lastName"
-                        {...register('lastName', {
+                        name="lastname"
+                        {...register('lastname', {
                             required: {
                                 value: true,
                                 message: 'Last name is required'
@@ -71,13 +77,13 @@ const Create = () => {
                         })}
                     />
                     {
-                        errors.lastName?.type === "required" && <span className="error">Last name is required</span>
+                        errors.lastname?.type === "required" && <span className="error">Last name is required</span>
                     }
                     {
-                        errors.lastName?.type === "maxLength" && <span className="error">Last name is To long</span>
+                        errors.lastname?.type === "maxLength" && <span className="error">Last name is To long</span>
                     }
                     {
-                        errors.lastName?.type === "minLength" && <span className="error">Last name is to short</span>
+                        errors.lastname?.type === "minLength" && <span className="error">Last name is to short</span>
                     }     
                     </div>
                     <div>
@@ -85,8 +91,8 @@ const Create = () => {
                             className='loginInput' 
                             type="text" 
                             placeholder='Usuario'
-                            name="nickName"
-                            {...register('nickName', {
+                            name="nickname"
+                            {...register('nickname', {
                                 required: {
                                     value: true,
                                     message: 'UserName is required'
@@ -94,16 +100,16 @@ const Create = () => {
                             })}
                         />
                         {
-                            errors.user?.type === "required" && <span className="error">User name is required</span>
+                            errors.nickname?.type === "required" && <span className="error">User name is required</span>
                         }
                     </div>
                     <div>
                     <input
                         className='loginInput' 
-                        type="email"
-                        name="email"
+                        type="Email"
+                        name="Email"
                         placeholder='Email'
-                        {...register("email", {
+                        {...register("Email", {
                         required: {
                         value: true,
                         message: "Email is required",

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import './upload.css'
 const UploadImage = ({image, setImage}) => {
 
     const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ const UploadImage = ({image, setImage}) => {
     return ( 
         <div>
             <input 
-                style={{textAlign: 'left', padding: '0.8rem 10rem 0.8rem 0.5rem', marginBottom: '2rem'}}
+                className='file-select'
                 id="exampleFile"
                 name="file"
                 type="file"
