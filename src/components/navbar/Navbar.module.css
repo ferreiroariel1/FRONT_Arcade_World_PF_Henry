@@ -1,5 +1,14 @@
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  background-color: #1e181d;
+}
+.logo{
+  width: 8em;
+}
 .homeForm {
-  color: rgb(26, 51, 3);
+  color: rgb(185, 182, 182);
   font-weight: bold;
   font-size: 20px;
   
@@ -17,13 +26,10 @@
 }
 .butn {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
-  margin-inline-end: 2rem; 
   gap: 1rem;
 }
 
-.butn button {
+.butn .button {
   font-size: 14px;
   color:rgb(61, 40, 12);
   background-color: rgb(214, 180, 135);
@@ -33,7 +39,7 @@
   inline-size: 5rem;
   block-size: 28px;
 }
-.butn button:hover {
+.butn .button:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
