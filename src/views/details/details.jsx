@@ -5,9 +5,8 @@ const Details = () =>{
      
    return(
     <>
-<br />
-    <div className={style.container}>
-<div>
+   <div className={style.container}>
+     <div>
     <img className={style.photo} src="https://m.media-amazon.com/images/I/81KUccM8azL._AC_UF1000,1000_QL80_.jpg" alt="" />
     <p className={style.score}>Score</p>
     <div className={style.attributes}>
