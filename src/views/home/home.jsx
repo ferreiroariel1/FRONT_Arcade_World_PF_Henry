@@ -20,10 +20,12 @@ const Home = () => {
   const DownloadsGame=game?.slice(7,12)
   const RatingGame = game?.slice(14,19) 
   const IMGcarrusel=game?.slice(23,29)
+  console.log(typeof IMGcarrusel)
   return (
     <div className='Home'>
 <div>
   <Carrusel imagenes={IMGcarrusel}/>
+  
 </div>
         <h2 className='titulo'>NEWS</h2>
        <div className="News com">
