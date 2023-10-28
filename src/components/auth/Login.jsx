@@ -10,7 +10,7 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors, isDirty }, reset } = useForm();
   const onSubmit = handleSubmit((data) =>{
     dispatch(postLogin(data)).then((response) => {
-      if(data.nick_email === response.data.nickname || data.nick_email === response.data.Email && data.password === response.data.password){
+      if(data.nick_email === response.data.user.nickname || data.nick_email === response.data.user.Email && data.password === response.data.user.password){
         Swal.fire({
           position: 'top-center',
           icon: 'success',
