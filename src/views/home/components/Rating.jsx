@@ -1,4 +1,4 @@
-
+import PropTypes from "prop-types";
 import '../style/RatingStyle.css'
 
 function Rating({name,image,price}) {
@@ -11,6 +11,11 @@ function Rating({name,image,price}) {
         </div>
     </div>
   )
+}
+Rating.propTypes= {
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired
 }
 
 export default Rating

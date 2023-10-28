@@ -4,7 +4,7 @@ import Rating from './components/Rating'
 import {useDispatch,useSelector}from 'react-redux'
 import { getGames } from "../../redux/actions"
 import { useEffect } from "react"
-import Carrusel from './components/Carrusel'
+import Carrusel from './components/Carrusel.jsx';
 import './style/StyleHome.css'
 
 
@@ -25,6 +25,7 @@ const Home = () => {
     <div className='Home'>
 <div>
   <Carrusel imagenes={IMGcarrusel}/>
+  
 </div>
         <h2 className='titulo'>NEWS</h2>
        <div className="News com">

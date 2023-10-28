@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { gamePlataforms, gameGenres, setSelectedPlatform, setSelectedGenre, resetFilters } from "../../redux/actions";
+import style from './Sider.module.css';
+import { gamePlataforms, gameGenres, setSelectedPlatform, setSelectedGenre, resetFilters, filterGames } from "../../redux/actions";
 
 function Sider() {
 
@@ -20,8 +21,9 @@ function Sider() {
 
   function handlePlatformSelectChange(e) {
     let platformName =  e.target.value;
-    dispatch(setSelectedPlatform({ platformName}));
+    dispatch(setSelectedPlatform(platformName));
     console.log(platformName);
+    dispatch(filterGames());
   }
  
   //fetch genres:
@@ -39,14 +41,15 @@ function Sider() {
 
   function handleGenreSelectChange(e) {
     let genresName =  e.target.value;
-    dispatch(setSelectedGenre({ genresName }));
+    dispatch(setSelectedGenre(genresName));
     console.log(genresName);
+    dispatch(filterGames());
   }
 
 
   return (
-    <div>
-        <div>
+    <div className={style.form}>
+        <div >
            <label htmlFor="">Platforms: </label>
            <select onChange={handlePlatformSelectChange}>
               {allPlatformsArray.map((platformName, index) => (

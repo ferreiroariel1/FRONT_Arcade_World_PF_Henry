@@ -1,4 +1,4 @@
-
+import PropTypes from "prop-types";
 import '../style/NewsStyle.css'
 
 function News({name,image,price}) {
@@ -11,6 +11,11 @@ function News({name,image,price}) {
         </div>
     </div>
   )
+}
+News.propTypes= {
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired
 }
 
 export default News

@@ -1,5 +1,5 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import Profile from '../profile/Profile'
+// import Profile from '../profile/Profile'
 import Search from '../search/Search';
 import style from './Navbar.module.css'
 import logo from './logo1Sinfondo.png'
@@ -27,9 +27,11 @@ function Navbar() {
         <>
           <div className={style.butn}>
             <Link to= '/cart'><h2>🛒</h2></Link>
-            <Link to= '/auth'><button className={style.button} >Log In</button></Link>
+            {location.pathname !== '/user/profile' && (
+              <Link to= '/auth'><button className={style.button} >Log In</button></Link>
+            )}
           </div>
-         </>
+        </>
       )}
       </div>
     </div>

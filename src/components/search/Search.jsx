@@ -1,5 +1,5 @@
 
-import React from "react"
+
 import './StyleSearch.css'
 import lupa from './lupa.svg'
 
