@@ -1,15 +1,15 @@
 .wrap {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   inline-size: 100vw;
-  margin-inline-start: -2.5rem;
-}
+  background-color: #1a2a3b;
+ }
 .contenStore {
   display: flex;
   flex-direction: column;
   inline-size: 95vw;
-  block-size: 82vh;
+  block-size: 86vh;
   overflow-x: hidden;  
   overflow-y: hidden;  
 }

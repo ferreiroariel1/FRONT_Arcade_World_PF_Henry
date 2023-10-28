@@ -4,7 +4,7 @@ import Rating from './components/Rating'
 import {useDispatch,useSelector}from 'react-redux'
 import { getGames } from "../../redux/actions"
 import { useEffect } from "react"
-import Carrusel from './components/Carrusel'
+import Carrusel from './components/Carrusel.jsx';
 import './style/StyleHome.css'
 
 
@@ -16,10 +16,10 @@ const Home = () => {
    dispatch(getGames())
   },[dispatch])
 
-  const NewsGame =game?.games?.slice(0,5)
-  const DownloadsGame=game?.games?.slice(7,12)
-  const RatingGame = game?.games?.slice(14,19) 
-  const IMGcarrusel=game?.games?.slice(23,29)
+  const NewsGame =game?.slice(0,5)
+  const DownloadsGame=game?.slice(7,12)
+  const RatingGame = game?.slice(14,19) 
+  const IMGcarrusel=game?.slice(23,29)
   return (
     <div className='Home'>
 <div>

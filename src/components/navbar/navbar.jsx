@@ -1,5 +1,5 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import Profile from '../profile/Profile'
+// import Profile from '../profile/Profile'
 import Search from '../search/Search';
 import style from './Navbar.module.css'
 import logo from './logo1Sinfondo.png'

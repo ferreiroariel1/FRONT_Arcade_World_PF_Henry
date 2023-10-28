@@ -2,8 +2,9 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import PropTypes from "prop-types";
 
-function Carrusel({imagenes})
+function Carrusel({imagenes}) {
   const settings = {
     dots: true,
     infinite: true,
@@ -27,7 +28,7 @@ function Carrusel({imagenes})
       {
         images?.map((i)=>{
           return(
-            <div>
+            <div key={i.id}>
               <img src={i?.imagen} alt="" style={{width:'100%',height:'30em'}} />
             <h2>{i?.name}</h2>
             </div>
@@ -36,6 +37,9 @@ function Carrusel({imagenes})
       }
     </Slider>
   )
+}
+Carrusel.propTypes= {
+  imagenes: PropTypes.array.isRequired
 }
 
 export default Carrusel
