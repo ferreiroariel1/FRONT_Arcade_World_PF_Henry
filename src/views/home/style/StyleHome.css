@@ -1,0 +1,10 @@
+.Home{
+   background-color: #1a2a3b;
+    width: 100%;
+}
+.com{
+   display: flex;
+   justify-content: space-between;
+   flex-wrap: wrap;
+   width: 100%;
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import '../style/RatingStyle.css'
 
 function Rating({name,image,price}) {
   return (
