@@ -1,3 +1,4 @@
+
 import '../style/NewsStyle.css'
 
 function News({name,image,price}) {
