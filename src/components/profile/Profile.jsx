@@ -18,11 +18,11 @@ const Profile = () => {
     
     return ( 
         <div>
-            <img src={userData.image} alt="" />
-            <p>Name: {userData.name}</p>
-            <p>Lastname: {userData.lastname}</p>
-            <p>Nickname: {userData.nickname}</p>
-            <p>Email: {userData.Email}</p>
+            <img src={userData?.user?.image} alt="" />
+            <p>Name: {userData?.user?.name}</p>
+            <p>Lastname: {userData?.user?.lastname}</p>
+            <p>Nickname: {userData?.user?.nickname}</p>
+            <p>Email: {userData?.user?.Email}</p>
         </div>
      );
 }
