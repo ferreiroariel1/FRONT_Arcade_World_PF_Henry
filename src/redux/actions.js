@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 export const GET_GAMES = 'GET_GAMES';
 export const GET_GAME_NAME = 'GET_GAME_NAME';
 export const GET_GAME_ID = 'GET_GAME_ID';
@@ -90,19 +89,16 @@ export const setSelectedPlatform = (platform) => {
     payload: platform
   }
 };
-
 export function postRegister(payload){
   return async function(){
     const data = await
     axios.post("http://localhost:3001/user/register",payload)
     return data
   }
-}
-
+};
 export function postLogin(payload){
   return async function(){
     const data = await
     axios.post("http://localhost:3001/user/login",payload)
     return data
-  }
-}
+ };
