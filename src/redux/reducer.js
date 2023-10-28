@@ -1,4 +1,6 @@
-import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID, GET_PLATFORMS, GET_GENRES, SET_SELECTED_GENRE,SET_SELECTED_PLATFORM} from './actions.js';
+import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID, 
+         GET_PLATFORMS, GET_GENRES, SET_SELECTED_GENRE,
+         SET_SELECTED_PLATFORM, SET_AUTHENTICATED, SET_USER_DATA } from './actions.js';
 
 const initialState = {
   games:[],
@@ -7,8 +9,9 @@ const initialState = {
   platforms:[],
   genres:[],
   selectedGenre: null,
-  selectedPlatform: null
-
+  selectedPlatform: null,
+  isAuthenticated: false,
+  userData: null,
  }  
 
  const rootReducer = (state=initialState, action)=> {
@@ -49,6 +52,17 @@ const initialState = {
             ...state,
             selectedPlatform: action.payload,
           };
+
+    case SET_AUTHENTICATED:
+            return {
+              ...state,
+              isAuthenticated: action.payload,
+            };
+    case SET_USER_DATA:
+              return {
+                ...state,
+                userData: action.payload,
+              };
     default:
       return {...state}  
   }
