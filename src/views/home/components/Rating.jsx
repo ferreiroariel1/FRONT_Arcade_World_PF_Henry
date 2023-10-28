@@ -3,10 +3,12 @@ import '../style/RatingStyle.css'
 
 function Rating({name,image,price}) {
   return (
-    <div>
-        <img src={image} alt="" style={{width:'12em'}}/>
-        <h5>{name}</h5>
-        <p>{price}</p>
+    <div className='cardss'>
+        <img className='imagess' src={image} alt=""/>
+        <div className='TPSS'>
+        <h5 className='titless'>{name}</h5>
+        <p className='pricess'>{price}</p>
+        </div>
     </div>
   )
 }

@@ -1,0 +1,80 @@
+.cards {
+    position: relative;
+    width: 11em;
+    height: 17em;
+    box-shadow: 0px 1px 13px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 120ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+padding: 2em;
+  }
+ 
+  .cards::after {
+    content: "Add to Cart";
+    padding-top: 1.25em;
+    padding-left: 1.25em;
+    position: absolute;
+    left: 0;
+    bottom: -60px;
+    background: #00AC7C;
+    color: #fff;
+    height: 2.5em;
+    width: 92%;
+    transition: all 80ms;
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: 0;
+  }
+  
+  .titles {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    left: 0.625em;
+    bottom: 1.875em;
+    font-weight: 400;
+    color: white;
+  }
+
+
+   .prices {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1em;
+    background-color: green;
+   padding: 0.5em;
+    width: 30%;
+    color: white;
+  }
+  
+  .cards:hover::after {
+    bottom: 0;
+    opacity: 1;
+  }
+  .TPS{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:2em ;
+    position: absolute;
+    width: 130%;
+    background-color: rgba(0, 0, 0, 0.663);
+  }
+  
+  .cards:active {
+    transform: scale(0.98);
+  }
+  
+  .cards:active::after {
+    content: "Added !";
+    height: 3.125em;
+  }
+  
+  .images {
+    background: rgb(241, 241, 241);
+    width: 130%;
+    height: 120%;
+    display: grid;
+    place-items: center;
+  }
