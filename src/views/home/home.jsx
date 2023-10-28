@@ -22,6 +22,7 @@ const Home = () => {
     <div>
 <div>
   <Carrusel/>
+  hola
 </div>
        <div className="News">
         <h2>NEWS</h2>
