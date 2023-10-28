@@ -12,6 +12,7 @@ function Store() {
   return (
     <div className={style.wrap}>
       <div className={style.contenStore}>
+         <Sider/>
           <Cards games={paginate}/>
         <div className={style.storePage} >
           <Paginate prevChange={changePrev} 

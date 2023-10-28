@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import style from './Sider.module.css';
 import { gamePlataforms, gameGenres, setSelectedPlatform, setSelectedGenre, resetFilters } from "../../redux/actions";
 
 function Sider() {
@@ -45,8 +46,8 @@ function Sider() {
 
 
   return (
-    <div>
-        <div>
+    <div className={style.form}>
+        <div >
            <label htmlFor="">Platforms: </label>
            <select onChange={handlePlatformSelectChange}>
               {allPlatformsArray.map((platformName, index) => (
