@@ -8,6 +8,7 @@ export const SET_SELECTED_GENRE = 'SET_SELECTED_GENRE';
 export const SET_SELECTED_PLATFORM = 'SET_SELECTED_PLATFORM';
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 export const SET_USER_DATA = 'SET_USER_DATA';
+export const RESET_FILTERS = 'RESET_FILTERS';
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -15,7 +16,7 @@ export const getGames = ()=>{
    const dataGm = (await axios.get('http://localhost:3001/videogame')).data;
    return dispatch({
       type: GET_GAMES, 
-      payload: { games: dataGm }
+      payload: dataGm
     });
     
   } catch (error) {
@@ -91,6 +92,11 @@ export const setSelectedPlatform = (platform) => {
     payload: platform
   }
 };
+export const resetFilters = () => {
+  return {
+    type: RESET_FILTERS
+  }
+}
 export function postRegister(payload){
   return async function(){
     const data = await

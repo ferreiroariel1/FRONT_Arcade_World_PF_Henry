@@ -1,11 +1,14 @@
-import React from 'react'
+
+import '../style/NewsStyle.css'
 
 function News({name,image,price}) {
   return (
-    <div>
-        <img src={image} alt="" style={{width:'12em'}}/>
-        <h5>{name}</h5>
-        <p>{price}</p>
+    <div className='card'>
+      <img className='image' src={image} alt="" />
+        <div className='TP'>
+        <h5 className='title'>{name}</h5>
+        <p className='price'>$/{price}</p>
+        </div>
     </div>
   )
 }

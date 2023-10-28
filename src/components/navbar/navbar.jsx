@@ -2,20 +2,19 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import Profile from '../profile/Profile'
 import Search from '../search/Search';
 import style from './Navbar.module.css'
+import logo from './logo1Sinfondo.png'
 
 function Navbar() {
   const location = useLocation();
   
   return (
-    <div>
-      {location.pathname !== '/auth' && location.pathname !== '/user/profile' && (
-        <>
-          <div className={style.butn}>
-          <Link to= '/cart'><h2>🛒</h2></Link>
-            <Link to= '/auth'><button >Log In</button></Link>
-          </div>
+
+    <div className={style.navbar}>
+      
+      <img src={logo} alt="logo" className={style.logo}/>
+      {location.pathname !== '/auth' && (
+
           <Search/>
-        </>
       )}
       <div className={style.navContent}>
         <NavLink className={style.homeForm} to= '/'>Home</NavLink>
@@ -23,8 +22,18 @@ function Navbar() {
         <NavLink className={style.homeForm} to= '/library'>Library</NavLink>
         <NavLink className={style.homeForm} to= '/about'>About</NavLink>
       </div>
+      <div>
+      {location.pathname !== '/auth' && (
+        <>
+          <div className={style.butn}>
+            <Link to= '/cart'><h2>🛒</h2></Link>
+            <Link to= '/auth'><button className={style.button} >Log In</button></Link>
+          </div>
+         </>
+      )}
+      </div>
     </div>
-  )
+   )
 }
 
 export default Navbar;
