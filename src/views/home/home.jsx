@@ -16,10 +16,11 @@ const Home = () => {
    dispatch(getGames())
   },[dispatch])
 
-  const NewsGame =game?.games?.slice(0,5)
-  const DownloadsGame=game?.games?.slice(7,12)
-  const RatingGame = game?.games?.slice(14,19) 
-  const IMGcarrusel=game?.games?.slice(23,29)
+  const NewsGame =game?.slice(0,5)
+  const DownloadsGame=game?.slice(7,12)
+  const RatingGame = game?.slice(14,19) 
+  const IMGcarrusel=game?.slice(23,29)
+
   return (
     <div className='Home'>
 <div>

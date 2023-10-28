@@ -1,9 +1,9 @@
-
 import Slider from 'react-slick';
+import PropTypes from "prop-types";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-function Carrusel({imagenes})
+function Carrusel({imagenes}){
   const settings = {
     dots: true,
     infinite: true,
@@ -37,5 +37,7 @@ function Carrusel({imagenes})
     </Slider>
   )
 }
-
+Carrusel.propTypes= {
+  imagenes: PropTypes.array.isRequired
+}
 export default Carrusel
