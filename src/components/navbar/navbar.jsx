@@ -1,4 +1,5 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import Profile from '../profile/Profile'
 import Search from '../search/Search';
 import style from './Navbar.module.css'
 
@@ -14,6 +15,7 @@ function Navbar() {
             <Link to= '/auth'><button >Log In</button></Link>
           </div>
           <Search/>
+          <Profile/>
         </>
       )}
       <div className={style.navContent}>
