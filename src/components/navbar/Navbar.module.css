@@ -1,20 +1,19 @@
-.wrap {
+.navbar{
   display: flex;
-  justify-content: center;
-  }
-.content {
-  display: flex;
-  flex-direction: column;
-  inline-size: 95vw;
-  margin-block-start: -8px;
-}
-.contentHb {
-  display: flex;
+  align-items: center;
   justify-content:space-between;
-  inline-size: 95vw;
-  block-size: 6vh;
-  gap: 2rem;
+  background-color: #1e181d;
 }
+.logo{
+  width: 8em;
+}
+.homeForm {
+  color: rgb(185, 182, 182);
+  font-weight: bold;
+  font-size: 20px;
+  
+}
+
 .navContent{
   display: flex;
   flex-direction: row;
@@ -22,23 +21,15 @@
   gap: 2rem;
   inline-size: 95vw;
   block-size: 6vh;
-}
-.homeForm {
-  color: rgb(26, 51, 3);
-  font-weight: bold;
-  font-size: 20px;
+  margin-top: 1rem;
+  
 }
 .butn {
   display: flex;
-  justify-content: end;
-  align-items: center;
-  margin-inline-end: 2rem; 
-  inline-size: 20vw;
-  block-size: 2rem;
   gap: 1rem;
 }
 
-.butn button {
+.butn .button {
   font-size: 14px;
   color:rgb(61, 40, 12);
   background-color: rgb(214, 180, 135);
@@ -48,7 +39,7 @@
   inline-size: 5rem;
   block-size: 28px;
 }
-.butn button:hover {
+.butn .button:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
