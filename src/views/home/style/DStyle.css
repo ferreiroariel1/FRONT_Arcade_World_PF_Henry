@@ -10,6 +10,7 @@
     justify-content: center;
     background: #fff;
 padding: 2em;
+margin-bottom:1em ;
   }
  
   .cards::after {
@@ -58,7 +59,7 @@ padding: 2em;
     align-items: center;
     margin-top:2em ;
     position: absolute;
-    width: 130%;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.663);
   }
   

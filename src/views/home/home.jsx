@@ -25,7 +25,7 @@ const Home = () => {
 <div>
   <Carrusel imagenes={IMGcarrusel}/>
 </div>
-        <h2 style={{margin:'2em'}}>NEWS</h2>
+        <h2 className='titulo'>NEWS</h2>
        <div className="News com">
        {
         NewsGame?.map((games)=>{
@@ -41,7 +41,7 @@ const Home = () => {
         })
        }
        </div>
-        <h2 style={{margin:'2em'}}>DOWNLOADS</h2>
+        <h2 className='titulo' >DOWNLOADS</h2>
        <div className="Downloads com">
        {
         DownloadsGame?.map((games)=>{
@@ -56,7 +56,7 @@ const Home = () => {
         })
        }
        </div>
-        <h2 style={{margin:'2em'}}>RATING</h2>
+        <h2 className='titulo'>RATING</h2>
        <div className="Rating com">
        {
         RatingGame?.map((games)=>{

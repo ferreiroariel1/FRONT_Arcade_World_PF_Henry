@@ -1,11 +1,14 @@
 .Home{
    background-color: #1a2a3b;
-   min-height: 290vh;
+   min-height: 296vh;
     width: 100%;
 }
 .com{
    display: flex;
-   justify-content: space-between;
+   justify-content: space-around;
    flex-wrap: wrap;
    width: 100%;
+}
+.titulo{
+    margin: 2.5em;
 }
