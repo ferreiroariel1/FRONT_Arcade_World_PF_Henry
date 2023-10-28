@@ -1,9 +1,10 @@
 import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID, 
          GET_PLATFORMS, GET_GENRES, SET_SELECTED_GENRE,
-         SET_SELECTED_PLATFORM, SET_AUTHENTICATED, SET_USER_DATA } from './actions.js';
+         SET_SELECTED_PLATFORM, SET_AUTHENTICATED, SET_USER_DATA, RESET_FILTERS } from './actions.js';
 
 const initialState = {
   games:[],
+  allGames:[],
   gameId: [],
   gameFilter: [],
   platforms:[],
@@ -52,7 +53,12 @@ const initialState = {
             ...state,
             selectedPlatform: action.payload,
           };
-
+    case RESET_FILTERS:
+          return {
+            ...state,
+            selectedGenre: null,
+            selectedPlatform: null,
+          };
     case SET_AUTHENTICATED:
             return {
               ...state,

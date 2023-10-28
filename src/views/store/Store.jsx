@@ -1,7 +1,9 @@
+import Sider from "../../components/sider/Sider"
 import Cards from "../../components/cards/Cards";
 import Paginate from '../../components/paginate/Paginate.jsx';
 import usePage  from "../../components/utils/usePage";
 import style from './Store.module.css';
+
 
 function Store() {
   
@@ -18,9 +20,7 @@ function Store() {
             pageTotal={totPagine}
           />
           </div> 
-        
       </div>
-
     </div>
   )
 }
