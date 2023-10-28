@@ -1,13 +1,35 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useForm } from 'react-hook-form';
+import { postLogin } from "../../redux/actions";
+import Swal from 'sweetalert2';
+import { useDispatch } from "react-redux";
 import './auth.css'
 
 const Login = () => {
-    
+  const dispatch = useDispatch();
   const { register, handleSubmit, formState: { errors, isDirty }, reset } = useForm();
-
   const onSubmit = handleSubmit((data) =>{
-    console.log('data', data);
+    dispatch(postLogin(data)).then((response) => {
+      if(data.nick_email === response.data.nickname || data.nick_email === response.data.Email && data.password === response.data.password){
+        Swal.fire({
+          position: 'top-center',
+          icon: 'success',
+          title: 'Welcome back',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        console.log('bienvendio')
+      } else {
+        Swal.fire({
+          position: 'top-center',
+          icon: 'error',
+          title: 'Sorry',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        console.log('negativo')
+      }
+  })
     reset()   //limpiamos campos luego de mandar la data
   });
 
