@@ -98,3 +98,11 @@ export function postRegister(payload){
     return data
   }
 }
+
+export function postLogin(payload){
+  return async function(){
+    const data = await
+    axios.post("http://localhost:3001/user/login",payload)
+    return data
+  }
+}
