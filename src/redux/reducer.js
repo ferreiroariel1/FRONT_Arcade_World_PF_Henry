@@ -31,7 +31,7 @@ const initialState = {
     case GET_GAME_ID:
        return {
         ...state,
-        gameId: action.payload
+        gameId: action.payload,
         };
     case GET_PLATFORMS:
         return {
