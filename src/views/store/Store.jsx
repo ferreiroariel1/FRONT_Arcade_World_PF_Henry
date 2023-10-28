@@ -1,8 +1,8 @@
-
+import Sider from "../../components/sider/Sider"
 
 function Store() {
   return (
-    <div>Store</div>
+    <div>Sider</div>
   )
 }
 
