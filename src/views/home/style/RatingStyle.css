@@ -1,16 +1,16 @@
 .cardss {
-    position: relative;
-    width: 11.875em;
-    height: 17em;
-    box-shadow: 0px 1px 13px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: all 120ms;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    padding: 2em;
-    margin-bottom:1em ;
+  position: relative;
+  width: 11.875em;
+  height: 17em;
+  box-shadow: 0px 1px 13px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 120ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 1.5em 3.5em;
+  margin-bottom:1em ;
 
   }
  
@@ -24,7 +24,7 @@
     background: #00AC7C;
     color: #fff;
     height: 2.5em;
-    width: 92%;
+    width: 93.3%;
     transition: all 80ms;
     font-weight: 600;
     text-transform: uppercase;
@@ -75,8 +75,8 @@
   
   .imagess {
     background: rgb(241, 241, 241);
-    width: 130%;
-    height: 120%;
+    width: 150%;
+    height: 110%;
     display: grid;
     place-items: center;
   }
