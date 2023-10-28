@@ -8,14 +8,13 @@ function Navbar() {
   
   return (
     <div>
-      {location.pathname !== '/login' && (
+      {location.pathname !== '/auth' && location.pathname !== '/user/profile' && (
         <>
           <div className={style.butn}>
           <Link to= '/cart'><h2>🛒</h2></Link>
             <Link to= '/auth'><button >Log In</button></Link>
           </div>
           <Search/>
-          <Profile/>
         </>
       )}
       <div className={style.navContent}>

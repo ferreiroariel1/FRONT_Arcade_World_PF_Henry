@@ -1,13 +1,18 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { postLogin } from "../../redux/actions";
-import Swal from 'sweetalert2';
 import { useDispatch } from "react-redux";
+import { postLogin, setAuthenticated, setUserData  } from "../../redux/actions";
+import Swal from 'sweetalert2';
 import './auth.css'
 
 const Login = () => {
+  //para uso del form
+  const { register, handleSubmit, formState: { errors, isDirty }, reset } = useForm();  
+  //para uso de redux
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit, formState: { errors, isDirty }, reset } = useForm();
+
   const onSubmit = handleSubmit((data) =>{
     dispatch(postLogin(data)).then((response) => {
       if(data.nick_email === response.data.nickname || data.nick_email === response.data.Email && data.password === response.data.password){
@@ -18,7 +23,13 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500
         })
-        console.log('bienvendio')
+        console.log('Welcome');
+        //Autenticación para pasar al profile
+        dispatch(setAuthenticated(true));
+        //Toma de datos para pasarlos al profile
+        dispatch(setUserData(response.data));
+        //Migración al profile
+        navigate('/user/profile');
       } else {
         Swal.fire({
           position: 'top-center',

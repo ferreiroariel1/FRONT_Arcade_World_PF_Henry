@@ -6,6 +6,8 @@ export const GET_PLATFORMS = 'GET_PLATFORMS';
 export const GET_GENRES = 'GET_GENRES';
 export const SET_SELECTED_GENRE = 'SET_SELECTED_GENRE';
 export const SET_SELECTED_PLATFORM = 'SET_SELECTED_PLATFORM';
+export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
+export const SET_USER_DATA = 'SET_USER_DATA';
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -95,10 +97,24 @@ export function postRegister(payload){
     axios.post("http://localhost:3001/user/register",payload)
     return data
   }
-};
+}
 export function postLogin(payload){
   return async function(){
     const data = await
     axios.post("http://localhost:3001/user/login",payload)
     return data
- };
+  }
+}
+export function setUserData(userData) {
+  return {
+    type: SET_USER_DATA,
+    payload: userData,
+  };
+}
+export function setAuthenticated(isAuthenticated) {
+  return {
+    type: SET_AUTHENTICATED,
+    payload: isAuthenticated,
+  };
+}
+
