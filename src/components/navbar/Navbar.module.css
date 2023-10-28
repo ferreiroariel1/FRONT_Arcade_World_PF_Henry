@@ -1,10 +1,20 @@
-.homeForm {
-  color: rgb(26, 51, 3);
-  font-weight: bold;
-  font-size: 20px;
-  
+.wrap {
+  display: flex;
+  justify-content: center;
+  }
+.content {
+  display: flex;
+  flex-direction: column;
+  inline-size: 95vw;
+  margin-block-start: -8px;
 }
-
+.contentHb {
+  display: flex;
+  justify-content:space-between;
+  inline-size: 95vw;
+  block-size: 6vh;
+  gap: 2rem;
+}
 .navContent{
   display: flex;
   flex-direction: row;
@@ -12,14 +22,19 @@
   gap: 2rem;
   inline-size: 95vw;
   block-size: 6vh;
-  margin-top: 1rem;
-  
+}
+.homeForm {
+  color: rgb(26, 51, 3);
+  font-weight: bold;
+  font-size: 20px;
 }
 .butn {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
+  justify-content: end;
+  align-items: center;
   margin-inline-end: 2rem; 
+  inline-size: 20vw;
+  block-size: 2rem;
   gap: 1rem;
 }
 

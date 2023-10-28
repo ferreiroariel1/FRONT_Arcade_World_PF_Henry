@@ -6,22 +6,25 @@ function Navbar() {
   const location = useLocation();
   
   return (
-    <div>
-      {location.pathname !== '/login' && (
-        <>
-          <div className={style.butn}>
-          <Link to= '/cart'><h2>🛒</h2></Link>
-            <Link to= '/auth'><button >Log In</button></Link>
+    <div className={style.wrap}>
+      <div className={style.content} >
+        {location.pathname !== '/login' && (
+          <div className={style.contentHb}>
+            <Search/>
+            <div className={style.butn}>
+            <Link to= '/cart'><h2>🛒</h2></Link>
+              <Link to= '/auth'><button >Log In</button></Link>
+            </div>
           </div>
-          <Search/>
-        </>
-      )}
-      <div className={style.navContent}>
-        <NavLink className={style.homeForm} to= '/'>Home</NavLink>
-        <NavLink className={style.homeForm} to= '/store'>Store</NavLink>
-        <NavLink className={style.homeForm} to= '/library'>Library</NavLink>
-        <NavLink className={style.homeForm} to= '/about'>About</NavLink>
+        )}
+        <div className={style.navContent}>
+          <NavLink className={style.homeForm} to= '/'>Home</NavLink>
+          <NavLink className={style.homeForm} to= '/store'>Store</NavLink>
+          <NavLink className={style.homeForm} to= '/library'>Library</NavLink>
+          <NavLink className={style.homeForm} to= '/about'>About</NavLink>
+        </div>
       </div>
+
     </div>
   )
 }
