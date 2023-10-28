@@ -1,0 +1,20 @@
+.wrap {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  inline-size: 100vw;
+  margin-inline-start: -2.5rem;
+}
+.contenStore {
+  display: flex;
+  flex-direction: column;
+  inline-size: 95vw;
+  block-size: 82vh;
+  overflow-x: hidden;  
+  overflow-y: hidden;  
+}
+.storePage {
+  display: flex;
+  justify-content: center;
+  margin-inline-start: 0.5rem;
+}
