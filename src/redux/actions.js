@@ -6,6 +6,7 @@ export const GET_PLATFORMS = 'GET_PLATFORMS';
 export const GET_GENRES = 'GET_GENRES';
 export const SET_SELECTED_GENRE = 'SET_SELECTED_GENRE';
 export const SET_SELECTED_PLATFORM = 'SET_SELECTED_PLATFORM';
+export const FILTER_GAMES = 'FILTER_GAMES';
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const RESET_FILTERS = 'RESET_FILTERS';
@@ -24,6 +25,7 @@ export const getGames = ()=>{
   }
 }
 };
+
 export const gameByName = (name)=> {
 return async function(dispatch) {
   try {
@@ -92,11 +94,28 @@ export const setSelectedPlatform = (platform) => {
     payload: platform
   }
 };
-export const resetFilters = () => {
-  return {
-    type: RESET_FILTERS
+export const filterGames = () => {
+  return (dispatch, getState) => {
+    const { games, selectedGenre, selectedPlatform } = getState();
+    let filteredGames = games;
+    if (selectedGenre) {
+      filteredGames = filteredGames.filter(game => game.genres.includes(selectedGenre));
+    } if (selectedPlatform) {
+      filteredGames = filteredGames.filter(game => game.platforms.includes(selectedPlatform));
+    } dispatch({
+      type: FILTER_GAMES,
+      payload: filteredGames
+    });
   }
-}
+};
+export const resetFilters = () => {
+  return (dispatch) => {
+    dispatch({
+      type: RESET_FILTERS,
+    });
+    dispatch(filterGames());
+  }
+};
 export function postRegister(payload){
   return async function(){
     const data = await

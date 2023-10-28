@@ -9,9 +9,9 @@
   -webkit-text-size-adjust: 100%;
 }
 
-* {
+/* * {
 box-sizing: border-box;
- }
+ } */
 h1,
 h2,
 h3,
@@ -33,6 +33,13 @@ body {
   font-family: inherit;
   vertical-align: baseline;
  
+}
+
+html,
+body {
+  height: auto;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 a {

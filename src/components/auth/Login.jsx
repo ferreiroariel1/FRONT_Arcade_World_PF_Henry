@@ -15,22 +15,7 @@ const Login = () => {
 
   const onSubmit = handleSubmit((data) =>{
     dispatch(postLogin(data)).then((response) => {
-      if(data.nick_email === response.data.nickname || data.nick_email === response.data.Email && data.password === response.data.password){
-        Swal.fire({
-          position: 'top-center',
-          icon: 'success',
-          title: 'Welcome back',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        console.log('Welcome');
-        //Autenticación para pasar al profile
-        dispatch(setAuthenticated(true));
-        //Toma de datos para pasarlos al profile
-        dispatch(setUserData(response.data));
-        //Migración al profile
-        navigate('/user/profile');
-      } else {
+      if(response.data.login === false){
         Swal.fire({
           position: 'top-center',
           icon: 'error',
@@ -39,7 +24,23 @@ const Login = () => {
           timer: 1500
         })
         console.log('negativo')
-      }
+      
+      } else {
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Welcome back',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      console.log('Welcome');
+      //Autenticación para pasar al profile
+      dispatch(setAuthenticated(true));
+      //Toma de datos para pasarlos al profile
+      dispatch(setUserData(response.data));
+      //Migración al profile
+      navigate('/user/profile');
+    }
   })
     reset()   //limpiamos campos luego de mandar la data
   });
