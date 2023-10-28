@@ -90,3 +90,11 @@ export const setSelectedPlatform = (platform) => {
     payload: platform
   }
 };
+
+export function postRegister(payload){
+  return async function(){
+    const data = await
+    axios.post("http://localhost:3001/user/register",payload)
+    return data
+  }
+}
