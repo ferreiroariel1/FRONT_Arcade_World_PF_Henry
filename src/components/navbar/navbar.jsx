@@ -1,4 +1,5 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import Profile from '../profile/Profile'
 import Search from '../search/Search';
 import style from './Navbar.module.css'
 
@@ -7,7 +8,7 @@ function Navbar() {
   
   return (
     <div>
-      {location.pathname !== '/login' && (
+      {location.pathname !== '/auth' && location.pathname !== '/user/profile' && (
         <>
           <div className={style.butn}>
           <Link to= '/cart'><h2>🛒</h2></Link>

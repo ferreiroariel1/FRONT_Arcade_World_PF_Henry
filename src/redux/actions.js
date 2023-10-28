@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 export const GET_GAMES = 'GET_GAMES';
 export const GET_GAME_NAME = 'GET_GAME_NAME';
 export const GET_GAME_ID = 'GET_GAME_ID';
@@ -7,6 +6,8 @@ export const GET_PLATFORMS = 'GET_PLATFORMS';
 export const GET_GENRES = 'GET_GENRES';
 export const SET_SELECTED_GENRE = 'SET_SELECTED_GENRE';
 export const SET_SELECTED_PLATFORM = 'SET_SELECTED_PLATFORM';
+export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
+export const SET_USER_DATA = 'SET_USER_DATA';
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -90,7 +91,6 @@ export const setSelectedPlatform = (platform) => {
     payload: platform
   }
 };
-
 export function postRegister(payload){
   return async function(){
     const data = await
@@ -98,7 +98,6 @@ export function postRegister(payload){
     return data
   }
 }
-
 export function postLogin(payload){
   return async function(){
     const data = await
@@ -106,3 +105,16 @@ export function postLogin(payload){
     return data
   }
 }
+export function setUserData(userData) {
+  return {
+    type: SET_USER_DATA,
+    payload: userData,
+  };
+}
+export function setAuthenticated(isAuthenticated) {
+  return {
+    type: SET_AUTHENTICATED,
+    payload: isAuthenticated,
+  };
+}
+
