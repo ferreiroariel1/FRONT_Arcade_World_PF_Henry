@@ -10,6 +10,8 @@ export const FILTER_GAMES = 'FILTER_GAMES';
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const RESET_FILTERS = 'RESET_FILTERS';
+export const RESET_PLATFORM_FILTER = 'RESET_PLATFORM_FILTER';
+export const RESET_GENRE_FILTER = 'RESET_GENRE_FILTER';
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -95,25 +97,42 @@ export const setSelectedPlatform = (platform) => {
 };
 export const filterGames = () => {
   return (dispatch, getState) => {
-    const { games, selectedGenre, selectedPlatform } = getState();
-    let filteredGames = games;
-    if (selectedGenre) {
-      filteredGames = filteredGames.filter(game => game.genres.includes(selectedGenre));
-    } if (selectedPlatform) {
-      filteredGames = filteredGames.filter(game => game.platforms.includes(selectedPlatform));
-    } dispatch({
+    const { allGames, selectedGenre, selectedPlatform } = getState();
+    let filteredGames = [...allGames]; // Crear una copia del array
+    if (selectedGenre && selectedGenre !== "") {
+      filteredGames = filteredGames.filter((game) =>
+        game.genres.includes(selectedGenre)
+      );
+    }
+    if (selectedPlatform && selectedPlatform !== "") {
+      filteredGames = filteredGames.filter((game) =>
+        game.platforms.includes(selectedPlatform)
+      );
+    }
+    dispatch({
       type: FILTER_GAMES,
-      payload: filteredGames
+      payload: filteredGames,
     });
+  };
+};
+export const resetPlatformFilter = () => {
+  return {
+    type: RESET_PLATFORM_FILTER,
+  }
+};
+
+export const resetGenreFilter = () => {
+  return {
+    type: RESET_GENRE_FILTER,
   }
 };
 export const resetFilters = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: RESET_FILTERS,
     });
     dispatch(filterGames());
-  }
+  };
 };
 export function postRegister(payload){
   return async function(){

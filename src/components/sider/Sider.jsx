@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import style from './Sider.module.css';
-import { gamePlataforms, gameGenres, setSelectedPlatform, setSelectedGenre, resetFilters, filterGames } from "../../redux/actions";
+import { gamePlataforms, gameGenres, setSelectedPlatform, setSelectedGenre, resetFilters, filterGames, resetGenreFilter } from "../../redux/actions";
 
 function Sider() {
 
@@ -16,13 +16,15 @@ function Sider() {
 //este codigo es para visualizar el reset filter
   let selectedPlatform = useSelector(state => state.selectedPlatform);
   useEffect(() => {
-    console.log(selectedPlatform);
   }, [selectedPlatform]);
 
   function handlePlatformSelectChange(e) {
     let platformName =  e.target.value;
-    dispatch(setSelectedPlatform(platformName));
-    console.log(platformName);
+    if (platformName === "") {
+      dispatch(resetPlatformFilter());
+    } else {
+      dispatch(setSelectedPlatform(platformName));
+    }
     dispatch(filterGames());
   }
  
@@ -36,13 +38,15 @@ function Sider() {
   //este codigo es para visualizar el reset filter
   let selectedGenre = useSelector(state => state.selectedGenre);
   useEffect(() => {
-    console.log(selectedGenre);
   }, [selectedGenre]);
 
   function handleGenreSelectChange(e) {
     let genresName =  e.target.value;
-    dispatch(setSelectedGenre(genresName));
-    console.log(genresName);
+    if (genresName === "") {
+      dispatch(resetGenreFilter());
+    } else {
+      dispatch(setSelectedGenre(genresName));
+    }
     dispatch(filterGames());
   }
 
@@ -52,6 +56,7 @@ function Sider() {
         <div >
            <label htmlFor="">Platforms: </label>
            <select onChange={handlePlatformSelectChange}>
+           <option value="">Todos</option>
               {allPlatformsArray.map((platformName, index) => (
                 <option key={index} value={platformName}>
                   {platformName}
@@ -63,6 +68,7 @@ function Sider() {
         <div>
             <label htmlFor="">Genres: </label>
             <select onChange={handleGenreSelectChange}>
+            <option value="">Todos</option>
               {allGenresArray.map((genresName, index) => (
                 <option key={index} value={genresName}>
                   {genresName}
