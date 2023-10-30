@@ -1,4 +1,3 @@
-
 import style from './details.module.css'
 
 const Details = () =>{
