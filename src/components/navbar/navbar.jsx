@@ -12,7 +12,7 @@ function Navbar() {
     <div className={style.navbar}>
       
       <img src={logo} alt="logo" className={style.logo}/>
-      {location.pathname !== '/auth' && (
+      {location.pathname !== '/auth' && location.pathname !== '/' && location.pathname !== '/library' && location.pathname !== '/about' && (
 
           <Search/>
       )}

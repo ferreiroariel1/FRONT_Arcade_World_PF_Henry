@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from "react-redux";
@@ -26,13 +26,22 @@ const Login = () => {
         console.log('negativo')
       
       } else {
-      Swal.fire({
-        position: 'top-center',
-        icon: 'success',
-        title: 'Welcome back',
-        showConfirmButton: false,
-        timer: 1500
-      })
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'bottom',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Signed in successfully'
+        })
       console.log('Welcome');
       //Autenticación para pasar al profile
       dispatch(setAuthenticated(true));
