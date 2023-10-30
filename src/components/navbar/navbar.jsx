@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import Search from '../search/Search';
 import style from './Navbar.module.css'
 import logo from './logo1Sinfondo.png'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function Navbar() {
   const location = useLocation();
@@ -26,7 +27,7 @@ function Navbar() {
       {location.pathname !== '/auth' && (
         <>
           <div className={style.butn}>
-            <Link to= '/cart'><h2>🛒</h2></Link>
+            <Link to= '/cart'><ShoppingCartIcon sx={{color:'#f1f1f1'}}/></Link>
             {location.pathname !== '/user/profile' && (
               <Link to= '/auth'><button className={style.button} >Log In</button></Link>
             )}

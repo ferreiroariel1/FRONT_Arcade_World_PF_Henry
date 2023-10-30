@@ -1,68 +1,123 @@
-import { useEffect } from 'react';
-import { gameById } from '../../redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import style from './details.module.css'
-import { useParams } from 'react-router-dom';
+import { useEffect } from "react";
+import { gameById } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
-const Details = () =>{
+import { useParams } from "react-router-dom";
+import {
+  Button,
+  Card,
+  CardMedia,
+  Stack,
+  Typography,
+} from "@mui/material";
+import ShopIcon from '@mui/icons-material/Shop';
+import AddIcon from '@mui/icons-material/Add';
+import Skeleton from '@mui/material/Skeleton';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
-    const dispatch = useDispatch();
-    const gameDetails = useSelector(state => state.gameId);
-    const { id } = useParams();
+const Details = () => {
+  const dispatch = useDispatch();
+  const gameDetails = useSelector((state) => state.gameId);
+  const { id } = useParams();
 
-    useEffect(() => {
-        dispatch(gameById(id));
-        console.log(gameDetails)
-    }, [dispatch, id]);    
+  useEffect(() => {
+    dispatch(gameById(id));
+    console.log(gameDetails);
+  }, [dispatch, id]);
 
-    const handleChange = (event) => {
-        setMessage(event.target.value);
-    }
+  const handleChange = (event) => {
+    setMessage(event.target.value);
+  };
 
-    return(
-        <>
-            {gameDetails ? (
-                <div className={style.container}>
-                <div>
-                    <img className={style.photo} src={gameDetails.image} alt={gameDetails.name} />
-                    <p className={style.score}>Score: {gameDetails.score}</p>
-                    <div className={style.attributes}>
-                        <p>Graphics: {gameDetails.graphics}</p>
-                        <p>Gameplay: {gameDetails.gameplay}</p>
-                        <p>Quality price: {gameDetails.qualityPrice}</p>
-                    </div>
-                </div>
-                <div className={style.info}>
-                    <h3 className={style.title}>{gameDetails.name}</h3>
-                    <p><span>Platforms:</span> {gameDetails.platforms && gameDetails.platforms.join(', ')}</p>
-                    <p><span>Genres:</span> {gameDetails.genres && gameDetails.genres.join(', ')}</p>
-                    <p className={style.data}><span>About the game:</span> {gameDetails.description}</p>
-                    <p><span>Release:</span> {gameDetails.released}</p>
-                    <p><span>Price:</span> ${gameDetails.price}</p>
-                    <div className={style.buttons}>
-                        <button className={style.cartbutton} >Add</button>
-                        <button className={style.buybutton} >Buy</button>
-                    </div>
-                </div>
+  return (
+    <>
+      {gameDetails ? (
+        <Stack sx={{ display: "flex" }} direction="row">
+          <Stack>
+            <Card sx={{ marginLeft: "3px", marginTop: "3px" }}>
+              <CardMedia
+                sx={{ height: 317, width: 450 }}
+                image={gameDetails.image}
+                title="prueba"
+              />
+              <Stack sx={{textAlign:'left', marginLeft:'8px'}}>
+                <Typography variant="overline">
+                  Score:{gameDetails?.score}
+                </Typography>
+                <Typography variant="overline">
+                  Graphics: {gameDetails.graphics}
+                </Typography>
+                <Typography variant="overline">
+                  Gameplay: {gameDetails.gameplay}
+                </Typography>
+                <Typography variant="overline">
+                  Quality price: {gameDetails.qualityPrice}
+                </Typography>
+              </Stack>
+            </Card>
+          </Stack>
+          <Stack textAlign="left" marginLeft="20px">
+            <Typography variant="h3">{gameDetails.name}</Typography>
+            <Typography variant="body1">
+              <Typography variant="h6">Platforms:</Typography>{" "}
+              {gameDetails.platforms && gameDetails.platforms.join(", ")}
+            </Typography>
+            <Typography variant="body1">
+              <Typography variant="h6">Genres:</Typography>{" "}
+              {gameDetails.genres && gameDetails.genres.join(", ")}
+            </Typography>
+            <Typography variant="body1">
+              <Typography variant="h6">About the game:</Typography>{" "}
+              {gameDetails.description}
+            </Typography>
+            <Typography variant="body1">
+              <Typography variant="h6">Release:</Typography>{" "}
+              {gameDetails.released}
+            </Typography>
+            <Typography variant="body1">
+              <Typography variant="h6">Price:</Typography> ${gameDetails.price}
+            </Typography>
+            <div>
+              <Button variant="outlined" color="success" size="medium" startIcon={<AddIcon/>}>
+                Add
+              </Button>
+              <Button variant="contained" color="success" size="medium" endIcon={<ShopIcon/>} sx={{marginLeft: '3px'}}>
+                Buy
+              </Button>
             </div>
-                ) : (
-                <p>Loading...</p>
-            )}
-        
-        <div className={style.comments}>
-                <p>Comments:</p>
-                {/* {comments.map((comment, index) => (
+          </Stack>
+        </Stack>
+      ) : (
+        <Skeleton variant="rectangular" width={450} height={500} />
+      )}
+     
+
+      <Stack sx={{textAlign:'center', marginTop: '20px'}}>
+        <Typography variant="h6">Comments:</Typography>
+        {/* {comments.map((comment, index) => (
                     <p key={index}>{comment}</p>
                 ))} */}
-                <form className={style.message}>
-                    <label htmlFor="message">Message:</label>
-                    <br />
-                    <textarea id='message' name='message' onChange={handleChange}></textarea>
-                    <br />
-                    <button type="submit" className={style.btn}>Submit</button>
-                </form>
-            </div>
-        </>
-    );
-}
+        <Box 
+        component='form'
+        sx={{'& > :not(style)': { m: 1, width: '25ch' }, textAlign: 'center'}}
+        noValidate
+        autoComplete="off"
+        >
+          <TextField
+            variant="outlined" 
+            label='Message'
+            id="message"
+            name="message"
+            onChange={handleChange}
+          ></TextField>
+          <br />
+          <Button type="submit" variant="outlined" color="info">
+            Submit
+          </Button>
+        </Box>
+      </Stack>
+    </>
+  );
+};
 export default Details;
