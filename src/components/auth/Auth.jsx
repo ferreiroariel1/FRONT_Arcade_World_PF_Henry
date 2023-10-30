@@ -14,7 +14,7 @@ export default function AuthLogin() {
   return (
     <div>
       {
-        signIn === true ? (<Login/>) : (<Create/>)
+        signIn === true ? (<Login/>) : (<Create handleSign={handleSign}/>)
       }
       {
         signIn === true ? 
