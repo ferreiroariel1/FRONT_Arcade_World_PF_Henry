@@ -7,14 +7,13 @@ import { useDispatch } from "react-redux";
 
 import './auth.css'
 
-const Create = () => {
+const Create = ({handleSign}) => {
     const dispatch = useDispatch();
     const [image, setImage] = useState('');
     const { register, handleSubmit, formState: { errors, isDirty }, reset, watch } = useForm();
 
     const onSubmit = handleSubmit((data)=> {
         data.image = image
-        console.log('data', data);
         dispatch(postRegister(data)).then((response) => {
             Swal.fire({
                 position: 'top-center',
@@ -25,6 +24,7 @@ const Create = () => {
               })
             setImage('')
             reset()
+            handleSign()
         })
     });
     return ( 
