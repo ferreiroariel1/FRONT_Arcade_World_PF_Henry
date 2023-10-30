@@ -1,7 +1,8 @@
 import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID, 
          GET_PLATFORMS, GET_GENRES, SET_SELECTED_GENRE,
          SET_SELECTED_PLATFORM, SET_AUTHENTICATED, SET_USER_DATA, RESET_FILTERS,
-         FILTER_GAMES, RESET_GENRE_FILTER, RESET_PLATFORM_FILTER } from './actions.js';
+         FILTER_GAMES, RESET_GENRE_FILTER, RESET_PLATFORM_FILTER,
+         SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE } from './actions.js';
 
 const initialState = {
   games:[],
@@ -12,6 +13,9 @@ const initialState = {
   genres:[],
   selectedGenre: "",
   selectedPlatform: "",
+  sortDirection: 'asc',
+  sortDirection: 'desc',
+  sortOrder:'',
   isAuthenticated: false,
   userData: null,
  }  
@@ -60,7 +64,23 @@ const initialState = {
             ...state,
             games: action.payload
           };
-      case RESET_FILTERS:
+    case SORT_GAMES_ASC:
+          return {
+            ...state,
+            games: [...state.games].sort((a, b) => a.name.localeCompare(b.name)),
+          };
+
+    case SORT_GAMES_DESC:
+          return {
+            ...state,
+            games: [...state.games].sort((a, b) => b.name.localeCompare(a.name)),
+          };
+    case FILTER_GAMES_BY_PRICE:
+          return {
+            ...state,
+            games: state.allGames.filter(game => game.price <= action.payload),
+          };
+              case RESET_FILTERS:
             return {
               ...state,
               selectedGenre: "",
@@ -77,7 +97,9 @@ const initialState = {
             return {
               ...state,
               selectedGenre: "",
-              games: [...state.allGames], 
+              selectedPlatform: "",
+              games: [...state.allGames],
+              sortOrder: initialState.sortOrder, 
             };
     case SET_AUTHENTICATED:
             return {

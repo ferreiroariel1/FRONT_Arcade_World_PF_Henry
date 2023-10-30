@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import style from './Sider.module.css';
-import { gamePlataforms, gameGenres, setSelectedPlatform, setSelectedGenre, resetFilters, filterGames, resetGenreFilter } from "../../redux/actions";
+import { gamePlataforms, gameGenres, setSelectedPlatform, 
+        setSelectedGenre, resetFilters, filterGames, 
+        resetGenreFilter, sortGamesAsc, sortGamesDesc, filterGamesByPrice } from "../../redux/actions";
 
 function Sider() {
 
@@ -76,7 +78,9 @@ function Sider() {
               ))}
             </select>
         </div>
-          
+        <input type="number" onChange={(e) => dispatch(filterGamesByPrice(e.target.value))} />
+        <button onClick={() => dispatch(sortGamesAsc())}>Ordenar Ascendente</button>
+        <button onClick={() => dispatch(sortGamesDesc())}>Ordenar Descendente</button>  
        <button onClick={() => dispatch(resetFilters())}>Reset Filter</button>
     </div>
   )
