@@ -56,7 +56,7 @@ function Sider() {
         <div >
            <label htmlFor="">Platforms: </label>
            <select onChange={handlePlatformSelectChange}>
-           <option value="">Todos</option>
+           <option value="">All</option>
               {allPlatformsArray.map((platformName, index) => (
                 <option key={index} value={platformName}>
                   {platformName}
@@ -68,7 +68,7 @@ function Sider() {
         <div>
             <label htmlFor="">Genres: </label>
             <select onChange={handleGenreSelectChange}>
-            <option value="">Todos</option>
+            <option value="">All</option>
               {allGenresArray.map((genresName, index) => (
                 <option key={index} value={genresName}>
                   {genresName}
