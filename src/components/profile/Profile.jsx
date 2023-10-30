@@ -27,6 +27,7 @@ const Profile = () => {
 
   //Traigo la data del user logueado
   const userData = useSelector((state) => state.userData);
+  console.log(userData)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
@@ -176,3 +177,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+//src={userData?.user?.image || userNoImage }
