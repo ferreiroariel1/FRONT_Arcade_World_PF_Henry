@@ -1,13 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { gameById } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 import style from './details.module.css'
+import { useParams } from 'react-router-dom';
 
 const Details = () =>{
-    const [message, setMessage] = useState('')
 
-    useEffect(()=>{
-        console.log(message)
-    },[message])
+    const dispatch = useDispatch();
+    const gameDetails = useSelector(state => state.gameId);
+    const { id } = useParams();
 
+    useEffect(() => {
+        dispatch(gameById(id));
+        console.log(gameDetails)
+    }, [dispatch, id]);    
 
     const handleChange = (event) => {
         setMessage(event.target.value);
@@ -15,33 +21,41 @@ const Details = () =>{
 
     return(
         <>
-            <div className={style.container}>
+            {gameDetails ? (
+                <div className={style.container}>
                 <div>
-                    <img className={style.photo} src="https://m.media-amazon.com/images/I/81KUccM8azL._AC_UF1000,1000_QL80_.jpg" alt="" />
-                    <p className={style.score}>Score</p>
+                    <img className={style.photo} src={gameDetails.image} alt={gameDetails.name} />
+                    <p className={style.score}>Score: {gameDetails.score}</p>
                     <div className={style.attributes}>
-                        <p>Graphics:</p>
-                        <p>Gameplay:</p>
-                        <p>Quality price:</p>
+                        <p>Graphics: {gameDetails.graphics}</p>
+                        <p>Gameplay: {gameDetails.gameplay}</p>
+                        <p>Quality price: {gameDetails.qualityPrice}</p>
                     </div>
                 </div>
                 <div className={style.info}>
-                    <h3 className={style.title}>Name: Super Smash Bros Brawl</h3>
-                    <p><span>Plataforms:</span> Wii, Wii U, Nintendo Switch</p>
-                    <p><span>Genres:</span> Action, Adventure, Multiplayer</p>
-                    <p className={style.data}><span>About the game:</span> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-                    <p><span>Relase:</span> DD/MM/AAAA</p>
+                    <h3 className={style.title}>{gameDetails.name}</h3>
+                    <p><span>Platforms:</span> {gameDetails.platforms && gameDetails.platforms.join(', ')}</p>
+                    <p><span>Genres:</span> {gameDetails.genres && gameDetails.genres.join(', ')}</p>
+                    <p className={style.data}><span>About the game:</span> {gameDetails.description}</p>
+                    <p><span>Release:</span> {gameDetails.released}</p>
+                    <p><span>Price:</span> ${gameDetails.price}</p>
                     <div className={style.buttons}>
-                        <button>Add</button>
-                        <button>Buy</button>
+                        <button className={style.cartbutton} >Add</button>
+                        <button className={style.buybutton} >Buy</button>
                     </div>
-                    
                 </div>
             </div>
-            <div className={style.commets}>
+                ) : (
+                <p>Loading...</p>
+            )}
+        
+        <div className={style.comments}>
                 <p>Comments:</p>
+                {/* {comments.map((comment, index) => (
+                    <p key={index}>{comment}</p>
+                ))} */}
                 <form className={style.message}>
-                    <label for="message">Message:</label>
+                    <label htmlFor="message">Message:</label>
                     <br />
                     <textarea id='message' name='message' onChange={handleChange}></textarea>
                     <br />
@@ -49,6 +63,17 @@ const Details = () =>{
                 </form>
             </div>
         </>
-    )
+    );
 }
 export default Details;
+
+ // <div className={style.commets}>
+            //     <p>Comments:</p>
+            //     <form className={style.message}>
+            //         <label for="message">Message:</label>
+            //         <br />
+            //         <textarea id='message' name='message' onChange={handleChange}></textarea>
+            //         <br />
+            //         <button type="submit" className={style.btn}>Submit</button>
+            //     </form>
+            // </div>
