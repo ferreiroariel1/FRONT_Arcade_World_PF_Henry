@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Accordion from "@mui/material/Accordion";
@@ -19,12 +19,16 @@ const Profile = () => {
   //autenticación para el salto a este componente
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
   const navigate = useNavigate();
-
-  if (!isAuthenticated) {
-    navigate("/auth");
-    return null;
-  }
-
+  let userLocal = localStorage.getItem('login')
+  userLocal = userLocal ?  JSON.parse(userLocal) : null
+  
+  
+  useEffect(() => {
+    if( userLocal && !userLocal.login || userLocal === null){
+      navigate("/")
+    }
+  }, [])
+  
   //Traigo la data del user logueado
   const userData = useSelector((state) => state.userData);
   console.log(userData)
@@ -35,21 +39,21 @@ const Profile = () => {
           <Card sx={{ width: "100%" }}>
             <Stack direction="column" alignItems="center">
               <Avatar
-                sx={{ width: 300, height: 300 }}
-                src={userData?.user?.image}
+                sx={{ width: 300, height: 300, marginTop: '4px' }}
+                src={userLocal?.user?.image}
                 alt="Profile image"
               />
               <Typography variant="h5" component="div">
-                Name: {userData?.user?.name}
+                Name: {userLocal?.user?.name}
               </Typography>
               <Typography variant="h5">
-                Lastname: {userData?.user?.lastname}
+                Lastname: {userLocal?.user?.lastname}
               </Typography>
               <Typography variant="h5">
-                Nickname: {userData?.user?.nickname}
+                Nickname: {userLocal?.user?.nickname}
               </Typography>
               <Typography variant="h5">
-                Email: {userData?.user?.Email}
+                Email: {userLocal?.user?.Email}
               </Typography>
             </Stack>
           </Card>
