@@ -1,15 +1,46 @@
 import PropTypes from "prop-types";
-import '../style/NewsStyle.css'
+import SendIcon from '@mui/icons-material/Send';
+import { Link } from "react-router-dom";
+import { Card,Box, Button, CardContent, CardMedia, Typography } from '@mui/material';
 
-function News({name,image,price}) {
+function News({id,name,image,price}) {
+  const cardStyle = {
+    cursor: 'pointer',
+    flexwrap:'wrap',
+    width: '15em',
+    maxheight:'16em', // Establece una altura fija para las tarjetas
+    overflow: 'hidden',
+    backgroundColor: '#333',
+     color: 'white' 
+  }
+  const priceStyle = {
+
+    bottom: '0', 
+    left: '0',
+    backgroundColor: '#4caf50', 
+    color: '#fff',
+    padding:'0.4em',
+    width:'3.7em'
+  };
   return (
-    <div className='card'>
-      <img className='image' src={image} alt="" />
-        <div className='TP'>
-        <h5 className='title'>{name}</h5>
-        <p className='price'>$/{price}</p>
-        </div>
-    </div>
+    <Card style={cardStyle}>
+    <CardMedia component="img" height="140" image={image} alt={name} />
+    <CardContent>
+      <Typography variant="h5" component="div">
+        {name}
+      </Typography >
+      <Box display='flex' gap={2}>
+      <Typography style={priceStyle}>
+        $/{price}
+      </Typography>
+      <Link to={`/detail/${id}`}>
+        <Button variant="contained" endIcon={<SendIcon />}>
+  Detail
+</Button>
+   </Link>
+      </Box>
+    </CardContent>
+  </Card>
   )
 }
 News.propTypes= {

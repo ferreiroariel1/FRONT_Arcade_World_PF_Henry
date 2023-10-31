@@ -55,7 +55,7 @@ const Login = () => {
   });
 
   return (
-    <div>
+    <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
       <div className='inputBox'>
         <div className='titleBox'>
           <p className='LoginTitle'>Sign in to Arcade World</p>
