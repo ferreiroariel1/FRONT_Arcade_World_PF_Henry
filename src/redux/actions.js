@@ -7,11 +7,14 @@ export const GET_GENRES = 'GET_GENRES';
 export const SET_SELECTED_GENRE = 'SET_SELECTED_GENRE';
 export const SET_SELECTED_PLATFORM = 'SET_SELECTED_PLATFORM';
 export const FILTER_GAMES = 'FILTER_GAMES';
-export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
-export const SET_USER_DATA = 'SET_USER_DATA';
-export const RESET_FILTERS = 'RESET_FILTERS';
+export const SORT_GAMES_ASC = 'SORT_GAMES_ASC';
+export const SORT_GAMES_DESC = 'SORT_GAMES_DESC';
+export const FILTER_GAMES_BY_PRICE = 'FILTER_GAMES_BY_PRICE';
 export const RESET_PLATFORM_FILTER = 'RESET_PLATFORM_FILTER';
 export const RESET_GENRE_FILTER = 'RESET_GENRE_FILTER';
+export const RESET_FILTERS = 'RESET_FILTERS';
+export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
+export const SET_USER_DATA = 'SET_USER_DATA';
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -116,12 +119,22 @@ export const filterGames = () => {
     });
   };
 };
+export const sortGamesAsc = () => ({
+  type: SORT_GAMES_ASC,
+});
+
+export const sortGamesDesc = () => ({
+  type: SORT_GAMES_DESC,
+});
+export const filterGamesByPrice = (price) => ({
+  type: FILTER_GAMES_BY_PRICE,
+  payload: price,
+});
 export const resetPlatformFilter = () => {
   return {
     type: RESET_PLATFORM_FILTER,
   }
 };
-
 export const resetGenreFilter = () => {
   return {
     type: RESET_GENRE_FILTER,

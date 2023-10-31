@@ -3,6 +3,4 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  inline-size: 95vw;
-  block-size: 78vh;
 }

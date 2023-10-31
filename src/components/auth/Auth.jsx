@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Login from './login'
+import Login from './Login'
 import Create from './Create'
 
 export default function AuthLogin() {
@@ -12,7 +12,7 @@ export default function AuthLogin() {
   }
 
   return (
-    <div>
+    <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
       {
         signIn === true ? (<Login/>) : (<Create handleSign={handleSign}/>)
       }

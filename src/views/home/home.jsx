@@ -5,7 +5,7 @@ import {useDispatch,useSelector}from 'react-redux'
 import { getGames } from "../../redux/actions"
 import { useEffect } from "react"
 import Carrusel from './components/Carrusel.jsx';
-import './style/StyleHome.css'
+import { Box, Container, Typography } from '@mui/material';
 
 
 const Home = () => {
@@ -19,62 +19,61 @@ const Home = () => {
   const NewsGame =game?.slice(0,5)
   const DownloadsGame=game?.slice(7,12)
   const RatingGame = game?.slice(14,19) 
-  const IMGcarrusel=game?.slice(23,29)
+  const IMGcarrusel=game?.slice(40,50)
 
   return (
-    <div className='Home'>
-<div>
-  <Carrusel imagenes={IMGcarrusel}/>
-  
-</div>
-        <h2 className='titulo'>NEWS</h2>
-       <div className="News com">
-       {
-        NewsGame?.map((games)=>{
-          
-          return(
-            <News 
-              key={games?.id}
-              name={games?.name}
-              image={games?.image}
-              price={games?.price}
-            />
-          )
-        })
-       }
-       </div>
-        <h2 className='titulo' >DOWNLOADS</h2>
-       <div className="Downloads com">
-       {
-        DownloadsGame?.map((games)=>{
-          return(
-            <MoreDownload 
-              key={games?.id}
-              name={games?.name}
-              image={games?.image}
-              price={games?.price}
-            />
-          )
-        })
-       }
-       </div>
-        <h2 className='titulo'>RATING</h2>
-       <div className="Rating com">
-       {
-        RatingGame?.map((games)=>{
-          return(
-            <Rating 
-              key={games?.id}
-              name={games?.name}
-              image={games?.image}
-              price={games?.price}
-            />
-          )
-        })
-       }
-       
-    </div>
-  </div>
+    <Box bgcolor="#1a2a3b">
+    <Container maxWidth="xl">
+      <Box width="95%" margin="0 2em">
+        <Carrusel imagenes={IMGcarrusel} />
+      </Box>
+
+      <Typography variant="h3" component="h3" className="titulo" textAlign="center" color="beige" sx={{ margin: '1em 0em' }}>
+         🎉NEWS🎉
+      </Typography>
+      <Box className="com" display="flex" justifyContent="space-around" flexWrap="wrap">
+        {NewsGame?.map((games) => (
+          <News
+            key={games?.id}
+            id={games?.id}
+            name={games?.name}
+            image={games?.image}
+            price={games?.price}
+          />
+        ))}
+      </Box>
+
+      <Typography variant="h3" sx={{ margin: '1em 0em' }} component="h3" className="titulo" textAlign="center" color="beige">
+        📥DOWNLOADS📥
+      </Typography>
+      <Box className="com" display="flex" justifyContent="space-around" flexWrap="wrap">
+        {DownloadsGame?.map((games) => (
+          <MoreDownload
+            key={games?.id}
+            id={games?.id}
+            name={games?.name}
+            image={games?.image}
+            price={games?.price}
+          />
+        ))}
+      </Box>
+
+      <Typography variant="h3" sx={{ margin: '1em 0em' }} component="h3" className="titulo" textAlign="center" color="beige">
+        🎮RATING🎮
+      </Typography>
+      <Box className="com" display="flex" justifyContent="space-around" flexWrap="wrap">
+        {RatingGame?.map((games) => (
+          <Rating
+            key={games?.id}
+            id={games?.id}
+            name={games?.name}
+            image={games?.image}
+            price={games?.price}
+          />
+        ))}
+      </Box>
+    </Container>
+  </Box>
   )
 }
 
