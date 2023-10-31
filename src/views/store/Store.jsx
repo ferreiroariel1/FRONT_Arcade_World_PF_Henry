@@ -2,7 +2,6 @@ import Sider from "../../components/sider/Sider"
 import Cards from "../../components/cards/Cards";
 import Paginate from '../../components/paginate/Paginate.jsx';
 import usePage  from "../../components/utils/usePage";
-import style from './Store.module.css';
 
 
 function Store() {
@@ -10,11 +9,11 @@ function Store() {
     const {changeNext, changePrev, paginate, count, totPagine} = usePage();
 
   return (
-    <div className={style.wrap}>
-      <div className={style.contenStore}>
+    <div style={{backgroundColor:'#1a2a3b'}}>
+      <div >
          <Sider/>
-          <Cards games={paginate}/>
-        <div className={style.storePage} >
+          <Cards games={paginate} />
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center',marginTop:'1em'}}>
           <Paginate prevChange={changePrev} 
             nextChange={changeNext} 
             pages={count} 

@@ -28,8 +28,8 @@ function Carrusel({imagenes}){
         images?.map((i)=>{
           return(
             <div key={i.id}>
-              <img src={i?.imagen} alt="" style={{width:'100%',height:'30em'}} />
-            <h2>{i?.name}</h2>
+              <img src={i?.imagen}  style={{width:'100%',height:'30em'}} />
+            <h2 style={{textAlign:'center',color:'white'}}>{i?.name}</h2>
             </div>
           )
         })

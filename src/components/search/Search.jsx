@@ -1,11 +1,13 @@
-import { useState } from 'react'
-import {useDispatch} from 'react-redux'
-import './StyleSearch.css'
-import lupa from './lupa.svg'
-import { gameByName } from '../../redux/actions'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { TextField, Button } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import { gameByName } from '../../redux/actions';
+
+
 
 function Search() {
-  const [Valor,setValor]=useState('')
+  const [valor,setValor]=useState('')
   const dispatch=useDispatch()
   const chageHandlers=(e)=>{
     setValor(e.target.value)
@@ -14,12 +16,23 @@ function Search() {
     dispatch(gameByName(Name))
   }
   return (
-    <div className="InputContainer">
-      <input type="search"  placeholder="Search Game" value={Valor}  onChange={chageHandlers} className="input"/>
-      <button onClick={()=>{
-        onsearch(Valor)
-      }} className="thebutton"><img src={lupa} alt="lupa" /></button>
-      </div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <TextField
+        fullWidth
+        variant="outlined"
+        placeholder="Search Game"
+        value={valor}
+        onChange={chageHandlers}
+      />
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => onsearch(valor)}
+        startIcon={<SearchIcon />}
+      >
+        Search
+      </Button>
+    </div>
   )
 }
 

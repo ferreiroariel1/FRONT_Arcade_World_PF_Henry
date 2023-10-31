@@ -58,10 +58,11 @@ const Login = () => {
     reset(); //limpiamos campos luego de mandar la data
   });
   return (
-    <div>
-      <div className="inputBox">
-        <div className="titleBox">
-          <p className="LoginTitle">Sign in to Arcade World</p>
+
+    <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+      <div className='inputBox'>
+        <div className='titleBox'>
+          <p className='LoginTitle'>Sign in to Arcade World</p>
         </div>
         <div>
           <button className="btnAuth0">
