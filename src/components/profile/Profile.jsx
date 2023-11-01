@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Accordion from "@mui/material/Accordion";
@@ -14,10 +14,10 @@ import { Stack, Grid, Avatar, Box } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import LogoutIcon from '@mui/icons-material/Logout';
+
 
 const Profile = () => {
-  //autenticación para el salto a este componente
-  const isAuthenticated = useSelector((state) => state.isAuthenticated);
   const navigate = useNavigate();
   let userLocal = localStorage.getItem('login')
   userLocal = userLocal ?  JSON.parse(userLocal) : null
@@ -29,9 +29,6 @@ const Profile = () => {
     }
   }, [])
   
-  //Traigo la data del user logueado
-  const userData = useSelector((state) => state.userData);
-  console.log(userData)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
@@ -102,6 +99,7 @@ const Profile = () => {
                     <Typography>$100</Typography>
                   </AccordionDetails>
                 </Accordion>
+                <Button size="large" sx={{color: '#000'}}><LogoutIcon/></Button>
               </Card>
         </Grid>
         <Grid item xs={6}>
