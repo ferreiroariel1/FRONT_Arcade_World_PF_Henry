@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { gameById } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-
+import Grafico from "./Grafico";
 import { useParams } from "react-router-dom";
 import {
   Button,
@@ -23,7 +23,6 @@ const Details = () => {
 
   useEffect(() => {
     dispatch(gameById(id));
-    console.log(gameDetails);
   }, [dispatch, id]);
 
   const handleChange = (event) => {
@@ -56,6 +55,7 @@ const Details = () => {
                 </Typography>
               </Stack>
             </Card>
+                <Grafico/>
           </Stack>
           <Stack textAlign="left" marginLeft="20px">
             <Typography variant="h3">{gameDetails.name}</Typography>
@@ -80,7 +80,7 @@ const Details = () => {
             </Typography>
             <div>
               <Button variant="outlined" color="success" size="medium" startIcon={<AddIcon/>}>
-                Add
+                Adds
               </Button>
               <Button variant="contained" color="success" size="medium" endIcon={<ShopIcon/>} sx={{marginLeft: '3px'}}>
                 Buy

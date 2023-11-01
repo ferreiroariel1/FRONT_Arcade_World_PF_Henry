@@ -23,7 +23,6 @@ function App() {
         <Route path="/auth" element={<Auth/>} />
         <Route path='/user/profile' element={<Profile/>}/>
       </Routes>
-      k
     </div>
   )
 

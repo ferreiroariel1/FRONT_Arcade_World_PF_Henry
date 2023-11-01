@@ -25,9 +25,8 @@ const Home = () => {
     <Box bgcolor="#1a2a3b">
     <Container maxWidth="xl">
       <Box width="95%" margin="0 2em">
-        <Carrusel imagenes={IMGcarrusel} />
+        <Carrusel imagenes={IMGcarrusel}  />
       </Box>
-
       <Typography variant="h3" component="h3" className="titulo" textAlign="center" color="beige" sx={{ margin: '1em 0em' }}>
          🎉NEWS🎉
       </Typography>
