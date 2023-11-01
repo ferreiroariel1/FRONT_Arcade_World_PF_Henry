@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Accordion from "@mui/material/Accordion";
@@ -14,21 +14,20 @@ import { Stack, Grid, Avatar, Box } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import LogoutIcon from '@mui/icons-material/Logout';
-
 
 const Profile = () => {
+  //autenticación para el salto a este componente
+  const isAuthenticated = useSelector((state) => state.isAuthenticated);
   const navigate = useNavigate();
-  let userLocal = localStorage.getItem('login')
-  userLocal = userLocal ?  JSON.parse(userLocal) : null
-  
-  
-  useEffect(() => {
-    if( userLocal && !userLocal.login || userLocal === null){
-      navigate("/")
-    }
-  }, [])
-  
+
+  if (!isAuthenticated) {
+    navigate("/auth");
+    return null;
+  }
+
+  //Traigo la data del user logueado
+  const userData = useSelector((state) => state.userData);
+  console.log(userData)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
@@ -36,21 +35,21 @@ const Profile = () => {
           <Card sx={{ width: "100%" }}>
             <Stack direction="column" alignItems="center">
               <Avatar
-                sx={{ width: 300, height: 300, marginTop: '4px' }}
-                src={userLocal?.user?.image}
+                sx={{ width: 300, height: 300 }}
+                src={userData?.user?.image}
                 alt="Profile image"
               />
               <Typography variant="h5" component="div">
-                Name: {userLocal?.user?.name}
+                Name: {userData?.user?.name}
               </Typography>
               <Typography variant="h5">
-                Lastname: {userLocal?.user?.lastname}
+                Lastname: {userData?.user?.lastname}
               </Typography>
               <Typography variant="h5">
-                Nickname: {userLocal?.user?.nickname}
+                Nickname: {userData?.user?.nickname}
               </Typography>
               <Typography variant="h5">
-                Email: {userLocal?.user?.Email}
+                Email: {userData?.user?.Email}
               </Typography>
             </Stack>
           </Card>
@@ -99,7 +98,6 @@ const Profile = () => {
                     <Typography>$100</Typography>
                   </AccordionDetails>
                 </Accordion>
-                <Button size="large" sx={{color: '#000'}}><LogoutIcon/></Button>
               </Card>
         </Grid>
         <Grid item xs={6}>
