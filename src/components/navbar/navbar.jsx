@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import Profile from '../profile/Profile'
+import { Link, NavLink, useLocation } from "react-router-dom";
+import Profile from "../profile/Profile";
 import Search from "../search/Search";
 import logo from "./logo1Sinfondo.png";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -11,10 +11,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Box } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+
 function Navbar() {
   let userLocal = localStorage.getItem("login");
   userLocal = userLocal ? JSON.parse(userLocal) : null;
-  console.log(userLocal);
   const userLog = userLocal?.login;
   const location = useLocation();
   const appbar = {
@@ -79,9 +79,6 @@ function Navbar() {
               <>
                 <Link to="/cart">
                   <ShoppingCartIcon sx={{ color: "#f1f1f1" }} />
-                </Link>
-                <Link to="/user/profile">
-                  <Avatar alt="Remy Sharp" src={userLocal?.user?.image} />
                 </Link>
                 {userLog && (
                   <Link to="/user/profile">
