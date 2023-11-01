@@ -19,7 +19,8 @@ function Search() {
     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
       <TextField
         fullWidth
-        variant="outlined"
+        size='small'
+        variant="standard"
         placeholder="Search Game"
         value={valor}
         onChange={chageHandlers}
@@ -29,6 +30,8 @@ function Search() {
         color="primary"
         onClick={() => onsearch(valor)}
         startIcon={<SearchIcon />}
+        size='small'
+        sx={{paddingLeft:'20px', paddingRight:'20px'}}
       >
         Search
       </Button>
