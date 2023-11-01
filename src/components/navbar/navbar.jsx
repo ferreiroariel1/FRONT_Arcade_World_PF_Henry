@@ -10,10 +10,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import { Box } from '@mui/material';
 
-
-
-
-
 function Navbar() {
  const location = useLocation();
   const appbar={
@@ -44,25 +40,35 @@ function Navbar() {
           <NavLink style={{ fontSize: '1.5em', color: 'white' }} to="/about">About</NavLink>
         </Box>
   
-        {/* Cart and Login */}
-        <Box  display='flex' justifyContent="center" alignItems="center" gap={2}>
-          {location.pathname !== '/auth' && (
-            <>
-              <Link to="/cart">
-                <ShoppingCartIcon sx={{ color: '#f1f1f1' }} />
-              </Link>
-              {location.pathname !== '/user/profile' && (
-                <Link to="/auth">
-                  <Button variant="soft">Login</Button>
+        {/* Cart, Login and avatar */}
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            gap={2}
+          >
+            {location.pathname !== "/auth" && (
+              <>
+                <Link to="/cart">
+                  <ShoppingCartIcon sx={{ color: "#f1f1f1" }} />
                 </Link>
-              )}
-            </>
-          )}
-        </Box>
-      </Toolbar>
-    </Container>
-  </AppBar>
-   )
+                {userLog && (
+                  <Link to="/user/profile">
+                    <Avatar alt="Remy Sharp" src={userLocal?.user?.image} />
+                  </Link>
+                )}
+                {location.pathname !== "/user/profile" && !userLocal?.login && (
+                  <Link to="/auth">
+                    <Button variant="soft">Login</Button>
+                  </Link>
+                )}
+              </>
+            )}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 }
 
 export default Navbar;

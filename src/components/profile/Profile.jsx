@@ -16,18 +16,24 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Profile = () => {
-  //autenticación para el salto a este componente
-  const isAuthenticated = useSelector((state) => state.isAuthenticated);
-  const navigate = useNavigate();
+  let userLocal = localStorage.getItem('login')
+  userLocal = userLocal ?  JSON.parse(userLocal) : null
+  
+  useEffect(() => {
+    if( userLocal && !userLocal.login || userLocal === null){
+      navigate("/store")
+    }
+  }, [userLocal?.login])
 
-  if (!isAuthenticated) {
-    navigate("/auth");
-    return null;
+  const handleLogout =()=>{
+    if (userLocal){
+      userLocal.login = false;
+      localStorage.setItem('login', JSON.stringify(userLocal));
+      console.log("Estado del user:", userLocal.login)
+      navigate("/");
+    }
   }
 
-  //Traigo la data del user logueado
-  const userData = useSelector((state) => state.userData);
-  console.log(userData)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
@@ -98,6 +104,7 @@ const Profile = () => {
                     <Typography>$100</Typography>
                   </AccordionDetails>
                 </Accordion>
+                <Button size="large" sx={{color: '#000'}} onClick={handleLogout}><LogoutIcon/></Button>
               </Card>
         </Grid>
         <Grid item xs={6}>
@@ -178,4 +185,3 @@ const Profile = () => {
 
 export default Profile;
 
-//src={userData?.user?.image || userNoImage }
