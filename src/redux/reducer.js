@@ -85,7 +85,8 @@ const initialState = {
               ...state,
               selectedGenre: "",
               selectedPlatform: "",
-              games: [...state.allGames], 
+              games: [...state.allGames],
+              sortOrder: initialState.sortOrder 
             };
       case RESET_PLATFORM_FILTER:
             return {
@@ -97,9 +98,9 @@ const initialState = {
             return {
               ...state,
               selectedGenre: "",
-              selectedPlatform: "",
-              games: [...state.allGames],
-              sortOrder: initialState.sortOrder, 
+              // selectedPlatform: "",
+              games: [...state.allGames]
+              , 
             };
     case SET_AUTHENTICATED:
             return {

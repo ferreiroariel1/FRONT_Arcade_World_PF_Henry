@@ -25,9 +25,18 @@ const Profile = () => {
   
   useEffect(() => {
     if( userLocal && !userLocal.login || userLocal === null){
-      navigate("/")
+      navigate("/store")
     }
-  }, [])
+  }, [userLocal?.login])
+
+  const handleLogout =()=>{
+    if (userLocal){
+      userLocal.login = false;
+      localStorage.setItem('login', JSON.stringify(userLocal));
+      console.log("Estado del user:", userLocal.login)
+      navigate("/");
+    }
+  }
   
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -99,7 +108,7 @@ const Profile = () => {
                     <Typography>$100</Typography>
                   </AccordionDetails>
                 </Accordion>
-                <Button size="large" sx={{color: '#000'}}><LogoutIcon/></Button>
+                <Button size="large" sx={{color: '#000'}} onClick={handleLogout}><LogoutIcon/></Button>
               </Card>
         </Grid>
         <Grid item xs={6}>

@@ -83,9 +83,11 @@ function Navbar() {
                 <Link to="/cart">
                   <ShoppingCartIcon sx={{ color: "#f1f1f1" }} />
                 </Link>
-                <Link to="/user/profile">
-                  <Avatar alt="Remy Sharp" src={userLocal?.user?.image} />
-                </Link>
+                {userLog && (
+                  <Link to="/user/profile">
+                    <Avatar alt="Remy Sharp" src={userLocal?.user?.image} />
+                  </Link>
+                )}
                 {location.pathname !== "/user/profile" && !userLocal?.login && (
                   <Link to="/auth">
                     <Button variant="soft">Login</Button>
