@@ -34,7 +34,6 @@ const Profile = () => {
       navigate("/");
     }
   }
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
