@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Accordion from "@mui/material/Accordion";
@@ -14,17 +14,20 @@ import { Stack, Grid, Avatar, Box } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import LogoutIcon from '@mui/icons-material/Logout';
+
 
 const Profile = () => {
+  const navigate = useNavigate();
   let userLocal = localStorage.getItem('login')
   userLocal = userLocal ?  JSON.parse(userLocal) : null
-  
+
+
   useEffect(() => {
     if( userLocal && !userLocal.login || userLocal === null){
-      navigate("/store")
+      navigate("/")
     }
-  }, [userLocal?.login])
-
+  }, [])
   const handleLogout =()=>{
     if (userLocal){
       userLocal.login = false;
@@ -33,7 +36,6 @@ const Profile = () => {
       navigate("/");
     }
   }
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
@@ -41,21 +43,21 @@ const Profile = () => {
           <Card sx={{ width: "100%" }}>
             <Stack direction="column" alignItems="center">
               <Avatar
-                sx={{ width: 300, height: 300 }}
-                src={userData?.user?.image}
+                sx={{ width: 300, height: 300, marginTop: '4px' }}
+                src={userLocal?.user?.image}
                 alt="Profile image"
               />
               <Typography variant="h5" component="div">
-                Name: {userData?.user?.name}
+                Name: {userLocal?.user?.name}
               </Typography>
               <Typography variant="h5">
-                Lastname: {userData?.user?.lastname}
+                Lastname: {userLocal?.user?.lastname}
               </Typography>
               <Typography variant="h5">
-                Nickname: {userData?.user?.nickname}
+                Nickname: {userLocal?.user?.nickname}
               </Typography>
               <Typography variant="h5">
-                Email: {userData?.user?.Email}
+                Email: {userLocal?.user?.Email}
               </Typography>
             </Stack>
           </Card>
@@ -122,11 +124,11 @@ const Profile = () => {
                     <Typography variant="h6">Super Smash Bros Brawl</Typography>
                     <Typography variant="subtitle2">
                       Plataforms:
-                    </Typography>{" "}
+                    </Typography>
                     <Typography variant="overline">
                       Wii, Wii U, Nintendo Switch
                     </Typography>
-                    <Typography variant="subtitle2">Genres:</Typography>{" "}
+                    <Typography variant="subtitle2">Genres:</Typography>
                     <Typography variant="overline">
                       Action, Adventure, Multiplayer
                     </Typography>
@@ -142,11 +144,11 @@ const Profile = () => {
                     <Typography variant="h6">Super Smash Bros Brawl</Typography>
                     <Typography variant="subtitle2">
                       Plataforms:
-                    </Typography>{" "}
+                    </Typography>
                     <Typography variant="overline">
                       Wii, Wii U, Nintendo Switch
                     </Typography>
-                    <Typography variant="subtitle2">Genres:</Typography>{" "}
+                    <Typography variant="subtitle2">Genres:</Typography>
                     <Typography variant="overline">
                       Action, Adventure, Multiplayer
                     </Typography>
@@ -162,11 +164,11 @@ const Profile = () => {
                     <Typography variant="h6">Super Smash Bros Brawl</Typography>
                     <Typography variant="subtitle2">
                       Plataforms:
-                    </Typography>{" "}
+                    </Typography>
                     <Typography variant="overline">
                       Wii, Wii U, Nintendo Switch
                     </Typography>
-                    <Typography variant="subtitle2">Genres:</Typography>{" "}
+                    <Typography variant="subtitle2">Genres:</Typography>
                     <Typography variant="overline">
                       Action, Adventure, Multiplayer
                     </Typography>
@@ -182,6 +184,4 @@ const Profile = () => {
     </Box>
   );
 };
-
 export default Profile;
-
