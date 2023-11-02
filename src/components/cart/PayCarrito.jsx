@@ -1,26 +1,35 @@
-import axios from "axios";
+
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
 
 
 export default function PayCarrito(props) {
+  // document.addEventListener("DOMContentLoaded", () => {
+    
+  // });
   const { params } = props;
-  // const history = useHistory();
-
   const handleOnclickcarrito = async () => {
-    const productIds = params.map((product) => product.id);
+    const payNowButton = document.getElementById("newButton");
+    
+    payNowButton.addEventListener("click", () => {
+      params.map((product) => product.id);
+      const redirectUrl = localStorage.getItem("videogameIds");
+ 
+  if (redirectUrl) {
+   
+    window.location.href = 'http://localhost:5173/summary';
+  } else {
+    console.error("URL no válida");
+  }
+});
+     
+ };
 
-    const url = await axios.post(
-      "",
-      props.params
-    );
-    window.location.href = url.data.url;
-    localStorage.setItem("productIds", JSON.stringify(productIds));
-  };
+     
   return (
     <div>
       <Button
-        
+       id="newButton"
         variant="contained"
         color="success"
         fullWidth

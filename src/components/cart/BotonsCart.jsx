@@ -10,13 +10,13 @@ import {
   deleteItemCart,
 } from "../../redux/actions.js";
 
-const BotonsCart = (props) => {
+const BotonsCart = ({element}) => {
   const roleUser = JSON.parse(window?.localStorage.getItem("login"));
 
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData);
    const userId = userData.id;
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   // const [count, setCount] = useState(0);
 
   const handleAddToCart = () => {
@@ -24,7 +24,7 @@ const BotonsCart = (props) => {
     setQuantity(newQuantity);
     const payload = {
       userId: userId,
-      videogameId: props.element.id,
+      videogameId: element.id,
       quantity: newQuantity,
     };
     setQuantity(0);
@@ -34,7 +34,7 @@ const BotonsCart = (props) => {
   const handleRemoveFromCart = () => {
     const payload = {
       userId: userId,
-      videogameId: props.element.id,
+      videogameId: element.id
     };
     
     dispatch(deleteItemCart(payload));

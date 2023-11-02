@@ -31,17 +31,18 @@ const loadLocalStorageData = () => {
 
 // Cargar el estado inicial desde localStorage si está disponible
 const initialState = {
-    games:[],
-    allGames:[],
-    gameId: [],
-    gameFilter: [],
-    platforms:[],
-    genres:[],
-    selectedGenre: "",
-    selectedPlatform: "",
-    sortOrder:'',
-    isAuthenticated: false,
-    userData: null,
+  games:[],
+  allGames:[],
+  gameId: [],
+  gameFilter: [],
+  platforms:[],
+  genres:[],
+  selectedGenre: "",
+  selectedPlatform: "",
+  sortOrder:'',
+  isAuthenticated: false,
+  userData: null,
+  shoppingCart: [],
   ...loadLocalStorageData(),
 };
 

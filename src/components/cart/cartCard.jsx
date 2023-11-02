@@ -48,7 +48,7 @@ const CartCard = ({ element }) => {
               >
                 {element.name}
               </Typography>
-              <Typography
+              {/* <Typography
                 variant="h1"
                 component="div"
                 sx={{
@@ -58,8 +58,8 @@ const CartCard = ({ element }) => {
                   opacity: "0.7",
                 }}
               >
-                (x{element.cartProducts.quantity})
-              </Typography>
+                (X{element.quantity})
+              </Typography> */}
             </CardContent>
           </Link>
 
