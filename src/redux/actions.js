@@ -15,6 +15,9 @@ export const RESET_GENRE_FILTER = 'RESET_GENRE_FILTER';
 export const RESET_FILTERS = 'RESET_FILTERS';
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 export const SET_USER_DATA = 'SET_USER_DATA';
+export const CART_SHOPING = 'CART_SHOPING';
+export const DELETE_ITEM_CART = 'DELETE_ITEM_CART';
+export const ADD_TO_CART = 'ADD_TO_CART';
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -174,4 +177,44 @@ export function setAuthenticated(isAuthenticated) {
     payload: isAuthenticated,
   };
 }
+export const shoppingCartId = (id) => {
+  return async function (dispatch) {
+      try {
+      const { data } = await axios(
+        `http://localhost:3001/videogame/${id}`
+      );
+      return dispatch({
+        type: CART_SHOPING,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+}
+export const deleteItemCart = (payload) => {
+  return {
+    type: DELETE_ITEM_CART,
+    payload: payload,
+  };
+}
+export const addToCart = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/videogame/purchased',
+        payload
+      );
+      const addedProduct = response.data;
+
+      dispatch({
+        type: ADD_TO_CART,
+        payload: addedProduct,
+      });
+    } catch (error) {
+      console.log(error.message)
+      
+    }
+  };
+};
 

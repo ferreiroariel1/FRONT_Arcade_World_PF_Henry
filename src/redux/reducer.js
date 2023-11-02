@@ -2,7 +2,8 @@ import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID,
          GET_PLATFORMS, GET_GENRES, SET_SELECTED_GENRE,
          SET_SELECTED_PLATFORM, SET_AUTHENTICATED, SET_USER_DATA, RESET_FILTERS,
          FILTER_GAMES, RESET_GENRE_FILTER, RESET_PLATFORM_FILTER,
-         SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE } from './actions.js';
+         SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE, CART_SHOPING, 
+         DELETE_ITEM_CART, ADD_TO_CART } from './actions.js';
 
 const initialState = {
   games:[],
@@ -18,6 +19,7 @@ const initialState = {
   sortOrder:'',
   isAuthenticated: false,
   userData: null,
+  shoppingCart: []
  }  
 
  const rootReducer = (state=initialState, action)=> {
@@ -114,6 +116,22 @@ const initialState = {
                 ...state,
                 userData: action.payload,
               };
+    case CART_SHOPING:
+      return {
+        ...state,
+        shoppingCart: action.payload,
+      };
+    case DELETE_ITEM_CART:
+      return {
+        ...state,
+        shoppingCart: action.payload
+      };
+      case ADD_TO_CART:
+      return {
+        ...state,
+        shoppingCart: action.payload,
+      };
+
     default:
       return {...state}  
   }

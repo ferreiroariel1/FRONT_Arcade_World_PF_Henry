@@ -20,6 +20,7 @@ import Box from "@mui/material/Box";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import Pay from '../../components/cart/Pay.jsx'
 
 const Details = () => {
   const [comments, setComments] = useState("");
@@ -120,15 +121,8 @@ const Details = () => {
               >
                 Adds
               </Button>
-              <Button
-                variant="contained"
-                color="success"
-                size="medium"
-                endIcon={<ShopIcon />}
-                sx={{ marginLeft: "3px" }}
-              >
-                Buy
-              </Button>
+              
+              <Pay/>
             </div>
           </Stack>
         </Stack>
