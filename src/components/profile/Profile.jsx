@@ -16,6 +16,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Profile = () => {
+  const navigate = useNavigate();
   let userLocal = localStorage.getItem('login')
   userLocal = userLocal ?  JSON.parse(userLocal) : null
   
