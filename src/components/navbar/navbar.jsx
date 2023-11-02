@@ -21,40 +21,58 @@ function Navbar() {
     flexwrap: "wrap",
   };
   return (
-    <AppBar position="static" sx={{ background: '#333' }} style={appbar}>
-    <Container maxWidth="xl">
-      <Toolbar disableGutters>
-        {/* Logo */}
-        <Box display="flex" justifyContent="center" alignItems="center" gap={2}>     
-            <img src={logo} style={{ width: '5em' }} alt="Logo" />
-          <Typography variant='h4' sx={{
-             fontFamily: 'monospace',
-             fontWeight: 700,
-             letterSpacing: '.3rem',
-          }}>
-            Arcade World
-          </Typography>
-          {location.pathname === '/store' && <Search />}
-        </Box>
-        { location.pathname !== '/Dashboard' &&(
-          <Box display="flex" justifyContent="center" alignItems="center" gap={5} sx={{ flexGrow: 1}}>
-          <NavLink style={{ fontSize: '1.5em', color: 'white' }} to="/">Home</NavLink>
-          <NavLink style={{ fontSize: '1.5em', color: 'white' }} to="/store">Store</NavLink>
-          <NavLink style={{ fontSize: '1.5em', color: 'white' }} to="/library">Library</NavLink>
-          <NavLink style={{ fontSize: '1.5em', color: 'white' }} to="/about">About</NavLink>
-        </Box>
-          )} 
-  
-        <Box  display='flex' justifyContent="center" alignItems="center" gap={2}>
-          {location.pathname !== '/auth' && location.pathname !== '/Dashboard' && (
-            <>
-              <Link to="/cart">
-                <ShoppingCartIcon sx={{ color: '#f1f1f1' }} />
-              </Link>
-              {location.pathname !== '/user/profile' && (
-                <Link to="/auth">
-                  <Button variant="soft">Login</Button>
-
+    <AppBar position="" sx={{ background: "#333" }} style={appbar}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          {/* Logo */}
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            gap={2}
+          >
+            <img src={logo} style={{ width: "5em" }} alt="Logo" />
+            <Typography
+              variant="h4"
+              sx={{
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+              }}
+            >
+              Arcade World
+            </Typography>
+            {location.pathname === "/store" && <Search />}
+          </Box>
+          {/* Links */}
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            gap={5}
+            sx={{ flexGrow: 1 }}
+          >
+            <NavLink style={{ fontSize: "1.5em", color: "white" }} to="/">
+              Home
+            </NavLink>
+            <NavLink style={{ fontSize: "1.5em", color: "white" }} to="/store">
+              Store
+            </NavLink>
+            <NavLink style={{ fontSize: "1.5em", color: "white" }} to="/about">
+              About
+            </NavLink>
+          </Box>
+          {/* Cart, Login and avatar */}
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            gap={2}
+          >
+            {location.pathname !== "/auth" && (
+              <>
+                <Link to="/cart">
+                  <ShoppingCartIcon sx={{ color: "#f1f1f1" }} />
                 </Link>
                 {userLog && (
                   <Link to="/user/profile">
