@@ -58,12 +58,6 @@ function Navbar() {
             <NavLink style={{ fontSize: "1.5em", color: "white" }} to="/store">
               Store
             </NavLink>
-            <NavLink
-              style={{ fontSize: "1.5em", color: "white" }}
-              to="/library"
-            >
-              Library
-            </NavLink>
             <NavLink style={{ fontSize: "1.5em", color: "white" }} to="/about">
               About
             </NavLink>
