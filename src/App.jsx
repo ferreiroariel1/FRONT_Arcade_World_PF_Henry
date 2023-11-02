@@ -4,7 +4,7 @@ import Navbar from './components/navbar/navbar.jsx';
 import Cart from './components/cart/cart.jsx';
 import Auth from './components/auth/Auth.jsx';
 import Profile from './components/profile/Profile.jsx';
-
+import AppdDash from './views/Dashboard/AppDash.jsx'//
 import './App.css'
 
 
@@ -22,6 +22,7 @@ function App() {
         <Route path="/cart" element={<Cart/>} />
         <Route path="/auth" element={<Auth/>} />
         <Route path='/user/profile' element={<Profile/>}/>
+        <Route path='/Dashboard' element={<AppdDash/>}/>  
       </Routes>
     </div>
   )

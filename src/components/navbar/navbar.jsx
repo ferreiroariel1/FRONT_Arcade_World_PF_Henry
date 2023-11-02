@@ -35,18 +35,17 @@ function Navbar() {
           </Typography>
           {location.pathname === '/store' && <Search />}
         </Box>
-  
-        {/* Links */}
-        <Box display="flex" justifyContent="center" alignItems="center" gap={5} sx={{ flexGrow: 1}}>
+        { location.pathname !== '/Dashboard' &&(
+          <Box display="flex" justifyContent="center" alignItems="center" gap={5} sx={{ flexGrow: 1}}>
           <NavLink style={{ fontSize: '1.5em', color: 'white' }} to="/">Home</NavLink>
           <NavLink style={{ fontSize: '1.5em', color: 'white' }} to="/store">Store</NavLink>
           <NavLink style={{ fontSize: '1.5em', color: 'white' }} to="/library">Library</NavLink>
           <NavLink style={{ fontSize: '1.5em', color: 'white' }} to="/about">About</NavLink>
         </Box>
+          )} 
   
-        {/* Cart and Login */}
         <Box  display='flex' justifyContent="center" alignItems="center" gap={2}>
-          {location.pathname !== '/auth' && (
+          {location.pathname !== '/auth' && location.pathname !== '/Dashboard' && (
             <>
               <Link to="/cart">
                 <ShoppingCartIcon sx={{ color: '#f1f1f1' }} />
