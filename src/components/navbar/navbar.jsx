@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Profile from "../profile/Profile";
 import Search from "../search/Search";
@@ -10,12 +11,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Box } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import { useLocation } from "react-router-dom";
 
 function Navbar() {
   let userLocal = localStorage.getItem("login");
   userLocal = userLocal ? JSON.parse(userLocal) : null;
-  console.log(userLocal);
   const userLog = userLocal?.login;
   const location = useLocation();
   const appbar = {
@@ -99,4 +98,5 @@ function Navbar() {
     </AppBar>
   );
 }
+
 export default Navbar;
