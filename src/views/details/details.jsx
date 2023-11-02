@@ -168,9 +168,9 @@ const Details = () => {
               <Card sx={{ minWidth: 275, marginBottom:'20px'}}>
                 <CardContent sx={{textAlign: 'center', height:'200px', width:'400px'}}>
                 <Stack alignItems='center'>
-                  <Avatar src={userLocalDetail.user.image}/>
+                  <Avatar src={userLocalDetail?.user?.image}/>
                   </Stack>
-                  <Typography textAlign="center" marginBottom='10px'>{userLocalDetail.user.nickname}</Typography>
+                  <Typography textAlign="center" marginBottom='10px'>{userLocalDetail?.user?.nickname}</Typography>
                   <Typography textAlign="center">{comments}</Typography>
                 </CardContent>
               </Card>
@@ -179,9 +179,9 @@ const Details = () => {
               <Card sx={{ minWidth: 275, marginBottom:'20px'}}>
                 <CardContent sx={{textAlign: 'center', height:'200px', width:'400px'}}>
                   <Stack alignItems='center'>
-                  <Avatar src={userLocalDetail.user.image}/>
+                  <Avatar src={userLocalDetail?.user?.image}/>
                   </Stack>
-                  <Typography textAlign="center" marginBottom='10px'>{userLocalDetail.user.nickname}</Typography>
+                  <Typography textAlign="center" marginBottom='10px'>{userLocalDetail?.user?.nickname}</Typography>
                   <Typography textAlign="center">{comments}</Typography>
                 </CardContent>
               </Card>
@@ -190,9 +190,9 @@ const Details = () => {
               <Card sx={{ minWidth: 275, marginBottom:'20px'}}>
                 <CardContent sx={{textAlign: 'center', height:'200px', width:'400px'}}>
                 <Stack alignItems='center'>
-                  <Avatar src={userLocalDetail.user.image}/>
+                  <Avatar src={userLocalDetail?.user?.image}/>
                   </Stack>
-                  <Typography textAlign="center" marginBottom='10px'>{userLocalDetail.user.nickname}</Typography>
+                  <Typography textAlign="center" marginBottom='10px'>{userLocalDetail?.user?.nickname}</Typography>
                   <Typography textAlign="center">{comments}</Typography>
                 </CardContent>
               </Card>
