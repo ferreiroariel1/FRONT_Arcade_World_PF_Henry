@@ -28,7 +28,15 @@ const Profile = () => {
       navigate("/")
     }
   }, [])
-  
+  const handleLogout =()=>{
+    if (userLocal){
+      userLocal.login = false;
+      localStorage.setItem('login', JSON.stringify(userLocal));
+      console.log("Estado del user:", userLocal.login)
+      navigate("/");
+    }
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
