@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import style from './Sider.module.css';
 import { gamePlataforms, gameGenres, setSelectedPlatform, 
         setSelectedGenre, resetFilters, filterGames, 
-        resetGenreFilter, sortGamesAsc, sortGamesDesc, filterGamesByPrice } from "../../redux/actions";
+        resetGenreFilter, resetPlatformFilter, sortGamesAsc, sortGamesDesc, filterGamesByPrice } from "../../redux/actions";
 
 function Sider() {
 
@@ -15,7 +15,7 @@ function Sider() {
   let allPlatforms = useSelector(state => state.platforms);
   let allPlatformsArray = Object.values(allPlatforms);
 
-//este codigo es para visualizar el reset filter
+  //este codigo es para visualizar el reset filter
   let selectedPlatform = useSelector(state => state.selectedPlatform);
   useEffect(() => {
   }, [selectedPlatform]);
@@ -52,6 +52,8 @@ function Sider() {
     dispatch(filterGames());
   }
 
+  //input
+  const [inputValue, setInputValue] = useState("");
 
   return (
     <div className={style.form}>
@@ -78,10 +80,18 @@ function Sider() {
               ))}
             </select>
         </div>
-        <input type="number" onChange={(e) => dispatch(filterGamesByPrice(e.target.value))} />
-        <button onClick={() => dispatch(sortGamesAsc())}>Ordenar Ascendente</button>
-        <button onClick={() => dispatch(sortGamesDesc())}>Ordenar Descendente</button>  
-       <button onClick={() => dispatch(resetFilters())}>Reset Filter</button>
+        <label htmlFor="price">Price: </label>
+        <input type="number" value={inputValue} onChange={(e) => {
+            const regex = /^[0-9]*$/;
+            if (regex.test(e.target.value)) {
+              setInputValue(e.target.value);
+              dispatch(filterGamesByPrice(e.target.value));
+            }
+          }} 
+        />
+        <button onClick={() => dispatch(sortGamesAsc())}>Sort Ascending</button>
+        <button onClick={() => dispatch(sortGamesDesc())}>Sort Descending</button>  
+       <button onClick={() => {dispatch(resetFilters());setInputValue("");}}>Reset Filter</button>
     </div>
   )
 }

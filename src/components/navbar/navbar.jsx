@@ -1,25 +1,27 @@
-import { Link, NavLink, useLocation } from 'react-router-dom';
- import Profile from '../profile/Profile'
-import Search from '../search/Search';
-import logo from './logo1Sinfondo.png'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Button from '@mui/joy/Button';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
- import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { Box } from '@mui/material';
-
-
-
-
+import React from 'react'
+import { Link, NavLink, useLocation } from "react-router-dom";
+import Profile from "../profile/Profile";
+import Search from "../search/Search";
+import logo from "./logo1Sinfondo.png";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Button from "@mui/joy/Button";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { Box } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 
 function Navbar() {
- const location = useLocation();
-  const appbar={
-    flexwrap:'wrap'
-  }
+  let userLocal = localStorage.getItem("login");
+  userLocal = userLocal ? JSON.parse(userLocal) : null;
+  const userLog = userLocal?.login;
+  const location = useLocation();
+  const appbar = {
+    flexwrap: "wrap",
+  };
   return (
+
     <AppBar position="static" sx={{ background: '#333' }} style={appbar}>
     <Container maxWidth="xl">
       <Toolbar disableGutters>
@@ -54,14 +56,22 @@ function Navbar() {
                 <Link to="/auth">
                   <Button variant="soft">Login</Button>
                 </Link>
-              )}
-            </>
-          )}
-        </Box>
-      </Toolbar>
-    </Container>
-  </AppBar>
-   )
+                {userLog && (
+                  <Link to="/user/profile">
+                    <Avatar alt="Remy Sharp" src={userLocal?.user?.image} />
+                  </Link>
+                )}
+                {location.pathname !== "/user/profile" && !userLocal?.login && (
+                  <Link to="/auth">
+                    <Button variant="soft">Login</Button>
+                  </Link>
+                )}
+              </>
+            )}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 }
-
 export default Navbar;
