@@ -32,17 +32,19 @@ function Navbar() {
             alignItems="center"
             gap={2}
           >
-            <img src={logo} style={{ width: "5em" }} alt="Logo" />
-            <Typography
-              variant="h4"
-              sx={{
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-              }}
-            >
-              Arcade World
-            </Typography>
+            <Link to='/'>
+              <img src={logo} style={{ width: "5em" }} alt="Logo" />
+            </Link>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                }}
+              >
+                Arcade World
+              </Typography>
             {location.pathname === "/store" && <Search />}
           </Box>
 
