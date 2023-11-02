@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import SendIcon from '@mui/icons-material/Send';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Link } from "react-router-dom";
 import { Card,Box, Button, CardContent, CardMedia, Typography } from '@mui/material';
 
@@ -34,7 +34,7 @@ function News({id,name,image,price}) {
         $/{price}
       </Typography>
       <Link to={`/detail/${id}`}>
-        <Button variant="contained" endIcon={<SendIcon />}>
+        <Button variant="contained" endIcon={<InfoOutlinedIcon />}>
   Detail
 </Button>
    </Link>
