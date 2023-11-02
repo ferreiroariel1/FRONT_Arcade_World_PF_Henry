@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 import UploadImage from '../upload/UploadImage';
 import { postRegister } from "../../redux/actions";
 import { useDispatch } from "react-redux";
-
 import './auth.css'
 
 const Create = ({handleSign}) => {
