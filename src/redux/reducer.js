@@ -78,7 +78,9 @@ const initialState = {
     case FILTER_GAMES_BY_PRICE:
           return {
             ...state,
-            games: state.allGames.filter(game => game.price <= action.payload),
+            games: state.allGames
+              .filter(game => game.price <= action.payload)
+              .sort((a, b) => b.price - a.price)
           };
               case RESET_FILTERS:
             return {

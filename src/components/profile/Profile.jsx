@@ -36,6 +36,7 @@ const Profile = () => {
       navigate("/");
     }
   }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
@@ -106,7 +107,7 @@ const Profile = () => {
                     <Typography>$100</Typography>
                   </AccordionDetails>
                 </Accordion>
-                <Button size="large" sx={{color: '#000'}} onClick={handleLogout}><LogoutIcon/></Button>
+                <Button size="large" sx={{color: '#000'}}><LogoutIcon/></Button>
               </Card>
         </Grid>
         <Grid item xs={6}>
