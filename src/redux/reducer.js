@@ -2,7 +2,7 @@ import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID,
          GET_PLATFORMS, GET_GENRES, SET_SELECTED_GENRE,
          SET_SELECTED_PLATFORM, SET_AUTHENTICATED, SET_USER_DATA, RESET_FILTERS,
          FILTER_GAMES, RESET_GENRE_FILTER, RESET_PLATFORM_FILTER,
-         SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE } from './actions.js';
+         SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE,GET_USER } from './actions.js';
 
 const initialState = {
   games:[],
@@ -18,6 +18,7 @@ const initialState = {
   sortOrder:'',
   isAuthenticated: false,
   userData: null,
+  user:[],
  }  
 
  const rootReducer = (state=initialState, action)=> {
@@ -114,6 +115,11 @@ const initialState = {
                 ...state,
                 userData: action.payload,
               };
+              case GET_USER:
+                return{
+                  ...state,
+                  user:action.payload
+                }
     default:
       return {...state}  
   }

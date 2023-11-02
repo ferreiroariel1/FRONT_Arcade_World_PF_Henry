@@ -15,6 +15,7 @@ export const RESET_GENRE_FILTER = 'RESET_GENRE_FILTER';
 export const RESET_FILTERS = 'RESET_FILTERS';
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 export const SET_USER_DATA = 'SET_USER_DATA';
+export const GET_USER='GET_USER'
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -173,5 +174,18 @@ export function setAuthenticated(isAuthenticated) {
     type: SET_AUTHENTICATED,
     payload: isAuthenticated,
   };
+}
+export function GetUser(){
+  return async function(dispatch){
+   try {
+    const {data}= await axios.get('http://localhost:3001/user')
+    return dispatch({
+      type:GET_USER,
+      payload:data
+    })
+   } catch (error) {
+    console.log(error.message)
+   }
+  }
 }
 

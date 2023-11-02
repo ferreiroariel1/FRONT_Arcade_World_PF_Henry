@@ -17,7 +17,7 @@ function App() {
         <Box width={'20%'} height={'100vh'} bgcolor={'#333333'}>
       <List>
       <ListItem button onClick={() => HandlersComponet(<ViewMain />)}>
-            <ListItemText style={StyleMenu} primary="Table Purchases" />
+            <ListItemText style={StyleMenu} primary="View Main" />
           </ListItem>
       <ListItem button onClick={() => HandlersComponet(<TablePurchases />)}>
             <ListItemText style={StyleMenu} primary="Table Purchases" />
