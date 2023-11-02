@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import SendIcon from '@mui/icons-material/Send';
 import { Card, Box,CardContent, CardMedia, Typography,Button } from '@mui/material';
 
 function Rating({id,name,image,price}) {
@@ -34,7 +34,7 @@ function Rating({id,name,image,price}) {
          $/{price}
         </Typography>
    <Link to={`/detail/${id}`}>
-        <Button variant="contained" endIcon={<InfoOutlinedIcon />}>
+        <Button variant="contained" endIcon={<SendIcon />}>
   Detail
 </Button>
    </Link>

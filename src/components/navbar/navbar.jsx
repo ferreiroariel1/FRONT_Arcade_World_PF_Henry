@@ -10,13 +10,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Box } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+import { useLocation } from "react-router-dom";
 
 function Navbar() {
   let userLocal = localStorage.getItem("login");
   userLocal = userLocal ? JSON.parse(userLocal) : null;
   console.log(userLocal);
   const userLog = userLocal?.login;
-
   const location = useLocation();
   const appbar = {
     flexwrap: "wrap",
@@ -32,22 +32,19 @@ function Navbar() {
             alignItems="center"
             gap={2}
           >
-            <Link to='/'>
-              <img src={logo} style={{ width: "5em" }} alt="Logo" />
-            </Link>
-              <Typography
-                variant="h4"
-                sx={{
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                }}
-              >
-                Arcade World
-              </Typography>
+            <img src={logo} style={{ width: "5em" }} alt="Logo" />
+            <Typography
+              variant="h4"
+              sx={{
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+              }}
+            >
+              Arcade World
+            </Typography>
             {location.pathname === "/store" && <Search />}
           </Box>
-
           {/* Links */}
           <Box
             display="flex"
@@ -72,7 +69,6 @@ function Navbar() {
               About
             </NavLink>
           </Box>
-
           {/* Cart, Login and avatar */}
           <Box
             display="flex"
@@ -103,5 +99,4 @@ function Navbar() {
     </AppBar>
   );
 }
-
 export default Navbar;
