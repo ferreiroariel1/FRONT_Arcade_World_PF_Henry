@@ -15,6 +15,8 @@ export const RESET_GENRE_FILTER = 'RESET_GENRE_FILTER';
 export const RESET_FILTERS = 'RESET_FILTERS';
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 export const SET_USER_DATA = 'SET_USER_DATA';
+export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
+export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -174,15 +176,25 @@ export function setAuthenticated(isAuthenticated) {
     payload: isAuthenticated,
   };
 }
-export const addFav = (character) => {
-    const endpoint = 'http://localhost:3001/user/logout';
-    return (dispatch) => {
-       axios.put(endpoint, character).then(({ data }) => {
-          return dispatch({
-             type: 'ADD_FAV',
-             payload: data,
-          });
-       });
-    };
- };
+export const addToFavorites = (id) => ({
+  type: ADD_TO_FAVORITES,
+  payload: id,
+});
+export const removeFromFavorites = (id) => ({
+  type: REMOVE_FROM_FAVORITES,
+  payload: id,
+});
+
+
+// export const addFav = (character) => {
+//     const endpoint = 'http://localhost:3001/user/logout';
+//     return (dispatch) => {
+//        axios.put(endpoint, character).then(({ data }) => {
+//           return dispatch({
+//              type: 'ADD_FAV',
+//              payload: data,
+//           });
+//        });
+//     };
+//  };
 
