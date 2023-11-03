@@ -68,7 +68,7 @@ const Profile = () => {
     width: 1,
   });
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, height:'100vh'}}>
       <Grid container spacing={3}>
         <Grid item xs>
           <Card sx={{ width: "100%" }}>
