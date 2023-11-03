@@ -11,6 +11,7 @@ function ViewMain() {
     const dispatch=useDispatch()
     const game = useSelector((G)=>G?.games)
     const user = useSelector((U)=>U.user)
+    console.log(user)
     useEffect(()=>{
         dispatch(getGames())
         dispatch(GetUser())

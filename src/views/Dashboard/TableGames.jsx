@@ -1,14 +1,13 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
 // import { getGames } from '../../redux/actions'
-import { useDispatch,useSelector } from 'react-redux'
+import {useSelector } from 'react-redux'
 import { DataGridPro } from '@mui/x-data-grid-pro';
 
 
 function TableGames() {
  const games=useSelector((g)=>g.games)
  const rows = games.map((G)=>{
-    console.log(G.platforms[0])
     return{
         id:G.id,
         name:G.name,
@@ -18,7 +17,6 @@ function TableGames() {
     
     }
  })
- console.log(rows)
  const styleTable={
   color:'black',
   width:'98%'
@@ -39,8 +37,7 @@ function TableGames() {
        Table Games
       </Typography>
     </Box>
-    <DataGridPro style={styleTable} rows={rows} columns={[{field:'name'},{field:'price'},{field:'genres'},{field:'plataforms'}]}   pagination
-        paginationRowsPerPageOptions={[100]} />
+    <DataGridPro style={styleTable} rows={rows} columns={[{field:'name'},{field:'price'},{field:'genres'},{field:'plataforms'}]}   pagination />
    </Box>
   )
 }
