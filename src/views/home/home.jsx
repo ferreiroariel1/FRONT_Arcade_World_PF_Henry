@@ -5,7 +5,8 @@ import {useDispatch,useSelector}from 'react-redux'
 import { getGames } from "../../redux/actions"
 import { useEffect } from "react"
 import Carrusel from './components/Carrusel.jsx';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Typography, Stack } from '@mui/material';
+import FloatingBtn from '../../components/floatingButton/FloatinBtn.jsx'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -71,6 +72,9 @@ const Home = () => {
         ))}
       </Box>
     </Container>
+    <Stack>
+    <FloatingBtn/>
+    </Stack>
   </Box>
   )
 }
