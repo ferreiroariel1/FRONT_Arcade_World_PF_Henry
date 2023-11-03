@@ -4,6 +4,7 @@ import Navbar from './components/navbar/navbar.jsx';
 import Cart from './components/cart/cart.jsx';
 import Auth from './components/auth/Auth.jsx';
 import Profile from './components/profile/Profile.jsx';
+import Footer from './components/footer/Footer.jsx'
 
 import './App.css'
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/auth" element={<Auth/>} />
         <Route path='/user/profile' element={<Profile/>}/>
       </Routes>
+      <Footer/>
     </div>
   )
 
