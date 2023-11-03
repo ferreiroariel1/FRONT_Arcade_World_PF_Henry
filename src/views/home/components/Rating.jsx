@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Card, Box,CardContent, CardMedia, Typography,Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 function Rating({id,name,image,price}) {
   const cardStyle = {
@@ -24,6 +26,7 @@ function Rating({id,name,image,price}) {
   };
   return (
     <Card style={cardStyle}>
+      <IconButton sx={{display:'grid', position:'absolute', marginLeft:'195px'}}><FavoriteIcon/></IconButton>
       <CardMedia component="img" height="140" image={image} alt={name} />
       <CardContent >
         <Typography variant="h5" component="div">

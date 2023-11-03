@@ -5,8 +5,8 @@ import {useDispatch,useSelector}from 'react-redux'
 import { getGames } from "../../redux/actions"
 import { useEffect } from "react"
 import Carrusel from './components/Carrusel.jsx';
-import { Box, Container, Typography } from '@mui/material';
-
+import { Box, Container, Typography, Stack } from '@mui/material';
+import FloatingBtn from '../../components/floatingButton/FloatinBtn.jsx'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -33,13 +33,13 @@ const Home = () => {
       <Box className="com" display="flex" justifyContent="space-around" flexWrap="wrap">
         {NewsGame?.map((games) => (
           <News
-            key={games?.id}
-            id={games?.id}
-            name={games?.name}
-            image={games?.image}
-            price={games?.price}
+          key={games?.id}
+          id={games?.id}
+          name={games?.name}
+          image={games?.image}
+          price={games?.price}
           />
-        ))}
+          ))}
       </Box>
 
       <Typography variant="h3" sx={{ margin: '1em 0em' }} component="h3" className="titulo" textAlign="center" color="beige">
@@ -60,7 +60,7 @@ const Home = () => {
       <Typography variant="h3" sx={{ margin: '1em 0em' }} component="h3" className="titulo" textAlign="center" color="beige">
         🎮RATING🎮
       </Typography>
-      <Box className="com" display="flex" justifyContent="space-around" flexWrap="wrap">
+      <Box className="com" display="flex" justifyContent="space-around" flexWrap="wrap" paddingBottom='35px'>
         {RatingGame?.map((games) => (
           <Rating
             key={games?.id}
@@ -72,6 +72,9 @@ const Home = () => {
         ))}
       </Box>
     </Container>
+    <Stack>
+    <FloatingBtn/>
+    </Stack>
   </Box>
   )
 }

@@ -20,6 +20,8 @@ import Box from "@mui/material/Box";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import Filter from 'bad-words'
+var  filter = new Filter();
 
 const Details = () => {
   const [comments, setComments] = useState("");
@@ -59,7 +61,8 @@ const Details = () => {
   }, [dispatch, id]);
 
   const handleChange = (event) => {
-    setMessage(event.target.value);
+    let cleanMessage = filter.clean(event.target.value)
+    setMessage(cleanMessage);
   };
 
   return (

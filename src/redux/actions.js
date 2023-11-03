@@ -188,4 +188,16 @@ export function GetUser(){
    }
   }
 }
+export const addFav = (character) => {
+    const endpoint = 'http://localhost:3001/user/logout';
+    return (dispatch) => {
+       axios.put(endpoint, character).then(({ data }) => {
+          return dispatch({
+             type: 'ADD_FAV',
+             payload: data,
+          });
+       });
+    };
+ };
+
 
