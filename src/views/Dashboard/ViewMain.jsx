@@ -19,8 +19,8 @@ function ViewMain() {
        const GamesLength = game.length
  
     const cardStyle = {
-    width: '11.3em',
-    maxheight:'16em', 
+    width: '14em',
+    height:'12em', 
     overflow: 'hidden',
     backgroundColor: '#333',
      color: 'white' ,
@@ -34,9 +34,10 @@ function ViewMain() {
   const BoxCard={
     display:'flex',
     width:'100%',
+    flexWrap:'wrap'
   }
     const estiloBox = {
-      backdropFilter: 'blur(5px)', 
+      backdropFilter: 'blur(1px)', 
       borderRadius: '100%', 
       backgroundColor: 'rgba(255, 255, 255, 0.5)', // Fondo semitransparente
       padding: '20px 0px',
@@ -45,7 +46,7 @@ function ViewMain() {
       justifyContent: 'center'
     };
   return (
-    <Box bgcolor='#334' style={BoxCard} >
+    <Box bgcolor='#334' style={BoxCard} gap={4}>
      {/*  //?Card Games ↓*/} 
      <Box >
       <Card style={cardStyle} >
@@ -67,7 +68,7 @@ function ViewMain() {
       <Card style={cardStyle} >
         <CardContent>
         <Box style={estiloBox} >
-            <PersonIcon sx={{ fontSize: 40 }}/>
+            <PersonIcon sx={{ fontSize: 36 }}/>
         </Box>
             <Typography variant='h5' component={'div'}>
                 USERS
@@ -83,7 +84,7 @@ function ViewMain() {
       <Card style={cardStyle} >
         <CardContent>
         <Box style={estiloBox} >
-            <LocalMallIcon sx={{ fontSize: 40 }}/>
+            <LocalMallIcon sx={{ fontSize: 35 }}/>
         </Box>
             <Typography variant='h5' component={'div'}>
                 BUYS
@@ -99,7 +100,7 @@ function ViewMain() {
       <Card style={cardStyle} >
         <CardContent>
         <Box style={estiloBox} >
-            <VisibilityIcon sx={{ fontSize: 40 }}/>
+            <VisibilityIcon sx={{ fontSize: 35 }}/>
         </Box>
             <Typography variant='h5' component={'div'}>
             LOGIN

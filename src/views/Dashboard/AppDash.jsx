@@ -3,6 +3,7 @@ import { Box, List, ListItem, ListItemText } from '@mui/material';
 import ViewMain from './ViewMain';
 import TablePurchases from './TablePurchases'
 import TableUser from './TableUser';
+import TableGames from './TableGames.jsx'
 
 function App() {
   const [Component,setComponent]=useState(<ViewMain/>)
@@ -12,6 +13,7 @@ function App() {
   const StyleMenu={
     color:'white'
   }
+
     return(
       <Box display='flex'>
         <Box width={'20%'} height={'100vh'} bgcolor={'#333333'}>
@@ -22,12 +24,15 @@ function App() {
       <ListItem button onClick={() => HandlersComponet(<TablePurchases />)}>
             <ListItemText style={StyleMenu} primary="Table Purchases" />
           </ListItem>
+          <ListItem button onClick={() => HandlersComponet(<TableGames/>)}>
+            <ListItemText style={StyleMenu} primary="Table Games" />
+          </ListItem>
           <ListItem button onClick={() => HandlersComponet(<TableUser />)}>
             <ListItemText style={StyleMenu} primary="Table User" />
           </ListItem>
       </List>
         </Box>
-        <Box width={'80%'}>
+        <Box width={'80%'}  >
         {Component}
         </Box>
       </Box>
