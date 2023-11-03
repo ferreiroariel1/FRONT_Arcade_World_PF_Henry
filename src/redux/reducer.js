@@ -4,6 +4,7 @@ import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID,
          FILTER_GAMES, RESET_GENRE_FILTER, RESET_PLATFORM_FILTER,
          SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE, CART_SHOPING, 
          DELETE_ITEM_CART } from './actions.js';
+          
 
 const initialState = {
   games:[],
@@ -23,7 +24,7 @@ const initialState = {
  }  
 
  const rootReducer = (state=initialState, action)=> {
-
+  let found;
   switch (action.type) {
     case GET_GAMES:
      return {
@@ -117,10 +118,21 @@ const initialState = {
                 userData: action.payload,
               };
     case CART_SHOPING:
+       found = state.shoppingCart.find(el => el.id === action.payload[0].id);
+      
+      if(!found) {
+        const localCart = [...state.shoppingCart, ...action.payload];
+        localStorage.setItem("cart", JSON.stringify(localCart));
       return {
         ...state,
-        shoppingCart: action.payload,
-      };
+        shoppingCart: localCart
+      }
+    } else {
+      return {
+        ...state,
+        
+      }
+    }
     case DELETE_ITEM_CART:
       return {
         ...state,

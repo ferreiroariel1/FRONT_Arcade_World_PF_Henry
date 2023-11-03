@@ -1,60 +1,47 @@
 
 import Swal from "sweetalert2";
-import { useNavigate, useParams } from 'react-router-dom';
 import ShopIcon from "@mui/icons-material/Shop";
 import {Button} from "@mui/material";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from "react-router-dom";
+import { shoppingCartId } from '../../redux/actions.js';
 
  const Pay = ()=> {
-
-  const navigate = useNavigate();
-  let userLocalPay = localStorage.getItem("login");
-  userLocalPay = userLocalPay ? JSON.parse(userLocalPay) : null;
   const shoppingCart = useSelector((state) => state.shoppingCart);
-  const { id } = useParams();
+ 
+  const dispatch = useDispatch();
+  const showAlert = () => {
+    Swal.fire({
+      toast: true,
+      icon: "success",
+      title: "Product added to cart",
+      timer: 1200,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      position: "top",
+    });
+  };
 
-  const handleButton = () => {
-    if ((userLocalPay === null || userLocalPay === "")) {
-       Swal.fire({
-        toast: true,
-        icon: "info",
-        title: "Sorry, you can only buy if you register",
-        showConfirmButton: true,
-        position: "top-center",
-        confirmButtonText: "Login",
-        confirmButtonColor: "#F19E6E",
-      }).then((willRedirect) => {
-        if (willRedirect) {
-            navigate("/auth");
-        }
-      });
-    } else {
-      const found = shoppingCart.find(el => el.id === id)
-      if(!found) {
-        localStorage.setItem("cart", JSON.stringify(found));
-         navigate('/cart');
-         Swal.fire({
-          toast: true,
-          icon: "success",
-          title: "Product added to cart",
-          timer: 1200,
-          timerProgressBar: true,
-          showConfirmButton: false,
-          position: "top",
-        });
-      } else {
-         Swal.fire({
-          toast: true,
-          icon: "warning",
-          title: "The product is already in the cart",
-          timer: 2000,
-          timerProgressBar: true,
-          showConfirmButton: false,
-          position: "top",
-        });
-      }
-     }
-  }
+  const showAlert2 = () => {
+    Swal.fire({
+      toast: true,
+      icon: "warning",
+      title: "The product is already in the cart",
+      timer: 2000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      position: "top",
+    });
+  };
+
+  const { id } = useParams()
+  const handleClick = () => {
+    dispatch(shoppingCartId(id));
+    const found = shoppingCart.find(el => el.id === id)
+    if(!found) showAlert();
+    else showAlert2()
+  };
+
    
      return (
     <div>
@@ -64,11 +51,11 @@ import { useSelector } from 'react-redux';
                 size="medium"
                 endIcon={<ShopIcon />}
                 sx={{ marginLeft: "150px", marginTop:"-58px" }}
-                onClick={handleButton}
+                onClick={handleClick}
               >
                 Buy
               </Button>
-        {/* <button  onClick={handleButton}>Pay</button> */}
+        
     </div>
 
   )

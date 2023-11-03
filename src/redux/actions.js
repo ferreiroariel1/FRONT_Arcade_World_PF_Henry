@@ -178,14 +178,12 @@ export function setAuthenticated(isAuthenticated) {
   };
 }
 export const shoppingCartId = (id) => {
-  return async function (dispatch) {
-      try {
-      const { data } = await axios(
-        `http://localhost:3001/videogame/${id}`
-      );
+  return async function(dispatch) {
+    try {
+      const dated = (await axios.get(`http://localhost:3001/videogame/${id}`)).data;
       return dispatch({
         type: CART_SHOPING,
-        payload: data,
+        payload: dated,
       });
     } catch (error) {
       console.log(error.message);

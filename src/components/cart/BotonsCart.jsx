@@ -1,24 +1,29 @@
-import { useParams } from 'react-router-dom';
+
+
 import { useDispatch } from "react-redux";
 import CardContent from "@mui/material/CardContent";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { deleteItemCart } from "../../redux/actions.js"
 import PropTypes from "prop-types";
-import {
-  deleteItemCart, shoppingCartId
-} from "../../redux/actions.js";
 
-const BotonsCart = () => {
+
+const BotonsCart = (props) => {
+  const { id } = props.element;
+ 
   const dispatch = useDispatch();
-  const { id } = useParams;
   
-  const handleAddToCart = (id) => {
-   dispatch(shoppingCartId(id))
+  // let [index, setIndex] = useState()  
+  const handleAddToCart = () => {
+   
   };
 
   const handleRemoveFromCart = () => {
-   dispatch(deleteItemCart(id));
+    const filtrado = Object.values(props.element).find((el) => el.id !== id);
+    dispatch(deleteItemCart(filtrado));
+       
+    
  };
 
   return (

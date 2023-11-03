@@ -122,7 +122,7 @@ const Details = () => {
                 Adds
               </Button>
               
-              <Pay/>
+              <Pay />
             </div>
           </Stack>
         </Stack>

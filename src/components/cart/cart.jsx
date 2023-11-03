@@ -1,69 +1,52 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
-import { useParams, useNavigate } from "react-router-dom";
-import { shoppingCartId, deleteItemCart } from "../../redux/actions.js";
-import { useDispatch, } from "react-redux";
+import {  useNavigate } from "react-router-dom";
+import { deleteItemCart } from "../../redux/actions.js";
+import { useDispatch } from "react-redux";
 import { Button, Box, CardContent, Typography } from "@mui/material";
 import CartCard from "./cartCard.jsx";
 import style from "./cart.module.css";
 import Purchased from "./Purchased.jsx";
 
-const harcod = [
+const harcod =[
   {
-    id: 10449,
-    name: "Darksiders II Deathinitive Edition",
-    description:
-      "The video game Darksiders II Deathinitive Edition is an exciting title that belongs to the Action and RPG genres. It is available for play on PC, PlayStation, Xbox and Nintendo. Gamers around the world can enjoy the immersive experience offered by this game, which covers a range of Action and RPG genres. Whether you prefer playing on PC, PlayStation, Xbox and Nintendo, you'll have the opportunity to dive into this captivating gaming universe and explore all it has to offer.",
-    platforms: ["PlayStation 4", "Xbox One", "Nintendo Switch", "PC"],
+    id: 4570,
+    name: "Dead Space (2008)",
     image:
-      "https://media.rawg.io/media/games/cfe/cfe5960b5caca432f3575fc7d8ff736b.jpg",
-    released: "2015-11-05",
-    rating: 3.78,
-    origin: "API",
-    genres: ["Action", "RPG"],
+      "https://media.rawg.io/media/games/ebd/ebdbb7eb52bd58b0e7fa4538d9757b60.jpg",
     price: (Math.random() * 10 + 40).toFixed(2),
   },
   {
-    id: 2518,
-    name: "Max Payne",
-    description:
-      "The video game Max Payne is an exciting title that belongs to the Action and Shooter genres. It is available for play on PC, PlayStation, Xbox and Apple Macintosh. Gamers around the world can enjoy the immersive experience offered by this game, which covers a range of Action and Shooter genres. Whether you prefer playing on PC, PlayStation, Xbox and Apple Macintosh, you'll have the opportunity to dive into this captivating gaming universe and explore all it has to offer.",
-    platforms: [
-      "PC",
-      "PlayStation 3",
-      "Xbox",
-      "Classic Macintosh",
-      "PlayStation 2",
-      "Xbox 360",
-      "PlayStation 4",
-    ],
+    id: 4580,
+    name: "Wallpaper Engine",
     image:
-      "https://media.rawg.io/media/games/2f5/2f5eb72fe45540e93ac2726877551a20.jpg",
-    released: "2001-07-23",
-    rating: 4.46,
-    origin: "API",
-    genres: ["Action", "Shooter"],
-    price: (Math.random() * 10 + 40).toFixed(2)
+      "https://media.rawg.io/media/screenshots/5a7/5a72aed79451d8fbd6a7b82f784002bd.jpg",
+    price: (Math.random() * 10 + 40).toFixed(2),
+  },
+  {
+    id: 4670,
+    name: "Darksiders II Deathinitive Edition",
+    image:
+      "https://media.rawg.io/media/games/cfe/cfe5960b5caca432f3575fc7d8ff736b.jpg",
+    price: (Math.random() * 10 + 40).toFixed(2),
   },
 ]
 
-
 const Cart = () => {
-  let { id } = useParams();
-  const dispatch = useDispatch();
-  // let shoppingCart = useSelector((state) => state?.shoppingCart);
- 
+    const dispatch = useDispatch();
+    
+  let [index, setIndex] = useState(harcod?.map((item) =>
+  !Object.prototype.hasOwnProperty.call(item, "quantity")
+    ? { ...item, quantity: 1 }
+    : item))
+      
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(shoppingCartId(id));
-  }, [dispatch, id]);
-
-  const handleDiscoverClick = () => {
+   const handleDiscoverClick = () => {
     navigate("/store");
   };
 
-  const showAlert = () => {
+  const handleClearClick = () => {
     Swal.fire({
       title: "Are you sure?",
       text: "Are you sure you want to delete the items from your cart!",
@@ -71,20 +54,31 @@ const Cart = () => {
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
-      if (willDelete) {
-        // Vaciar el carrito aquí
-        handleClearClick();
-        Swal.fire("Success!", "Your cart has been emptied.", "success");
+      if (willDelete.isConfirmed) {
+        dispatch(deleteItemCart(index));
+        setIndex([]); // Vaciar el carrito
+         Swal.fire("Success!", "Your cart has been emptied.", "success");
       } else {
         Swal.fire("Cancelled", "Your cart is safe.", "info");
       }
     });
   };
+  
+     
+    let totalSum = () => {
+      let suma = 0;
+  
+      for (const item of index) {
+        suma += parseFloat(item.price) * item.quantity;
+      }
+       return suma.toFixed(2);
+    };
 
-  const handleClearClick = () => {
-    dispatch(deleteItemCart(id));
-  };
-
+    const handlerReduce = (arr) => {
+      const totalProducts = arr?.reduce((a, b) => a + b.quantity, 0);
+      return totalProducts;
+    };
+       
   return (
     <Box
       sx={{
@@ -93,7 +87,7 @@ const Cart = () => {
         alignItems: "flex-start",
         gap: "100px",
       }}
-    >
+       >
       <Box
         sx={{
           paddingTop: "30px",
@@ -102,18 +96,16 @@ const Cart = () => {
           flexDirection: "column",
           justifyContent: "flex-start",
           alignItems: "center",
-          backgroundColor: "#ffefcf",
           gap: "30px",
         }}
-      >
+        >
         {harcod.length > 0 ? (
           harcod.map((e) => (
             <CartCard key={e.id} element={e} />
           ))
         ) : (
           <div className={style.loading}>
-            {/* <Loading /> */}
-            <Box
+             <Box
               sx={{
                 backgroundColor: "#eddcb9",
                 height: "300px",
@@ -144,8 +136,8 @@ const Cart = () => {
                   component="div"
                   sx={{
                     fontSize: 25,
-                    // display: "flex",
-                    // alignItems: "center",
+                    display: "flex",
+                    alignItems: "center",
                   }}
                 >
                   Ups! You have no items in your cart
@@ -230,7 +222,7 @@ const Cart = () => {
                 opacity: "0.8",
               }}
             >
-              ({harcod.quantity})
+              ({handlerReduce(index)})
             </Typography>
           </Box>
           <Box
@@ -252,7 +244,8 @@ const Cart = () => {
               Total:
             </Typography>
             <Typography
-              variant="body1"
+             
+             variant="body1"
               component="div"
               sx={{
                 fontSize: 30,
@@ -260,7 +253,7 @@ const Cart = () => {
                 alignItems: "center",
               }}
             >
-              ${harcod.totalPrice}
+              ${totalSum()}
             </Typography>
           </Box>
         </CardContent>
@@ -274,7 +267,7 @@ const Cart = () => {
         >
           <Purchased carrPay={harcod}/>
           <Button
-            onClick={showAlert}
+            onClick={handleClearClick}
             variant="outlined"
             sx={{
               color: "rgb(114, 8, 8)",
