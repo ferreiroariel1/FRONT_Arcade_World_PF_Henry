@@ -18,10 +18,11 @@ const initialState = {
   sortOrder:'',
   isAuthenticated: false,
   userData: null,
+  Favorites: [],
+  allCharactersFav: []
  }  
 
  const rootReducer = (state=initialState, action)=> {
-
   switch (action.type) {
     case GET_GAMES:
      return {
@@ -117,6 +118,7 @@ const initialState = {
     default:
       return {...state}  
   }
+
  }
 
  export default rootReducer;
