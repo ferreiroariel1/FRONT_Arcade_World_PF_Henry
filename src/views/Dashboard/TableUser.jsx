@@ -1,7 +1,7 @@
 import React from 'react'
  import { DataGridPro} from '@mui/x-data-grid-pro';
 import { useSelector } from 'react-redux';
-import { Box,Typography} from '@mui/material';
+import { Box,Typography,Button} from '@mui/material';
 
 function TableUser() {
   const user=useSelector((U)=>U.user)
@@ -17,25 +17,45 @@ function TableUser() {
   })
   const columns=
    [
-    {field:'name', headerName: 'Name', width: 160, editable: true},{field:'lastname'},{field:'nickname'},{field:'Email'}
+    {field:'name', headerName: 'Name', width: 160, editable: true},
+    {field:'lastname'},
+    {field:'nickname'},
+    {field:'Email'},
+    {field:'',
+    headerName: '',
+    renderCell: () => (
+      <Button  variant="outlined" color="primary">
+       Detail
+      </Button>
+    )
+  }
    ]
    const styleTable={
     color:'black',
-    width:'98%'
+    width:'98%',
+    backgroundColor: '#cfd8dc'
    }
    const BoxMain={
       display:'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor: '#546e7a',
       flexDirection:'column',
       backgroundAttachment: 'fixed',
       backgroundSize: 'cover',
       height: '100vh',
    }
+   const TitleBox={
+    backgroundColor: '#37474f',
+    borderRadius:'1em',
+    padding:'1em',
+    color:'white',
+    margin:'1em'
+  }
   return (
-    <Box sx={BoxMain}>
-    <Box >
-      <Typography variant='h2' component={'h2'}>
+    <Box sx={BoxMain} gap={2}>
+    <Box sx={TitleBox} >
+      <Typography variant='h3' component={'h3'}>
        Table  User
       </Typography>
     </Box>

@@ -4,6 +4,7 @@ import ViewMain from './ViewMain';
 import TablePurchases from './TablePurchases'
 import TableUser from './TableUser';
 import TableGames from './TableGames.jsx'
+import PublishGame from './PublishGame.jsx';
 
 function App() {
   const [Component,setComponent]=useState(<ViewMain/>)
@@ -11,12 +12,16 @@ function App() {
     setComponent(Component)
   }
   const StyleMenu={
-    color:'white'
+    color:'white',
+  }
+  const Menu={
+    width:'15%',
+    minheight:'600px'
   }
 
     return(
       <Box display='flex'>
-        <Box width={'20%'} height={'100vh'} bgcolor={'#333333'}>
+        <Box sx={Menu} bgcolor={'#263238'}>
       <List>
       <ListItem button onClick={() => HandlersComponet(<ViewMain />)}>
             <ListItemText style={StyleMenu} primary="View Main" />
@@ -30,9 +35,12 @@ function App() {
           <ListItem button onClick={() => HandlersComponet(<TableUser />)}>
             <ListItemText style={StyleMenu} primary="Table User" />
           </ListItem>
+          <ListItem button onClick={() => HandlersComponet(<PublishGame />)}>
+            <ListItemText style={StyleMenu} primary="Publish Game" />
+          </ListItem>
       </List>
         </Box>
-        <Box width={'80%'}  >
+        <Box width={'85%'}  >
         {Component}
         </Box>
       </Box>

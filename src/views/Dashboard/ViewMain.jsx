@@ -11,7 +11,7 @@ function ViewMain() {
     const dispatch=useDispatch()
     const game = useSelector((G)=>G?.games)
     const user = useSelector((U)=>U.user)
-    console.log(user)
+
     useEffect(()=>{
         dispatch(getGames())
         dispatch(GetUser())
@@ -23,7 +23,7 @@ function ViewMain() {
     width: '14em',
     height:'12em', 
     overflow: 'hidden',
-    backgroundColor: '#333',
+    backgroundColor: '#37474f',
      color: 'white' ,
      display:'flex',
     alignItems: 'center',
@@ -47,7 +47,7 @@ function ViewMain() {
       justifyContent: 'center'
     };
   return (
-    <Box bgcolor='#334' style={BoxCard} gap={4}>
+    <Box bgcolor='#546e7a' style={BoxCard} gap={4}>
      {/*  //?Card Games ↓*/} 
      <Box >
       <Card style={cardStyle} >
