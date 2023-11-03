@@ -4,8 +4,37 @@ import { Link } from "react-router-dom";
 import { Card,Box, Button, CardContent, CardMedia, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { connect } from 'react-redux';
+import { addToFavorites, removeFromFavorites } from '../../../redux/actions'
+import { useState, useEffect } from "react";
 
-function News({id,name,image,price}) {
+function News({id,name,image,price, addToFavorites}) {
+
+  const [isPressed, setIsPressed] = useState();
+
+  const handleAddToFavorites = () => {
+    // Almacena el nuevo estado en una variable
+    const newIsPressed = !isPressed;
+  
+    if (newIsPressed) {
+      addToFavorites(id);
+    } else {
+      removeFromFavorites(id);
+      console.log(removeFromFavorites(id))
+    }
+  
+    // Actualiza el estado con la nueva variable
+    setIsPressed(newIsPressed);
+  };
+
+  useEffect(() => {
+    console.log(`El estado isPressed ha cambiado a: ${isPressed}`);
+  }, [isPressed]);
+
+  useEffect(() => {
+    console.log(`Se pasó el id: ${id}`);
+  }, [id]);
+
   const cardStyle = {
     cursor: 'pointer',
     flexwrap:'wrap',
@@ -26,7 +55,7 @@ function News({id,name,image,price}) {
   };
   return (
     <Card style={cardStyle}>
-      <IconButton sx={{display:'grid', position:'absolute', marginLeft:'195px'}}><FavoriteIcon/></IconButton>
+      <IconButton onClick={handleAddToFavorites} sx={{display:'grid', position:'absolute', marginLeft:'195px', color: isPressed ? 'red' : 'blue'}}><FavoriteIcon/></IconButton>
     <CardMedia component="img" height="140" image={image} alt={name} />
     <CardContent>
       <Typography variant="h5" component="div">
@@ -52,4 +81,8 @@ News.propTypes= {
   price: PropTypes.number.isRequired
 }
 
-export default News
+const mapDispatchToProps = {
+  addToFavorites,
+};
+
+export default connect(null, mapDispatchToProps)(News);
