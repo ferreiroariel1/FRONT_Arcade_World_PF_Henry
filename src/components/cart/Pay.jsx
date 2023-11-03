@@ -1,23 +1,21 @@
 
-import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from 'react-router-dom';
 import ShopIcon from "@mui/icons-material/Shop";
 import {Button} from "@mui/material";
-import { addToCart } from '../../redux/actions.js';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
  const Pay = ()=> {
 
   const navigate = useNavigate();
-  let userLocalDetail = localStorage.getItem("login");
-  userLocalDetail = userLocalDetail ? JSON.parse(userLocalDetail) : null;
-  const dispatch = useDispatch();
-  const { UserId, id } = useParams();
+  let userLocalPay = localStorage.getItem("login");
+  userLocalPay = userLocalPay ? JSON.parse(userLocalPay) : null;
+  const shoppingCart = useSelector((state) => state.shoppingCart);
+  const { id } = useParams();
 
   const handleButton = () => {
-    if (userLocalDetail === null || userLocalDetail === "") {
-      Swal.fire({
+    if ((userLocalPay === null || userLocalPay === "")) {
+       Swal.fire({
         toast: true,
         icon: "info",
         title: "Sorry, you can only buy if you register",
@@ -31,15 +29,32 @@ import { useDispatch } from 'react-redux';
         }
       });
     } else {
-      const payload = {
-        UserId: UserId,
-        videogameId: id,
-      };
-      dispatch(addToCart(payload))
-      navigate('/cart');
-    }
-  };
-
+      const found = shoppingCart.find(el => el.id === id)
+      if(!found) {
+        localStorage.setItem("cart", JSON.stringify(found));
+         navigate('/cart');
+         Swal.fire({
+          toast: true,
+          icon: "success",
+          title: "Product added to cart",
+          timer: 1200,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          position: "top",
+        });
+      } else {
+         Swal.fire({
+          toast: true,
+          icon: "warning",
+          title: "The product is already in the cart",
+          timer: 2000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          position: "top",
+        });
+      }
+     }
+  }
    
      return (
     <div>
@@ -58,8 +73,6 @@ import { useDispatch } from 'react-redux';
 
   )
 }
-Pay.propTypes= {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired
-}
+ 
+
 export default Pay;

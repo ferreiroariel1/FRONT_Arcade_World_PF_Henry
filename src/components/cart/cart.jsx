@@ -6,7 +6,7 @@ import { useDispatch, } from "react-redux";
 import { Button, Box, CardContent, Typography } from "@mui/material";
 import CartCard from "./cartCard.jsx";
 import style from "./cart.module.css";
-import PayCarrito from "./PayCarrito.jsx";
+import Purchased from "./Purchased.jsx";
 
 const harcod = [
   {
@@ -64,7 +64,7 @@ const Cart = () => {
   };
 
   const showAlert = () => {
-    Swal({
+    Swal.fire({
       title: "Are you sure?",
       text: "Are you sure you want to delete the items from your cart!",
       icon: "warning",
@@ -74,9 +74,9 @@ const Cart = () => {
       if (willDelete) {
         // Vaciar el carrito aquí
         handleClearClick();
-        Swal("Success!", "Your cart has been emptied.", "success");
+        Swal.fire("Success!", "Your cart has been emptied.", "success");
       } else {
-        Swal("Cancelled", "Your cart is safe.", "info");
+        Swal.fire("Cancelled", "Your cart is safe.", "info");
       }
     });
   };
@@ -272,7 +272,7 @@ const Cart = () => {
             gap: "50px",
           }}
         >
-          <PayCarrito params={harcod}></PayCarrito>
+          <Purchased carrPay={harcod}/>
           <Button
             onClick={showAlert}
             variant="outlined"

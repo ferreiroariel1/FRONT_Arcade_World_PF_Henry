@@ -1,51 +1,28 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useParams } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 import CardContent from "@mui/material/CardContent";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import PropTypes from "prop-types";
 import {
-  addToCart,
-  deleteItemCart,
+  deleteItemCart, shoppingCartId
 } from "../../redux/actions.js";
 
-const BotonsCart = ({element}) => {
-  const roleUser = JSON.parse(window?.localStorage.getItem("login"));
-
+const BotonsCart = () => {
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.userData);
-   const userId = userData.id;
-  const [quantity, setQuantity] = useState(1);
-  // const [count, setCount] = useState(0);
-
-  const handleAddToCart = () => {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
-    const payload = {
-      userId: userId,
-      videogameId: element.id,
-      quantity: newQuantity,
-    };
-    setQuantity(0);
-    dispatch(addToCart(payload));
+  const { id } = useParams;
+  
+  const handleAddToCart = (id) => {
+   dispatch(shoppingCartId(id))
   };
 
   const handleRemoveFromCart = () => {
-    const payload = {
-      userId: userId,
-      videogameId: element.id
-    };
-    
-    dispatch(deleteItemCart(payload));
-    
-  };
+   dispatch(deleteItemCart(id));
+ };
 
   return (
     <div>
-      {(roleUser?.role === "admin" ||
-        roleUser?.role === "superAdmin" ||
-        roleUser?.role == "user") && (
         <CardContent
           sx={{
             height: 35,
@@ -73,7 +50,7 @@ const BotonsCart = ({element}) => {
             <AddIcon />
           </Fab>
         </CardContent>
-      )}
+      
     </div>
   );
 }

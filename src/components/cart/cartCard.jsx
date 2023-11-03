@@ -30,7 +30,7 @@ const CartCard = ({ element }) => {
               borderRadius: "6px",
             }}
           />
-          <Link className={style.link} to={`/product/${element.id}`}>
+          <Link className={style.link} to={`/detail/${element.id}`}>
             <CardContent
               sx={{
                 height: 20,
@@ -48,18 +48,7 @@ const CartCard = ({ element }) => {
               >
                 {element.name}
               </Typography>
-              {/* <Typography
-                variant="h1"
-                component="div"
-                sx={{
-                  fontSize: 18,
-                  fontWeight: "bold",
-                  fontFamily: "Roboto Mono, monospace",
-                  opacity: "0.7",
-                }}
-              >
-                (X{element.quantity})
-              </Typography> */}
+              
             </CardContent>
           </Link>
 
@@ -69,20 +58,20 @@ const CartCard = ({ element }) => {
             </Typography>
           </CardContent>
          
-        </Card>
         <CardContent
             sx={{
-              height: 10,
+              height: 50,
+              width: 35,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginTop: "-90px",
-              marginBottom: "50px"
-              
+              border: "1px solid #ccc"        
+             
             }}
           >
             <BotonsCart element={element} />
           </CardContent>
+        </Card>
       </section>
     </div>
   );
