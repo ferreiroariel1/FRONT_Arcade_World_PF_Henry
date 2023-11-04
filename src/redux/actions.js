@@ -176,9 +176,9 @@ export function setAuthenticated(isAuthenticated) {
     payload: isAuthenticated,
   };
 }
-export const addToFavorites = (id) => ({
+export const addToFavorites = (game) => ({
   type: ADD_TO_FAVORITES,
-  payload: id,
+  payload: game,
 });
 export const removeFromFavorites = (id) => ({
   type: REMOVE_FROM_FAVORITES,

@@ -115,12 +115,14 @@ const initialState = {
               };
     case ADD_TO_FAVORITES:
             let allGamesFav = [...state.favorites, action.payload];
+            console.log("Add:",allGamesFav)
             return {
                 ...state,
                 favorites: allGamesFav,
             };
       case REMOVE_FROM_FAVORITES:
-              let allGamesRemove = state.favorites.filter(favoriteId => favoriteId !== action.payload);
+              let allGamesRemove = state.favorites.filter(game => game.id !== action.payload);
+              console.log("Remove:",allGamesRemove)
               return {
                   ...state,
                   favorites: allGamesRemove 

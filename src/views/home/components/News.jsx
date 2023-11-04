@@ -6,8 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useDispatch } from 'react-redux';
 import { addToFavorites, removeFromFavorites } from '../../../redux/actions'
-import { useState } from "react";
-
+import { useState} from "react";
 function News({id,name,image,price }) {
 
   const [isPressed, setIsPressed] = useState();
@@ -18,10 +17,11 @@ function News({id,name,image,price }) {
     const newIsPressed = !isPressed;
   
     if (newIsPressed) {
-      dispatch(addToFavorites(id));
+      dispatch(addToFavorites({id,name,image}));
     } else {
       dispatch(removeFromFavorites(id));
     }
+  
     // Actualiza el estado con la nueva variable
     setIsPressed(newIsPressed);
   };
@@ -71,5 +71,5 @@ News.propTypes= {
   image: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired
 }
-export default News;
 
+export default News;

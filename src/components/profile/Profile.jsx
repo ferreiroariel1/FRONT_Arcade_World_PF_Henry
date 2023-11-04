@@ -17,6 +17,9 @@ import CreateIcon from "@mui/icons-material/Create";
 import { styled } from '@mui/material/styles';
 
 const Profile = () => {
+  //llamada a favoritos
+  const favorites = useSelector(state => state.favorites);
+
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -138,15 +141,16 @@ const Profile = () => {
                   Favorites
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
+              {favorites.map(favorite =>(
+                <AccordionDetails key={favorite.id}>
                 <Avatar
                   sx={{ width: 150, height: 150 }}
-                  src="https://m.media-amazon.com/images/I/81KUccM8azL._AC_UF1000,1000_QL80_.jpg"
+                  src={favorite.image}
                   alt="Profile image"
                 />
-                <Typography>Super Smash Bros Brawl</Typography>
-                <Typography>$100</Typography>
+                <Typography>{favorite.name}</Typography>
               </AccordionDetails>
+              ))}
             </Accordion>
             <Button size="large" sx={{ color: "#000" }} onClick={handleLogout}>
               <LogoutIcon />
