@@ -4,36 +4,27 @@ import { Link } from "react-router-dom";
 import { Card,Box, Button, CardContent, CardMedia, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addToFavorites, removeFromFavorites } from '../../../redux/actions'
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-function News({id,name,image,price, addToFavorites}) {
+function News({id,name,image,price }) {
 
   const [isPressed, setIsPressed] = useState();
+  const dispatch = useDispatch();
 
   const handleAddToFavorites = () => {
     // Almacena el nuevo estado en una variable
     const newIsPressed = !isPressed;
   
     if (newIsPressed) {
-      addToFavorites(id);
+      dispatch(addToFavorites(id));
     } else {
-      removeFromFavorites(id);
-      console.log(removeFromFavorites(id))
+      dispatch(removeFromFavorites(id));
     }
-  
     // Actualiza el estado con la nueva variable
     setIsPressed(newIsPressed);
   };
-
-  useEffect(() => {
-    console.log(`El estado isPressed ha cambiado a: ${isPressed}`);
-  }, [isPressed]);
-
-  useEffect(() => {
-    console.log(`Se pasó el id: ${id}`);
-  }, [id]);
 
   const cardStyle = {
     cursor: 'pointer',
@@ -55,7 +46,7 @@ function News({id,name,image,price, addToFavorites}) {
   };
   return (
     <Card style={cardStyle}>
-      <IconButton onClick={handleAddToFavorites} sx={{display:'grid', position:'absolute', marginLeft:'195px', color: isPressed ? 'red' : 'blue'}}><FavoriteIcon/></IconButton>
+      <IconButton onClick={handleAddToFavorites} sx={{display:'grid', position:'absolute', marginLeft:'195px', color: isPressed ? 'red' : null}}><FavoriteIcon/></IconButton>
     <CardMedia component="img" height="140" image={image} alt={name} />
     <CardContent>
       <Typography variant="h5" component="div">
@@ -80,9 +71,5 @@ News.propTypes= {
   image: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired
 }
+export default News;
 
-const mapDispatchToProps = {
-  addToFavorites,
-};
-
-export default connect(null, mapDispatchToProps)(News);

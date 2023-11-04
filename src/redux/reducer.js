@@ -18,8 +18,7 @@ const initialState = {
   sortOrder:'',
   isAuthenticated: false,
   userData: null,
-  Favorites: [],
-  // allGamesFav: []
+  favorites: [],
  }  
 
  const rootReducer = (state=initialState, action)=> {
@@ -101,7 +100,6 @@ const initialState = {
             return {
               ...state,
               selectedGenre: "",
-              // selectedPlatform: "",
               games: [...state.allGames]
               , 
             };
@@ -116,19 +114,18 @@ const initialState = {
                 userData: action.payload,
               };
     case ADD_TO_FAVORITES:
-          let allGamesFav = [...state.Favorites, action.payload]
-          console.log("el estado de favorites:", allGamesFav);
-          return {
-              ...state,
-              Favorites: allGamesFav,
+            let allGamesFav = [...state.favorites, action.payload];
+            return {
+                ...state,
+                favorites: allGamesFav,
             };
       case REMOVE_FROM_FAVORITES:
-              allGamesFav = state.Favorites.filter(favoriteId => favoriteId !== action.payload);
-              console.log("el estado de remove favorites:", allGamesFav);
+              let allGamesRemove = state.favorites.filter(favoriteId => favoriteId !== action.payload);
               return {
-                ...state,
-                Favorites: allGamesFav,
-              }
+                  ...state,
+                  favorites: allGamesRemove 
+            };
+
     default:
       return {...state}  
   }
