@@ -22,7 +22,6 @@ function News({id,name,image,price }) {
     } else {
       dispatch(removeFromFavorites(id));
     }
-  
     // Actualiza el estado con la nueva variable
     setIsPressed(newIsPressed);
   };
@@ -72,5 +71,5 @@ News.propTypes= {
   image: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired
 }
-
 export default News;
+

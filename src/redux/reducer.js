@@ -123,8 +123,9 @@ const initialState = {
               let allGamesRemove = state.favorites.filter(favoriteId => favoriteId !== action.payload);
               return {
                   ...state,
-                  favorites: allGamesRemove ,
-              }
+                  favorites: allGamesRemove 
+            };
+
     default:
       return {...state}  
   }

@@ -4,6 +4,10 @@ import { useDispatch } from "react-redux";
 import { postLogin, setAuthenticated, setUserData  } from "../../redux/actions";
 import Swal from 'sweetalert2';
 import './auth.css'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { auth } from '../../firebase/config';
+
+
 
 const Login = () => {
    //para uso del form
@@ -54,6 +58,15 @@ const Login = () => {
      reset(); 
     }
    )
+   const loginGoogle = () => {
+    const googleProvider = new GoogleAuthProvider()
+    console.log(auth.app);
+    return signInWithPopup(auth, googleProvider)
+  }
+   const handleGoogleLogin = async () => {
+    await loginGoogle()
+    navigate("/user/profile");
+   }
    return (
      <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
        <div className='inputBox'>
@@ -61,7 +74,7 @@ const Login = () => {
            <p className='LoginTitle'>Sign in to Arcade World</p>
          </div>
          <div>
-           <button className='btnAuth0'>
+           <button onClick={handleGoogleLogin} className='btnAuth0'>
              <img className='googleIcon' src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo" />
              Continue with Google
            </button>
