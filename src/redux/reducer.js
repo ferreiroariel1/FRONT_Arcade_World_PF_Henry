@@ -2,7 +2,8 @@ import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID,
          GET_PLATFORMS, GET_GENRES, SET_SELECTED_GENRE,
          SET_SELECTED_PLATFORM, SET_AUTHENTICATED, SET_USER_DATA, RESET_FILTERS,
          FILTER_GAMES, RESET_GENRE_FILTER, RESET_PLATFORM_FILTER,
-         SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE, ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES} from './actions.js';
+         SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE, ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES,
+         ADD_COMMENT } from './actions.js';
 
 const initialState = {
   games:[],
@@ -19,6 +20,7 @@ const initialState = {
   isAuthenticated: false,
   userData: null,
   favorites: [],
+  reviews:[],
  }  
 
  const rootReducer = (state=initialState, action)=> {
@@ -127,6 +129,13 @@ const initialState = {
                   ...state,
                   favorites: allGamesRemove 
             };
+        case ADD_COMMENT:
+              let allComments = [...state.reviews, action.payload];
+              console.log(allComments)
+              return {
+                ...state,
+                reviews: allComments
+              }
 
     default:
       return {...state}  

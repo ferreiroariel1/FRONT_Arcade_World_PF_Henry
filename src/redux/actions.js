@@ -17,6 +17,7 @@ export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
 export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
+export const ADD_COMMENT = 'ADD_COMMENT';
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -183,6 +184,10 @@ export const addToFavorites = (game) => ({
 export const removeFromFavorites = (id) => ({
   type: REMOVE_FROM_FAVORITES,
   payload: id,
+});
+export const addComments = (gameComment) => ({
+  type: ADD_COMMENT,
+  payload: gameComment,
 });
 
 
