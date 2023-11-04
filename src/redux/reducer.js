@@ -5,6 +5,8 @@ import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID,
          SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE, CART_SHOPING, 
          DELETE_ITEM_CART } from './actions.js';
           
+const local = JSON.parse(localStorage.getItem("cart"));
+const storage = local ? local : [];
 
 const initialState = {
   games:[],
@@ -16,11 +18,11 @@ const initialState = {
   selectedGenre: "",
   selectedPlatform: "",
   sortDirection: 'asc',
-  sortDirection: 'desc',
+  // sortDirection: 'desc',
   sortOrder:'',
   isAuthenticated: false,
   userData: null,
-  shoppingCart: []
+  shoppingCart: storage
  }  
 
  const rootReducer = (state=initialState, action)=> {

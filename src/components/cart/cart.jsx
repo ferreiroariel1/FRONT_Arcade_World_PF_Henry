@@ -1,83 +1,92 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import {  useNavigate } from "react-router-dom";
-import { deleteItemCart } from "../../redux/actions.js";
-import { useDispatch } from "react-redux";
+import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
+import { CardElement, Elements } from "@stripe/react-stripe-js";
+import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { Button, Box, CardContent, Typography } from "@mui/material";
-import CartCard from "./cartCard.jsx";
-import style from "./cart.module.css";
-import Purchased from "./Purchased.jsx";
 
-const harcod =[
-  {
-    id: 4570,
-    name: "Dead Space (2008)",
-    image:
-      "https://media.rawg.io/media/games/ebd/ebdbb7eb52bd58b0e7fa4538d9757b60.jpg",
-    price: (Math.random() * 10 + 40).toFixed(2),
-  },
-  {
-    id: 4580,
-    name: "Wallpaper Engine",
-    image:
-      "https://media.rawg.io/media/screenshots/5a7/5a72aed79451d8fbd6a7b82f784002bd.jpg",
-    price: (Math.random() * 10 + 40).toFixed(2),
-  },
-  {
-    id: 4670,
-    name: "Darksiders II Deathinitive Edition",
-    image:
-      "https://media.rawg.io/media/games/cfe/cfe5960b5caca432f3575fc7d8ff736b.jpg",
-    price: (Math.random() * 10 + 40).toFixed(2),
-  },
-]
 
-const Cart = () => {
-    const dispatch = useDispatch();
-    
-  let [index, setIndex] = useState(harcod?.map((item) =>
-  !Object.prototype.hasOwnProperty.call(item, "quantity")
-    ? { ...item, quantity: 1 }
-    : item))
-      
-  const navigate = useNavigate();
+function Cart() {
+  const stripePromise = loadStripe(
+    "pk_test_51O72zZKp8iNlGuusO5lGEFDAfzKpuojwIZvbM1xQniQZX2QspLTI73wnQVNkMwJkw6wUt3UnHVbl3GlsyLvP5AX800p9mfzYYi"
+  );
+  const dispatch = useDispatch();
+  const shoppingCart = useSelector((state) => state.shoppingCart);
 
-   const handleDiscoverClick = () => {
-    navigate("/store");
-  };
-
-  const handleClearClick = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Are you sure you want to delete the items from your cart!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete.isConfirmed) {
-        dispatch(deleteItemCart(index));
-        setIndex([]); // Vaciar el carrito
-         Swal.fire("Success!", "Your cart has been emptied.", "success");
-      } else {
-        Swal.fire("Cancelled", "Your cart is safe.", "info");
-      }
-    });
-  };
-  
-     
-    let totalSum = () => {
-      let suma = 0;
-  
-      for (const item of index) {
-        suma += parseFloat(item.price) * item.quantity;
-      }
-       return suma.toFixed(2);
+  const CheckoutForm = () => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [message, setMessage] = useState("");
+       
+    const showAlert2 = () => {
+      Swal.fire({
+        toast: false,
+        icon: "success",
+        title: `Gracias por tu compra`,
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        position: "center",
+      });
     };
+    useEffect(() => {
+      if (message === "succeeded") {
+        showAlert2();
+      }
+    }, [message])
 
-    const handlerReduce = (arr) => {
-      const totalProducts = arr?.reduce((a, b) => a + b.quantity, 0);
-      return totalProducts;
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: "card",
+        card: elements.getElement(CardElement),
+      });
+
+      if (!error) {
+        const { id } = paymentMethod; // id de la compra
+        const valor = shoppingCart.map((e) => {
+          return e.price * e.quantity;
+        });
+        
+        const amount = valor.reduce(
+          (a, b) => a + (typeof b === "number" ? b : 0),
+          0
+        );
+        
+        const productos = shoppingCart.map((e) => {
+          const { id, price, name } = e;
+          return { id, price, name };
+        });
+
+        try {
+          const { data } = await axios.post(
+            "https://tu-suenio-back.onrender.com/payment/newPayment",
+            {
+              amount,
+              id,
+            }
+          );
+                                 
+         
+        } catch (error) {
+          console.error(error, "esto es el error");
+        }
+      }
     };
+    return (
+      <div >
+        <form onSubmit={handleSubmit}>
+          <CardElement />
+          <button >
+            Comprar
+          </button>
+        </form>
+      </div>
+    );
+  };
        
   return (
     <Box
@@ -284,6 +293,6 @@ const Cart = () => {
       </Box>
     </Box>
   );
-};
+}
 
 export default Cart;
