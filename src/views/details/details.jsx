@@ -22,8 +22,10 @@ import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Filter from 'bad-words'
 var  filter = new Filter();
+import { addComments } from "../../redux/actions"
 
 const Details = () => {
+  const dispatch = useDispatch();
   const [comments, setComments] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
@@ -48,11 +50,11 @@ const Details = () => {
         }
       });
     } else {
-      setComments(message);
+      dispatch(addComments({ id, message }))
+      // setComments(message);
     }
   };
 
-  const dispatch = useDispatch();
   const gameDetails = useSelector((state) => state.gameId);
   const { id } = useParams();
 
@@ -64,6 +66,9 @@ const Details = () => {
     let cleanMessage = filter.clean(event.target.value)
     setMessage(cleanMessage);
   };
+
+  const reviews = useSelector(state => state.reviews);
+  const gameComments = reviews.filter(review => review.id === id);
 
   return (
     <>
@@ -167,6 +172,7 @@ const Details = () => {
         </Box>
       </Stack>
           <Grid container spacing={3} justifyContent='center' marginTop='30px'>
+            { gameComments.map((comment, index)=>(
             <Stack textAlign='center' marginRight='20px'>
               <Card sx={{ minWidth: 275, marginBottom:'20px'}}>
                 <CardContent sx={{textAlign: 'center', height:'200px', width:'400px'}}>
@@ -174,11 +180,12 @@ const Details = () => {
                   <Avatar src={userLocalDetail?.user?.image}/>
                   </Stack>
                   <Typography textAlign="center" marginBottom='10px'>{userLocalDetail?.user?.nickname}</Typography>
-                  <Typography textAlign="center">{comments}</Typography>
+                  <Typography textAlign="center">{comment.message}</Typography>
                 </CardContent>
               </Card>
             </Stack>
-            <Stack textAlign='center' marginRight='20px'>
+            ))}
+            {/* <Stack textAlign='center' marginRight='20px'>
               <Card sx={{ minWidth: 275, marginBottom:'20px'}}>
                 <CardContent sx={{textAlign: 'center', height:'200px', width:'400px'}}>
                   <Stack alignItems='center'>
@@ -199,9 +206,24 @@ const Details = () => {
                   <Typography textAlign="center">{comments}</Typography>
                 </CardContent>
               </Card>
-            </Stack>
+            </Stack> */}
           </Grid>
     </>
   );
 };
 export default Details;
+
+
+//map del comentario:
+/*  {gameComments.map((comment, index) => (
+        <AccordionDetails key={index}>
+          <Avatar
+            sx={{ width: 150, height: 150 }}
+            src={comment.image}
+            alt="Profile image"
+          />
+          <Typography>{comment.message}</Typography>
+          <Typography>$100</Typography>
+        </AccordionDetails>
+      ))} 
+*/

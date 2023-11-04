@@ -78,13 +78,14 @@ function Sider() {
         marginTop: "20px",
       }}
     >
-      <FormControl color="success" size="small" sx={{ width: "200px" }}>
+      <FormControl color="success" size="small" sx={{ width: "200px", color: "#fff" }}>
         <InputLabel id="platforms">Platforms</InputLabel>
         <Select
           labelId="platforms"
           value={handlePlatformSelectChange}
           label="Platforms"
           onChange={handlePlatformSelectChange}
+          sx={{ color: "#fff" }}
         >
           <MenuItem value="">All</MenuItem>
           {allPlatformsArray.map((platformName, index) => (
@@ -94,13 +95,14 @@ function Sider() {
           ))}
         </Select>
       </FormControl>
-      <FormControl color="success" size="small" sx={{ width: "200px" }}>
+      <FormControl color="success" size="small" sx={{ width: "200px", color: "#fff" }}>
         <InputLabel  id="genres">Genres</InputLabel>
         <Select
           labelId="genres"
           value={handleGenreSelectChange}
           label="Genres"
           onChange={handleGenreSelectChange}
+          sx={{ color: "#fff" }}
         >
           <MenuItem value="">All</MenuItem>
           {allGenresArray.map((genresName, index) => (
