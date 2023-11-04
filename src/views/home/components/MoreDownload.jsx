@@ -19,7 +19,7 @@ function MoreDownload({id,name,image,price}) {
     const newIsPressed = !isPressed;
   
     if (newIsPressed) {
-      dispatch(addToFavorites(id));
+      dispatch(addToFavorites({id,name,image}));
     } else {
       dispatch(removeFromFavorites(id));
     }
