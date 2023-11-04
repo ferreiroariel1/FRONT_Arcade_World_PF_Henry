@@ -2,91 +2,27 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { loadStripe } from "@stripe/stripe-js";
-import { CardElement, Elements } from "@stripe/react-stripe-js";
-import { useStripe, useElements } from "@stripe/react-stripe-js";
+//import { loadStripe } from "@stripe/stripe-js";
+//import { CardElement, Elements } from "@stripe/react-stripe-js";
+//import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { Button, Box, CardContent, Typography } from "@mui/material";
+import CartCard from './cartCard'
+import Purchased from './Purchased'
+import { NavLink } from 'react-router-dom'
+
 
 
 function Cart() {
-  const stripePromise = loadStripe(
-    "pk_test_51O72zZKp8iNlGuusO5lGEFDAfzKpuojwIZvbM1xQniQZX2QspLTI73wnQVNkMwJkw6wUt3UnHVbl3GlsyLvP5AX800p9mfzYYi"
-  );
+  // const stripePromise = loadStripe(
+  //   "pk_test_51O72zZKp8iNlGuusO5lGEFDAfzKpuojwIZvbM1xQniQZX2QspLTI73wnQVNkMwJkw6wUt3UnHVbl3GlsyLvP5AX800p9mfzYYi"
+  // );
   const dispatch = useDispatch();
-  const shoppingCart = useSelector((state) => state.shoppingCart);
+  const shoppingCart = useSelector((state) => state.shoppingCart);//[...gameIds]
+  const gamesIds = !shoppingCart.length? [] : shoppingCart.map( vg => vg.id)
+  const UserId = useSelector( state => state.userData.id )
+  const handleDiscoverClick =  () => {
 
-  const CheckoutForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
-  const [message, setMessage] = useState("");
-       
-    const showAlert2 = () => {
-      Swal.fire({
-        toast: false,
-        icon: "success",
-        title: `Gracias por tu compra`,
-        timer: 2000,
-        timerProgressBar: true,
-        showConfirmButton: false,
-        position: "center",
-      });
-    };
-    useEffect(() => {
-      if (message === "succeeded") {
-        showAlert2();
-      }
-    }, [message])
-
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: "card",
-        card: elements.getElement(CardElement),
-      });
-
-      if (!error) {
-        const { id } = paymentMethod; // id de la compra
-        const valor = shoppingCart.map((e) => {
-          return e.price * e.quantity;
-        });
-        
-        const amount = valor.reduce(
-          (a, b) => a + (typeof b === "number" ? b : 0),
-          0
-        );
-        
-        const productos = shoppingCart.map((e) => {
-          const { id, price, name } = e;
-          return { id, price, name };
-        });
-
-        try {
-          const { data } = await axios.post(
-            "https://tu-suenio-back.onrender.com/payment/newPayment",
-            {
-              amount,
-              id,
-            }
-          );
-                                 
-         
-        } catch (error) {
-          console.error(error, "esto es el error");
-        }
-      }
-    };
-    return (
-      <div >
-        <form onSubmit={handleSubmit}>
-          <CardElement />
-          <button >
-            Comprar
-          </button>
-        </form>
-      </div>
-    );
-  };
+  }
        
   return (
     <Box
@@ -108,12 +44,12 @@ function Cart() {
           gap: "30px",
         }}
         >
-        {harcod.length > 0 ? (
-          harcod.map((e) => (
-            <CartCard key={e.id} element={e} />
+        {shoppingCart.length? (
+          shoppingCart.map((vg, i) => (
+            <CartCard key={i} element={vg} />
           ))
         ) : (
-          <div className={style.loading}>
+          <div >
              <Box
               sx={{
                 backgroundColor: "#eddcb9",
@@ -164,13 +100,15 @@ function Cart() {
                   Add something to your Shopping Cart !
                 </Typography>
               </CardContent>
-              <Button
-                variant="contained"
-                color="success"
-                onClick={handleDiscoverClick}
-              >
-                Discover Products
-              </Button>
+              <NavLink to='/store'>
+                <Button
+                  variant="contained"
+                  color="success"
+                >
+                    Discover Products
+                </Button>
+              </NavLink>
+              
             </Box>
           </div>
         )}
@@ -231,7 +169,7 @@ function Cart() {
                 opacity: "0.8",
               }}
             >
-              ({handlerReduce(index)})
+              ({gamesIds.length})
             </Typography>
           </Box>
           <Box
@@ -262,7 +200,7 @@ function Cart() {
                 alignItems: "center",
               }}
             >
-              ${totalSum()}
+              ${`suma para codear`}
             </Typography>
           </Box>
         </CardContent>
@@ -274,9 +212,9 @@ function Cart() {
             gap: "50px",
           }}
         >
-          <Purchased carrPay={harcod}/>
+          <Purchased />
           <Button
-            onClick={handleClearClick}
+            // onClick={handleClearClick}
             variant="outlined"
             sx={{
               color: "rgb(114, 8, 8)",

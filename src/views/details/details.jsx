@@ -21,6 +21,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Pay from '../../components/cart/Pay.jsx'
+import { addToCart } from '../../redux/actions.js'
 
 const Details = () => {
   const [comments, setComments] = useState("");
@@ -62,6 +63,11 @@ const Details = () => {
   const handleChange = (event) => {
     setMessage(event.target.value);
   };
+
+  const handleAdd = () => {
+    console.log('aaaa');
+    dispatch(addToCart(gameDetails))
+  }
 
   return (
     <>
@@ -118,6 +124,7 @@ const Details = () => {
                 color="success"
                 size="medium"
                 startIcon={<AddIcon />}
+                onClick={handleAdd}
               >
                 Adds
               </Button>

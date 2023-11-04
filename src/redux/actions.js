@@ -17,6 +17,8 @@ export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const CART_SHOPING = 'CART_SHOPING';
 export const DELETE_ITEM_CART = 'DELETE_ITEM_CART';
+export const ADD_NEWS_PURCHASED = 'ADD_NEWS_PURCHASED';
+export const ADD_TO_CART = 'ADD_TO_CART'
 
 
 export const getGames = ()=>{ 
@@ -196,23 +198,35 @@ export const deleteItemCart = (payload) => {
     payload: payload,
   };
 }
-// export const addToCart = (payload) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios.post(
-//         'http://localhost:3001/videogame/purchased',
-//         payload
-//       );
-//       const addedProduct = response.data;
 
-//       dispatch({
-//         type: ADD_TO_CART,
-//         payload: addedProduct,
-//       });
-//     } catch (error) {
-//       console.log(error.message)
+export const addPurchades = (payload) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: ADD_NEWS_PURCHASED,
+        payload
+      });
+    } catch (error) {
+      console.log(error.message)
       
-//     }
-//   };
-// };
+    }
+  };
+};
+
+export const addToCart = (payload) => {
+  return async function(dispatch) {
+    try {
+      // Realiza operaciones asíncronas si es necesario aquí antes de despachar la acción
+      // Por ejemplo, puedes realizar una solicitud de API antes de agregar al carrito.
+
+      // Despacha la acción una vez que las operaciones asíncronas se completen
+      return dispatch({
+        type: ADD_TO_CART,
+        payload: payload
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
