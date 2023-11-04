@@ -1,21 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Typography, Stack } from "@mui/material";
+import { Button, Typography, Stack, IconButton } from "@mui/material";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 function Paginate({ prevChange, nextChange, pages, pageTotal }) {
   return (
     <Stack spacing={2} marginBottom={2} display='flex' flexDirection='row'>
-        <Button variant="text" sx={{color:'#f1f1f1'}} onClick={prevChange}>
+        <IconButton variant="text" sx={{color:'#f1f1f1',  padding:'0px'}} onClick={prevChange}>
         <KeyboardArrowLeftIcon/>
-        </Button>
-        <Typography variant="inherit">
+        </IconButton>
+        <Typography sx={{color:'#fff'}} variant="inherit">
           Page {pages} of {pageTotal}
         </Typography>
-        <Button variant="text" sx={{color:'#f1f1f1'}} onClick={nextChange}>
-        <KeyboardArrowRightIcon/>
-        </Button>
+        <IconButton variant="text" sx={{color:'#f1f1f1', padding:'0px'}} onClick={nextChange}>
+        <KeyboardArrowRightIcon sx={{marginBottom:'14px'}}/>
+        </IconButton>
     </Stack>
   );
 }

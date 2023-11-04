@@ -11,7 +11,7 @@ function Store() {
     const {changeNext, changePrev, paginate, count, totPagine} = usePage();
 
   return (
-    <Stack style={{backgroundColor:'#1a2a3b'}}>
+    <Stack style={{backgroundColor:'#1a2a3b', minHeight:'100vh'}}>
       <Stack >
          <Sider/>
           <Cards games={paginate} />
