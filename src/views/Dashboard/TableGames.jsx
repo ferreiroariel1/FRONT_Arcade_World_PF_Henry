@@ -1,26 +1,29 @@
 import React from 'react'
-import { Box, Typography,Button,Alert } from '@mui/material'
-// import { getGames } from '../../redux/actions'
+import { Box, Typography,Button } from '@mui/material'
 import {useSelector } from 'react-redux'
 import { DataGridPro } from '@mui/x-data-grid-pro';
 
 
 function TableGames() {
  const games=useSelector((g)=>g.games)
+
  const rows = games.map((G)=>{
     return{
         id:G.id,
-        name:G.name,
-        price:G.price,
-        plataforms:G.platforms[0],
-        genres:G.genres[0]
+        Name:G.name,
+        Price:'$/'+G.price,
+        Plataforms:G.platforms[0],
+        Genres:G.genres[0],
+        Released:G.released
     
     }
  })
  const styleTable={
   color:'black',
   width:'98%',
-  backgroundColor: '#cfd8dc'
+  backgroundColor: '#90a4ae',
+  border: 'none',
+
  }
  const BoxMain={
     display:'flex',
@@ -40,19 +43,27 @@ function TableGames() {
    margin:'1em'
  }
  const columns = [
-   { field: 'name' },
-   { field: 'price' },
-   { field: 'genres' },
-   { field: 'plataforms' },
-   {field:'actions',
-     headerName: 'Actions',
+   { field: 'Name' },
+   { field: 'Price',
+   headerName: 'Price',
+     renderCell: (params) => (
+       <div style={{ color: 'green' }}> 
+         {params.row.Price}
+       </div>
+     ) },
+   { field: 'Genres' },
+   { field: 'Plataforms' },
+   {field:'Released'},
+   {field:'Delete',
+     headerName: 'Delete',
      renderCell: () => (
-       <Button  variant="outlined" color="primary">
-         Action
+       <Button  variant="outlined" color="error">
+         Delete
        </Button>
      )
    }
  ];
+
   return (
    <Box sx={BoxMain} gap={2}>
     <Box sx={TitleBox} >
@@ -60,7 +71,7 @@ function TableGames() {
        Table Games
       </Typography>
     </Box>
-    <DataGridPro style={styleTable} rows={rows} columns={columns}   pagination />
+    <DataGridPro style={styleTable} rows={rows} columns={columns} pagination />
    </Box>
   )
 }

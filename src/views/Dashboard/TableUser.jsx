@@ -21,11 +21,19 @@ function TableUser() {
     {field:'lastname'},
     {field:'nickname'},
     {field:'Email'},
-    {field:'',
-    headerName: '',
+    {field:'Detail',
+    headerName: 'Detail',
     renderCell: () => (
       <Button  variant="outlined" color="primary">
        Detail
+      </Button>
+    )
+  },{
+    field:'Delete',
+    headerName:'Delete',
+    renderCell:()=>(
+      <Button variant="outlined" color="error" >
+      Delete
       </Button>
     )
   }
@@ -33,7 +41,9 @@ function TableUser() {
    const styleTable={
     color:'black',
     width:'98%',
-    backgroundColor: '#cfd8dc'
+    backgroundColor: '#90a4ae',
+    border: 'none',
+  
    }
    const BoxMain={
       display:'flex',

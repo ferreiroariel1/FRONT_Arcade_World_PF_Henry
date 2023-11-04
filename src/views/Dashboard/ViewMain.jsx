@@ -1,17 +1,41 @@
-import React, { useEffect } from 'react'
-import {Card,Box, Button, CardContent,Typography }from '@mui/material'
+import React, { useEffect} from 'react'
+import {Card,Box, CardContent,Typography }from '@mui/material'
 import { getGames,GetUser } from '../../redux/actions'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import PersonIcon from '@mui/icons-material/Person';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import LocalMallIcon from '@mui/icons-material/LocalMall';
+import LocalMallSharpIcon from '@mui/icons-material/LocalMallSharp';
 import { useDispatch, useSelector } from 'react-redux'
+// import Chart from 'chart.js/auto';
 
 function ViewMain() {
     const dispatch=useDispatch()
     const game = useSelector((G)=>G?.games)
     const user = useSelector((U)=>U.user)
+    // const chartRef = useRef(null);
 
+    // useEffect(() => {
+    //   const ctx = chartRef.current.getContext('2d');
+  
+    //   new Chart(ctx, {
+    //     type: 'line', // Usamos el tipo de gráfico 'line' para crear un gráfico de área
+    //     data: {
+    //       labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
+    //       datasets: [{
+    //         label: 'Dataset de Área',
+    //         data: [10, 20, 30, 25, 35], // Tus datos aquí
+    //         fill: true, // Rellenar área bajo la línea
+    //         borderColor: 'rgba(75, 192, 192, 1)', // Color del borde de la línea
+    //         backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color del área
+    //         tension: 0.4, // Controla la curvatura de la línea
+    //       }]
+    //     },
+    //     options: {
+    //       responsive: true, // Permite que el gráfico sea responsive
+  
+    //     }
+    //   });
+    // }, []);
     useEffect(()=>{
         dispatch(getGames())
         dispatch(GetUser())
@@ -20,47 +44,48 @@ function ViewMain() {
        const GamesLength = game.length
  
     const cardStyle = {
-    width: '14em',
-    height:'12em', 
-    overflow: 'hidden',
+    width: '15em',
+    height:'10em', 
     backgroundColor: '#37474f',
      color: 'white' ,
      display:'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection:'column',
-    margin:'1em 0em 1em 1em ',
+    margin:'1em 0em 1em 0em ',
 
   }
   const BoxCard={
     display:'flex',
     width:'100%',
-    flexWrap:'wrap'
+    flexWrap:'wrap',
+    justifyContent:'space-evenly',
   }
     const estiloBox = {
       backdropFilter: 'blur(1px)', 
       borderRadius: '100%', 
-      backgroundColor: 'rgba(255, 255, 255, 0.5)', // Fondo semitransparente
-      padding: '20px 0px',
+      backgroundColor: 'rgba(255, 255, 255, 0.5)',
       display:'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      padding:'1em' // Fondo semitransparente
+ 
     };
   return (
-    <Box bgcolor='#546e7a' style={BoxCard} gap={4}>
+    <Box bgcolor='#546e7a' style={BoxCard} >
      {/*  //?Card Games ↓*/} 
      <Box >
       <Card style={cardStyle} >
         <CardContent>
         <Box style={estiloBox} >
-            <SportsEsportsIcon sx={{ fontSize: 40 }}/>
+            <SportsEsportsIcon sx={{ fontSize: 30 }} />
         </Box>
-            <Typography variant='h5' component={'div'}>
-                GAMES 
-            </Typography>
-          <Typography>
+          <Typography variant='h6'>
           {GamesLength}
                     </Typography>
+            <Typography variant='p' component={'p'} color={'#cfd8dc'}>
+               Total Games
+            </Typography>
                 </CardContent>
             </Card>
         </Box>
@@ -69,14 +94,14 @@ function ViewMain() {
       <Card style={cardStyle} >
         <CardContent>
         <Box style={estiloBox} >
-            <PersonIcon sx={{ fontSize: 36 }}/>
+            <PersonIcon sx={{ fontSize: 30}}/>
         </Box>
-            <Typography variant='h5' component={'div'}>
-                USERS
-            </Typography>
-          <Typography>
+          <Typography variant='h6'>
           {UserLength}
                     </Typography>
+            <Typography variant='p' component={'p'} color={'#cfd8dc'}>
+                Total Users
+            </Typography>
                 </CardContent>
             </Card>
         </Box>
@@ -85,14 +110,14 @@ function ViewMain() {
       <Card style={cardStyle} >
         <CardContent>
         <Box style={estiloBox} >
-            <LocalMallIcon sx={{ fontSize: 35 }}/>
+            <LocalMallSharpIcon sx={{ fontSize: 30}}/>
         </Box>
-            <Typography variant='h5' component={'div'}>
-                BUYS
-            </Typography>
-          <Typography>
-          pendiente
+          <Typography variant='h6'>
+          0
                     </Typography>
+            <Typography variant='p' component={'p'} color={'#cfd8dc'}>
+                Total Buys
+            </Typography>
                 </CardContent>
             </Card>
         </Box>
@@ -101,14 +126,16 @@ function ViewMain() {
       <Card style={cardStyle} >
         <CardContent>
         <Box style={estiloBox} >
-            <VisibilityIcon sx={{ fontSize: 35 }}/>
+            <VisibilityIcon sx={{ fontSize: 30}}/>
         </Box>
-            <Typography variant='h5' component={'div'}>
-            LOGIN
-            </Typography>
-          <Typography>
-          pendiente
+        <Box>
+          <Typography variant='h6'>
+        0
                     </Typography>
+            <Typography variant='p' component={'p'} color={'#cfd8dc'}>
+            Total Login
+            </Typography>
+        </Box>
                 </CardContent>
             </Card>
         </Box>
