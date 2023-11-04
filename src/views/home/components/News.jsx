@@ -7,11 +7,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useDispatch } from 'react-redux';
 import { addToFavorites, removeFromFavorites } from '../../../redux/actions'
 import { useState} from "react";
-function News({id,name,image,price }) {
 
+function News({id,name,image,price }) {
   const [isPressed, setIsPressed] = useState();
   const dispatch = useDispatch();
-
   const handleAddToFavorites = () => {
     // Almacena el nuevo estado en una variable
     const newIsPressed = !isPressed;
