@@ -18,7 +18,8 @@ function Cards({games}) {
         return (
           <Card
           key={gm.id}
-          game={gm}/>
+          game={gm}
+          />
         )
       })}
     </div>

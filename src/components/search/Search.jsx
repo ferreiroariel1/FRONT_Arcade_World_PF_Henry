@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Stack } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { gameByName } from '../../redux/actions';
 
@@ -16,7 +16,7 @@ function Search() {
     dispatch(gameByName(Name))
   }
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+    <Stack style={{ display: 'flex', alignItems: 'center', gap: '10px', flexDirection:'row' }}>
       <TextField
         fullWidth
         size='small'
@@ -26,7 +26,7 @@ function Search() {
         onChange={chageHandlers}
       />
       <Button
-        variant="contained"
+        variant="outlined"
         color="primary"
         onClick={() => onsearch(valor)}
         startIcon={<SearchIcon />}
@@ -35,7 +35,7 @@ function Search() {
       >
         Search
       </Button>
-    </div>
+    </Stack>
   )
 }
 

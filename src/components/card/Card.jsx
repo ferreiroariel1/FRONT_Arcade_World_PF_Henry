@@ -1,33 +1,36 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import style from './Card.module.css'
+import style from "./Card.module.css";
+import { Stack, Typography, Card, CardMedia, CardContent, Grid, Box } from "@mui/material";
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-function Card({game}) {
-
+function CardItem({ game }) {
   return (
-      <Link to={`/detail/${game.id}`}>
-    <div className={style.card}>
-      <div className={style.imgH}>
-        <h2 className={style.name}>Name: {game?.name}</h2>
-        <img src={game?.image} alt={game.name} />
-      </div>
-
-        <div className={style.hCont}>
-          <h3>Price: ${game?.price}</h3>
-          <div className={style.platforms}>
-           <h4>Genres: {game?.genres?.join(',')}</h4>
-           <p>Platforms: {game?.platforms?.join(',')}</p>
-          </div>
-        </div>
-    </div>
-      </Link>
-  )
+    <Link to={`/detail/${game.id}`}>
+      <Card sx={{ maxWidth: 445, marginTop:'20px', minWidth: 445, height:400, position:'relative'}}>
+      <CardMedia
+        sx={{ height: 240 }}
+        image={game?.image}
+        title={game.name}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h4" component="div">
+        {game?.name}
+        </Typography>
+        <Typography fontSize='20px' variant="body2" color="text.secondary">
+        <Stack display='flex' flexDirection='row'>
+        <AttachMoneyIcon/> 
+        {game?.price}
+        </Stack>
+        </Typography>
+      </CardContent>
+    </Card>
+    </Link>
+  );
 }
 
-Card.propTypes= {
+CardItem.propTypes = {
   game: PropTypes.object.isRequired,
-}
+};
 
-export default Card;
-
-
+export default CardItem;
