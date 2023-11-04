@@ -19,7 +19,6 @@ const initialState = {
   isAuthenticated: false,
   userData: null,
   favorites: [],
-
  }  
 
  const rootReducer = (state=initialState, action)=> {
@@ -116,16 +115,12 @@ const initialState = {
               };
     case ADD_TO_FAVORITES:
             let allGamesFav = [...state.favorites, action.payload];
-            console.log("el estado de favorites:", allGamesFav);
             return {
                 ...state,
                 favorites: allGamesFav,
             };
       case REMOVE_FROM_FAVORITES:
-              console.log("REMOVE_FROM_FAVORITES action triggered");
-              console.log("remove: ", action.payload)
               let allGamesRemove = state.favorites.filter(favoriteId => favoriteId !== action.payload);
-              console.log("el estado de remove favorites:", allGamesRemove );
               return {
                   ...state,
                   favorites: allGamesRemove ,
