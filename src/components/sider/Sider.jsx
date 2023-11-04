@@ -78,35 +78,35 @@ function Sider() {
         marginTop: "20px",
       }}
     >
-      <FormControl color="success" size="small" sx={{ width: "200px", color: "#fff" }}>
-        <InputLabel id="platforms">Platforms</InputLabel>
-        <Select
-          labelId="platforms"
-          value={handlePlatformSelectChange}
-          label="Platforms"
-          onChange={handlePlatformSelectChange}
-          sx={{ color: "#fff" }}
-        >
-          <MenuItem value="">All</MenuItem>
-          {allPlatformsArray.map((platformName, index) => (
-            <MenuItem key={index} value={platformName}>
-              {platformName}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl color="success" size="small" sx={{ width: "200px", color: "#fff" }}>
+      <FormControl size="small" sx={{ width: "200px" }}>
+      <InputLabel id="platforms">Platforms</InputLabel>
+      <Select
+        labelId="platforms"
+        value={selectedPlatform}
+        label="Platforms"
+        onChange={handlePlatformSelectChange}
+        sx={{ '& .MuiSelect-select': { color: selectedPlatform ? '#fff' : '#000' } }}
+      >
+        <MenuItem value="" sx={{ color: selectedPlatform === '' ? '#fff' : '#000' }}>All</MenuItem>
+        {allPlatformsArray.map((platformName, index) => (
+          <MenuItem key={index} value={platformName} sx={{ color: selectedPlatform === platformName ? '#fff' : '#000' }}>
+            {platformName}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+      <FormControl color="success" size="small" sx={{ width: "200px" }}>
         <InputLabel  id="genres">Genres</InputLabel>
         <Select
           labelId="genres"
-          value={handleGenreSelectChange}
+          value={selectedGenre}
           label="Genres"
           onChange={handleGenreSelectChange}
-          sx={{ color: "#fff" }}
+          sx={{ '& .MuiSelect-select': { color: selectedGenre ? '#fff' : '#000' } }}
         >
-          <MenuItem value="">All</MenuItem>
+          <MenuItem value="" sx={{ color: selectedGenre === '' ? '#fff' : '#000' }}>All</MenuItem>
           {allGenresArray.map((genresName, index) => (
-            <MenuItem key={index} value={genresName}>
+            <MenuItem key={index} value={genresName} sx={{ color: selectedGenre === genresName ? '#fff' : '#000' }}>
               {genresName}
             </MenuItem>
           ))}
@@ -122,6 +122,7 @@ function Sider() {
         label="Price"
         type="number"
         value={inputValue}
+        sx={{ '& .MuiInputBase-input': { color: 'white' }}}
         onChange={(e) => {
           const regex = /^[0-9]*$/;
           if (regex.test(e.target.value)) {

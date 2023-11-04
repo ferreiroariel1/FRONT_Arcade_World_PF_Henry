@@ -24,6 +24,7 @@ function Search() {
         placeholder="Search Game"
         value={valor}
         onChange={chageHandlers}
+        sx={{ '& .MuiInputBase-input': { color: 'white' }}}
       />
       <Button
         variant="outlined"

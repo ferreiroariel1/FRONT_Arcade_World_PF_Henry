@@ -57,6 +57,7 @@ const Details = () => {
 
   const gameDetails = useSelector((state) => state.gameId);
   const { id } = useParams();
+  console.log(gameDetails)
 
   useEffect(() => {
     dispatch(gameById(id));
