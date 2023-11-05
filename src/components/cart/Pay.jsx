@@ -2,14 +2,20 @@
 import Swal from "sweetalert2";
 import ShopIcon from "@mui/icons-material/Shop";
 import {Button} from "@mui/material";
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from "react-router-dom";
-import { shoppingCartId } from '../../redux/actions.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useNavigate } from "react-router-dom";
+import { addToCart } from '../../redux/actions.js';
+
 
  const Pay = ()=> {
   const shoppingCart = useSelector((state) => state.shoppingCart);
- 
+    const gameDetails = useSelector((state) => state.gameId);
+    const isAuthenticated = useSelector((state) => state.isAuthenticated);
+   
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams()
+
   const showAlert = () => {
     Swal.fire({
       toast: true,
@@ -21,7 +27,6 @@ import { shoppingCartId } from '../../redux/actions.js';
       position: "top",
     });
   };
-
   const showAlert2 = () => {
     Swal.fire({
       toast: true,
@@ -34,32 +39,47 @@ import { shoppingCartId } from '../../redux/actions.js';
     });
   };
 
-  const { id } = useParams()
   const handleClick = () => {
-    dispatch(shoppingCartId(id));
-    const found = shoppingCart.find(el => el.id === id)
-    if(!found) showAlert();
-    else showAlert2()
-  };
-
-   
-     return (
+  if (isAuthenticated) {
+    Swal.fire({
+      toast: true,
+      icon: "info",
+      title: "You must be logged in to continue with the purchase",
+      showConfirmButton: true,
+      position: "top-center",
+      confirmButtonText: "Login",
+    }).then((willRedirect) => {
+      if (willRedirect) {
+          navigate("/auth");
+      }
+    });
+  } else {
+    const found = shoppingCart?.find(el => el.id === id)
+    if(!found) {
+      showAlert();
+      dispatch(addToCart(gameDetails))
+      navigate("/cart");
+    } else {
+      showAlert2()
+      navigate("/cart");
+    }
+  }
+};
+          
+ return (
     <div>
       <Button
-                variant="contained"
-                color="success"
-                size="medium"
-                endIcon={<ShopIcon />}
-                sx={{ marginLeft: "150px", marginTop:"-58px" }}
-                onClick={handleClick}
-              >
-                Buy
-              </Button>
-        
-    </div>
+        variant="contained"
+        color="success"
+        size="medium"
+        endIcon={<ShopIcon />}
+        sx={{ marginLeft: "150px", marginTop:"-58px" }}
+        onClick={handleClick}
+        >
+         Buy
+        </Button>
+     </div>
 
   )
 }
- 
-
 export default Pay;

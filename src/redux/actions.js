@@ -18,11 +18,11 @@ export const SET_USER_DATA = 'SET_USER_DATA';
 export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
 export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
 export const ADD_COMMENT = 'ADD_COMMENT';
-export const GET_USER='GET_USER'
-export const CART_SHOPING = 'CART_SHOPING';
 export const DELETE_ITEM_CART = 'DELETE_ITEM_CART';
 export const ADD_NEWS_PURCHASED = 'ADD_NEWS_PURCHASED';
 export const ADD_TO_CART = 'ADD_TO_CART'
+export const DELETE_ITEM = 'DELETE_ITEM'
+export const GET_USER='GET_USER'
 
 
 export const getGames = ()=>{ 
@@ -150,7 +150,7 @@ export const resetGenreFilter = () => {
   }
 };
 export const resetFilters = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch({
       type: RESET_FILTERS,
     });
@@ -210,37 +210,11 @@ export const addComments = (gameComment) => ({
 //     };
 //  };
 
-export function GetUser(){
-  return async function(dispatch){
-   try {
-    const {data}= await axios.get('http://localhost:3001/user')
-    return dispatch({
-      type:GET_USER,
-      payload:data
-    })
-   } catch (error) {
-    console.log(error.message)
-   }
-  }
-}
 
-export const shoppingCartId = (id) => {
-  return async function(dispatch) {
-    try {
-      const dated = (await axios.get(`http://localhost:3001/videogame/${id}`)).data;
-      return dispatch({
-        type: CART_SHOPING,
-        payload: dated,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-}
-export const deleteItemCart = (payload) => {
+export const deleteItemCart = (UserId) => {
   return {
     type: DELETE_ITEM_CART,
-    payload: payload,
+    payload: UserId,
   };
 }
 
@@ -258,22 +232,35 @@ export const addPurchades = (payload) => {
   };
 };
 
-export const addToCart = (payload) => {
-  return async function(dispatch) {
-    try {
-      // Realiza operaciones asíncronas si es necesario aquí antes de despachar la acción
-      // Por ejemplo, puedes realizar una solicitud de API antes de agregar al carrito.
-
-      // Despacha la acción una vez que las operaciones asíncronas se completen
-      return dispatch({
+export const addToCart = (item) => {
+  return (dispatch)=> {
+    const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const updatedCart = [...existingCart,item ];
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+          dispatch({
         type: ADD_TO_CART,
-        payload: payload
+        payload: item
       });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+     };
 };
-
+export const deleteItem = (cart) => {
+  return {
+    type: DELETE_ITEM,
+    payload: cart
+  };
+}
+export function GetUser(){
+  return async function(dispatch){
+   try {
+    const {data}= await axios.get('http://localhost:3001/user')
+    return dispatch({
+      type:GET_USER,
+      payload:data
+    })
+   } catch (error) {
+    console.log(error.message)
+   }
+  }
+}
 
 

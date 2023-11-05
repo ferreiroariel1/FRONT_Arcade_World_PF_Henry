@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Login from './Login'
 import Create from './Create'
+import { Stack } from '@mui/material'
 
 export default function AuthLogin() {
   const [signUp, setSignUp] = useState(false)
@@ -11,7 +12,7 @@ export default function AuthLogin() {
     setSignIn((elemento) => !elemento)
   }
   return (
-    <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+    <Stack style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column', height:'100vh'}}>
       {
         signIn === true ? (<Login/>) : (<Create handleSign={handleSign}/>)
       }
@@ -32,6 +33,6 @@ export default function AuthLogin() {
       }
       
       
-    </div>
+    </Stack>
   )
 }
