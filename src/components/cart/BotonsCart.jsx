@@ -1,30 +1,21 @@
 
-
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CardContent from "@mui/material/CardContent";
 import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import { deleteItemCart } from "../../redux/actions.js"
-import PropTypes from "prop-types";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteItem } from "../../redux/actions.js"
 
-
-const BotonsCart = (props) => {
-  const { id } = props.element;
+const BotonsCart = () => {
  
-  const dispatch = useDispatch();
-  
-  // let [index, setIndex] = useState()  
-  const handleAddToCart = () => {
-   
-  };
-
-  const handleRemoveFromCart = () => {
-    const filtrado = Object.values(props.element).find((el) => el.id !== id);
-    dispatch(deleteItemCart(filtrado));
-       
+  const shoppingCart = useSelector((state) => state.shoppingCart);
     
- };
+  const dispatch = useDispatch();
+        
+     const handleRemoveCart = (id) => {
+    const filtrado = shoppingCart.filter((el) => el.id !== id);
+    dispatch(deleteItem(filtrado));
+    localStorage.setItem("cart", JSON.stringify(filtrado));
+     };
 
   return (
     <div>
@@ -39,27 +30,17 @@ const BotonsCart = (props) => {
         >
           <Fab
             style={{ backgroundColor: "#A5CAA8" }}
-            size="small"
+            size="medium"
             color="default"
             aria-label="add"
-            onClick={handleRemoveFromCart}
+            onClick={handleRemoveCart}
           >
-            <RemoveIcon />
+            <DeleteIcon />
           </Fab>
-          <Fab
-            size="small"
-            color="success"
-            aria-label="add"
-            onClick={handleAddToCart}
-          >
-            <AddIcon />
-          </Fab>
-        </CardContent>
+         </CardContent>
       
     </div>
   );
 }
-BotonsCart.propTypes= {
-  element: PropTypes.object.isRequired,
-}
+
 export default BotonsCart;

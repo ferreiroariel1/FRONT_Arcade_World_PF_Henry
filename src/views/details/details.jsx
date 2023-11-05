@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { gameById } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Grafico from "./Grafico";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Card,
@@ -12,13 +12,11 @@ import {
   Typography,
   Avatar
 } from "@mui/material";
-import ShopIcon from "@mui/icons-material/Shop";
 import AddIcon from "@mui/icons-material/Add";
 import Skeleton from "@mui/material/Skeleton";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Filter from 'bad-words'
 var  filter = new Filter();
@@ -31,8 +29,10 @@ const Details = () => {
   const [comments, setComments] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const shoppingCart = useSelector((state) => state.shoppingCart);
   let userLocalDetail = localStorage.getItem("login");
   userLocalDetail = userLocalDetail ? JSON.parse(userLocalDetail) : null;
+  console.log(userLocalDetail);
 
   const handleButton = () => {
     if (userLocalDetail === null || userLocalDetail === "") {
@@ -59,8 +59,7 @@ const Details = () => {
 
   const gameDetails = useSelector((state) => state.gameId);
   const { id } = useParams();
-  console.log(gameDetails)
-
+  
   useEffect(() => {
     dispatch(gameById(id));
   }, [dispatch, id]);
@@ -72,10 +71,43 @@ const Details = () => {
 
   const reviews = useSelector(state => state.reviews);
   const gameComments = reviews.filter(review => review.id === id);
+
+  const showAlert = () => {
+    Swal.fire({
+      toast: true,
+      icon: "success",
+      title: "Product added to cart",
+      timer: 1200,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      position: "top",
+    });
+  };
+
+  const showAlert2 = () => {
+    Swal.fire({
+      toast: true,
+      icon: "warning",
+      title: "The product is already in the cart",
+      timer: 2000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      position: "top",
+    });
+  };
+
+  
   const handleAdd = () => {
-    console.log('aaaa');
-    dispatch(addToCart(gameDetails))
+    const found = shoppingCart.find(el => el.id === id)
+    if(!found) {
+      dispatch(addToCart(gameDetails))
+      showAlert();
+       } else {
+      showAlert2()
   }
+ }
+ const updateShoppingCart = useSelector((state) => state.shoppingCart);
+ localStorage.setItem('cart', JSON.stringify(updateShoppingCart))
 
   return (
     <>

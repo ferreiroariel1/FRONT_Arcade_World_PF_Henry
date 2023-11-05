@@ -1,7 +1,7 @@
 import { CardContent, Typography, Card, CardMedia } from "@mui/material";
 import { Link } from "react-router-dom";
 import style from "./cart.module.css";
-import BotonsCart from "./BotonsCart.jsx";
+import BotonsCart from "./botonsCart.jsx";
 import PropTypes from "prop-types";
 
 const CartCard = ({ element }) => {
@@ -10,8 +10,8 @@ const CartCard = ({ element }) => {
       <section>
         <Card
           sx={{
-            width: "800px",
-            height: "250px",
+            width: "750px",
+            height: "200px",
             backgroundColor: "#eddcb9",
             boxShadow: "1px 1px 3px 1px black",
             display: "flex",
@@ -25,8 +25,8 @@ const CartCard = ({ element }) => {
             alt="imagen"
             sx={{
               backgroundColor: "#e4cfa5",
-              height: "150px",
-              width: "150px",
+              height: "170px",
+              width: "170px",
               borderRadius: "6px",
             }}
           />
@@ -41,7 +41,7 @@ const CartCard = ({ element }) => {
                 variant="h1"
                 component="div"
                 sx={{
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: "bold",
                   fontFamily: "Roboto Mono, monospace",
                 }}
@@ -65,11 +65,9 @@ const CartCard = ({ element }) => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              border: "1px solid #ccc"        
-             
-            }}
+             }}
           >
-            <BotonsCart element={element} />
+            <BotonsCart />
           </CardContent>
         </Card>
       </section>

@@ -1,29 +1,44 @@
-import { useEffect, useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import axios from "axios";
-//import { loadStripe } from "@stripe/stripe-js";
-//import { CardElement, Elements } from "@stripe/react-stripe-js";
-//import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { Button, Box, CardContent, Typography } from "@mui/material";
 import CartCard from './cartCard'
 import Purchased from './Purchased'
-import { NavLink } from 'react-router-dom'
-
+import { NavLink } from 'react-router-dom';
+import { deleteItemCart } from '../../redux/actions.js';
 
 
 function Cart() {
-  // const stripePromise = loadStripe(
-  //   "pk_test_51O72zZKp8iNlGuusO5lGEFDAfzKpuojwIZvbM1xQniQZX2QspLTI73wnQVNkMwJkw6wUt3UnHVbl3GlsyLvP5AX800p9mfzYYi"
-  // );
   const dispatch = useDispatch();
-  const shoppingCart = useSelector((state) => state.shoppingCart);//[...gameIds]
+  const shoppingCart = useSelector((state) => state.shoppingCart);
   const gamesIds = !shoppingCart.length? [] : shoppingCart.map( vg => vg.id)
-  const UserId = useSelector( state => state.userData.id )
-  const handleDiscoverClick =  () => {
+  const UserId = useSelector( state => state.userData );
+  localStorage.setItem("cart", JSON.stringify(gamesIds));
+ 
+ 
+ const priceTotal = shoppingCart.reduce((a, b) => a + b.price, 0)
+ 
 
+  const showAlert = ()=> {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Are you sure you want to delete the items from your cart!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        handleClearClick();
+        Swal("Success!", "Your cart has been emptied.", "success");
+      } else {
+        Swal("Cancelled", "Your cart is safe.", "info");
+      }
+    });
   }
-       
+  const handleClearClick = () => {
+    dispatch(deleteItemCart(UserId));
+  };
+         
   return (
     <Box
       sx={{
@@ -200,7 +215,7 @@ function Cart() {
                 alignItems: "center",
               }}
             >
-              ${`suma para codear`}
+              $ {priceTotal.toFixed(2)}
             </Typography>
           </Box>
         </CardContent>
@@ -214,7 +229,7 @@ function Cart() {
         >
           <Purchased />
           <Button
-            // onClick={handleClearClick}
+            onClick={showAlert}
             variant="outlined"
             sx={{
               color: "rgb(114, 8, 8)",
