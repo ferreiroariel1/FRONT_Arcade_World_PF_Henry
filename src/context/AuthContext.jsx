@@ -15,6 +15,7 @@ const authContext = createContext();
 export const useAuth = () => {
   const context = useContext(authContext);
   if (!context) throw new Error("There is no Auth provider");
+  console.log(typeof context, "el context:", context)
   return context;
 };
 

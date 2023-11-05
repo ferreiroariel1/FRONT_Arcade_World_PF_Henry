@@ -18,6 +18,7 @@ export const SET_USER_DATA = 'SET_USER_DATA';
 export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
 export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const LOGOUT = 'LOGOUT';
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -189,7 +190,18 @@ export const addComments = (gameComment) => ({
   type: ADD_COMMENT,
   payload: gameComment,
 });
-
+export const logout = () => async dispatch => {
+  try {
+    const response = await axios.put('/user/logout');
+    dispatch({
+      type: LOGOUT
+    });
+    console.log('Llenado de deslogueo completo')
+  } catch (error) {
+    console.error('Error al cerrar la sesión:', error);
+    // Aquí puedes manejar el error si es necesario
+  }
+};
 
 // export const addFav = (character) => {
 //     const endpoint = 'http://localhost:3001/user/logout';

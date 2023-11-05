@@ -3,7 +3,7 @@ import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID,
          SET_SELECTED_PLATFORM, SET_AUTHENTICATED, SET_USER_DATA, RESET_FILTERS,
          FILTER_GAMES, RESET_GENRE_FILTER, RESET_PLATFORM_FILTER,
          SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE, ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES,
-         ADD_COMMENT } from './actions.js';
+         ADD_COMMENT, LOGOUT } from './actions.js';
 
 const initialState = {
   games:[],
@@ -136,6 +136,12 @@ const initialState = {
                 ...state,
                 reviews: allComments
               }
+        case LOGOUT:
+              return {
+                ...state,
+                favorites,
+                reviews,
+              };
 
     default:
       return {...state}  

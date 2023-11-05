@@ -58,6 +58,7 @@ const Details = () => {
   const gameDetails = useSelector((state) => state.gameId);
   const { id } = useParams();
   console.log(gameDetails)
+  
 
   useEffect(() => {
     dispatch(gameById(id));
@@ -84,16 +85,16 @@ const Details = () => {
               />
               <Stack sx={{ textAlign: "left", marginLeft: "8px" }}>
                 <Typography variant="overline">
-                  Score:{gameDetails?.score}
+                  Score:
                 </Typography>
                 <Typography variant="overline">
-                  Graphics: {gameDetails.graphics}
+                  Graphics: {gameDetails?.graphics}
                 </Typography>
                 <Typography variant="overline">
-                  Gameplay: {gameDetails.gameplay}
+                  Gameplay: {gameDetails?.gameplay}
                 </Typography>
                 <Typography variant="overline">
-                  Quality price: {gameDetails.qualityPrice}
+                  Quality price: {gameDetails?.quality_price}
                 </Typography>
               </Stack>
             </Card>
