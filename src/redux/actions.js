@@ -18,6 +18,10 @@ export const SET_USER_DATA = 'SET_USER_DATA';
 export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
 export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const DELETE_ITEM_CART = 'DELETE_ITEM_CART';
+export const ADD_NEWS_PURCHASED = 'ADD_NEWS_PURCHASED';
+export const ADD_TO_CART = 'ADD_TO_CART'
+export const DELETE_ITEM = 'DELETE_ITEM'
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -144,7 +148,7 @@ export const resetGenreFilter = () => {
   }
 };
 export const resetFilters = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch({
       type: RESET_FILTERS,
     });
@@ -177,6 +181,7 @@ export function setAuthenticated(isAuthenticated) {
     payload: isAuthenticated,
   };
 }
+
 export const addToFavorites = (game) => ({
   type: ADD_TO_FAVORITES,
   payload: game,
@@ -202,4 +207,45 @@ export const addComments = (gameComment) => ({
 //        });
 //     };
 //  };
+
+
+export const deleteItemCart = (UserId) => {
+  return {
+    type: DELETE_ITEM_CART,
+    payload: UserId,
+  };
+}
+
+export const addPurchades = (payload) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: ADD_NEWS_PURCHASED,
+        payload
+      });
+    } catch (error) {
+      console.log(error.message)
+      
+    }
+  };
+};
+
+export const addToCart = (item) => {
+  return (dispatch)=> {
+    const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const updatedCart = [...existingCart,item ];
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+          dispatch({
+        type: ADD_TO_CART,
+        payload: item
+      });
+     };
+};
+export const deleteItem = (cart) => {
+  return {
+    type: DELETE_ITEM,
+    payload: cart
+  };
+}
+
 
