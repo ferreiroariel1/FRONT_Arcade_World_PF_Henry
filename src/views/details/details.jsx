@@ -175,7 +175,7 @@ const Details = () => {
       ) : (
         <Skeleton variant="rectangular" width={450} height={500} />
       )}
-   <Grafico infoGame={gameDetails} />
+   <Grafico />
       <Stack sx={{ textAlign: "center", marginTop: "20px" }}>
         <Typography variant="h6">Comments:</Typography>
         {/* {comments.map((comment, index) => (

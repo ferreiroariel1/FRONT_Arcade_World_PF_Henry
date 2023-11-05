@@ -1,9 +1,18 @@
 import React,{useEffect} from "react";
 import Chart from '/node_modules/chart.js/auto'
 import { Box } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { gameById } from "../../redux/actions";
 
-function Grafico({infoGame}) {
-  console.log(infoGame)
+function Grafico() {
+  const dispatch=useDispatch()
+  const gameDetails = useSelector((state) => state.gameId);
+  const { id } = useParams();
+  useEffect(() => {
+    dispatch(gameById(id));
+  }, [dispatch, id]);
+  console.log(gameDetails)
  const graficosGames=(arrs)=>{
   let arr=arrs.graphics;
   let contador = [0, 0, 0, 0, 0];
@@ -49,11 +58,17 @@ const PrecioCalidad =(arrs)=>{
 
   return porcentajes.reverse();
 }
-const porcentajesGraphics = graficosGames(infoGame);
-const porcentajesGameplay = GamesPlay(infoGame);
-const porcentajesQualityPrice = PrecioCalidad(infoGame);
-
-
+const porcentajesGraphics = graficosGames(gameDetails);
+const porcentajesGameplay = GamesPlay(gameDetails);
+const porcentajesQualityPrice = PrecioCalidad(gameDetails);
+function calcularPromedio(array) { 
+  const suma = array.reduce((acc, valor) => acc + valor, 0);
+  const promedio = (suma / array.length).toFixed(1);
+  return parseFloat(promedio);
+}
+const porcentajeG =calcularPromedio(porcentajesGraphics)
+const porcentajeGame=calcularPromedio(porcentajesGameplay)
+const  porcentajeQP=calcularPromedio(porcentajesQualityPrice)
     useEffect(() => {
       const ctx = document.getElementById('GRAPHICS').getContext('2d');
 
@@ -203,21 +218,21 @@ const porcentajesQualityPrice = PrecioCalidad(infoGame);
         <Box display='flex' sx={estilos} gap={12}>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}></h2>
+              <h2 style={{margin:'0'}}>{porcentajeG}</h2>
               <p>Graphics</p>
             </div>
             <canvas id="GRAPHICS" ></canvas>
           </Box>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}></h2>
+              <h2 style={{margin:'0'}}> {porcentajeGame} </h2>
               <p>Game play</p>
             </div>
             <canvas id="GAMEPLAY" ></canvas>
           </Box>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}></h2>
+              <h2 style={{margin:'0'}}> {porcentajeQP} </h2>
               <p>Quality Price</p>
             </div>
             <canvas id="QUALITYPRICE" ></canvas>
