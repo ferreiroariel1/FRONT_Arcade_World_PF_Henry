@@ -15,11 +15,13 @@ export const RESET_GENRE_FILTER = 'RESET_GENRE_FILTER';
 export const RESET_FILTERS = 'RESET_FILTERS';
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 export const SET_USER_DATA = 'SET_USER_DATA';
+export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
+export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
+export const ADD_COMMENT = 'ADD_COMMENT';
 export const CART_SHOPING = 'CART_SHOPING';
 export const DELETE_ITEM_CART = 'DELETE_ITEM_CART';
 export const ADD_NEWS_PURCHASED = 'ADD_NEWS_PURCHASED';
 export const ADD_TO_CART = 'ADD_TO_CART'
-
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -179,6 +181,33 @@ export function setAuthenticated(isAuthenticated) {
     payload: isAuthenticated,
   };
 }
+
+export const addToFavorites = (game) => ({
+  type: ADD_TO_FAVORITES,
+  payload: game,
+});
+export const removeFromFavorites = (id) => ({
+  type: REMOVE_FROM_FAVORITES,
+  payload: id,
+});
+export const addComments = (gameComment) => ({
+  type: ADD_COMMENT,
+  payload: gameComment,
+});
+
+
+// export const addFav = (character) => {
+//     const endpoint = 'http://localhost:3001/user/logout';
+//     return (dispatch) => {
+//        axios.put(endpoint, character).then(({ data }) => {
+//           return dispatch({
+//              type: 'ADD_FAV',
+//              payload: data,
+//           });
+//        });
+//     };
+//  };
+
 export const shoppingCartId = (id) => {
   return async function(dispatch) {
     try {
@@ -229,4 +258,5 @@ export const addToCart = (payload) => {
     }
   };
 };
+
 

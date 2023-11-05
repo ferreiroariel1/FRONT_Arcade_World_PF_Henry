@@ -1,17 +1,20 @@
+import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from "react-redux";
 import { postLogin, setAuthenticated, setUserData  } from "../../redux/actions";
 import Swal from 'sweetalert2';
 import './auth.css'
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
+  const { loginWithGoogle, resetPassword } = useAuth();
+  const [error, setError] = useState("");
    //para uso del form
    const { register, handleSubmit, formState: { errors, isDirty }, reset } = useForm();  
    //para uso de redux
    const navigate = useNavigate();
    const dispatch = useDispatch();
- 
    const onSubmit = handleSubmit((data) =>{
      dispatch(postLogin(data)).then((response) => {
        if(response.data.login === false){
@@ -50,10 +53,18 @@ const Login = () => {
            //Migración al profile
            navigate("/user/profile");
        }
-     });
+     });  
      reset(); 
     }
    )
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle();
+      navigate("/user/profile");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
    return (
      <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
        <div className='inputBox'>
@@ -61,7 +72,7 @@ const Login = () => {
            <p className='LoginTitle'>Sign in to Arcade World</p>
          </div>
          <div>
-           <button className='btnAuth0'>
+           <button onClick={handleGoogleLogin} className='btnAuth0'>
              <img className='googleIcon' src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo" />
              Continue with Google
            </button>

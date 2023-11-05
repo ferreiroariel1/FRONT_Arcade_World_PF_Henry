@@ -6,7 +6,8 @@ import Summary from './components/cart/summary.jsx';
 import Failed from './components/cart/failed.jsx';
 import Auth from './components/auth/Auth.jsx';
 import Profile from './components/profile/Profile.jsx';
-
+import Footer from './components/footer/Footer.jsx'
+import { AuthProvider } from "./context/authContext.jsx";
 import './App.css'
 
 
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <div>
+      <AuthProvider>
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>}></Route>
@@ -26,6 +28,8 @@ function App() {
         <Route path="/auth" element={<Auth/>} />
         <Route path='/user/profile' element={<Profile/>}/>
       </Routes>
+      <Footer/>
+      </AuthProvider>
     </div>
   )
 

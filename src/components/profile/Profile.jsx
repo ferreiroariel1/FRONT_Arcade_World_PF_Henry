@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-// import Container from '@mui/material/Container';
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Stack, Grid, Avatar, Box } from "@mui/material";
@@ -16,14 +14,28 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import LogoutIcon from "@mui/icons-material/Logout";
 import CreateIcon from "@mui/icons-material/Create";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import { useDispatch } from 'react-redux';
+import { removeFromFavorites } from '../../redux/actions'
+
+
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const removeFav = (id) => {
+    dispatch(removeFromFavorites(id));
+  }
+  //llamada a favoritos
+  const favorites = useSelector((state) => state.favorites);
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  //parte del login
   let userLocal = localStorage.getItem("login");
   userLocal = userLocal ? JSON.parse(userLocal) : null;
+  console.log(userLocal);
 
   useEffect(() => {
     if ((userLocal && !userLocal.login) || userLocal === null) {
@@ -58,26 +70,26 @@ const Profile = () => {
     setImage(file.secure_url);
     setLoading(false);
   };
-  const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
     height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
+    overflow: "hidden",
+    position: "absolute",
     bottom: 0,
     left: 0,
-    whiteSpace: 'nowrap',
+    whiteSpace: "nowrap",
     width: 1,
   });
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, height: "100vh" }}>
       <Grid container spacing={3}>
         <Grid item xs>
           <Card sx={{ width: "100%" }}>
             <Stack direction="column" alignItems="center">
               <Stack marginLeft="299px" marginTop="5px" marginBottom="-20px">
                 <Button
-                sx={{backgroundColor:'transparent', color:'#000'}}
+                  sx={{ backgroundColor: "transparent", color: "#000" }}
                   component="label"
                   variant="text"
                   startIcon={<CreateIcon />}
@@ -105,67 +117,81 @@ const Profile = () => {
               </Typography>
             </Stack>
           </Card>
+          <Stack marginTop="20px">
+            <Card>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography variant="h5" component="div">
+                    <ShoppingCartIcon />
+                    Your Cart
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Avatar
+                    sx={{ width: 150, height: 150 }}
+                    src="https://m.media-amazon.com/images/I/81KUccM8azL._AC_UF1000,1000_QL80_.jpg"
+                    alt="Profile image"
+                  />
+                  <Typography>Super Smash Bros Brawl</Typography>
+                  <Typography>$100</Typography>
+                </AccordionDetails>
+              </Accordion>
+            </Card>
+          </Stack>
+          <Stack marginTop='20px'>
           <Card>
-            <Accordion>
+            <Accordion width='100vw'>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
-              >
-                <Typography variant="h5" component="div">
-                  <ShoppingCartIcon />
-                  Your Cart
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Avatar
-                  sx={{ width: 150, height: 150 }}
-                  src="https://m.media-amazon.com/images/I/81KUccM8azL._AC_UF1000,1000_QL80_.jpg"
-                  alt="Profile image"
-                />
-                <Typography>Super Smash Bros Brawl</Typography>
-                <Typography>$100</Typography>
-              </AccordionDetails>
-            </Accordion>
-          </Card>
-          <Card>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
+                >
                 <Typography variant="h5" component="div">
                   <FavoriteIcon color="error" />
                   Favorites
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                <Avatar
-                  sx={{ width: 150, height: 150 }}
-                  src="https://m.media-amazon.com/images/I/81KUccM8azL._AC_UF1000,1000_QL80_.jpg"
-                  alt="Profile image"
-                />
-                <Typography>Super Smash Bros Brawl</Typography>
-                <Typography>$100</Typography>
-              </AccordionDetails>
+              {favorites.map((favorite) => (
+                <Stack display='flex' alignItems='center' >
+                <AccordionDetails key={favorite.id}>
+                  <Stack display='flex' alignItems='end'>
+                    <IconButton onClick={() => removeFav(favorite.id)}><CloseIcon/></IconButton>
+                  </Stack>
+                  <Avatar
+                    sx={{ width: 150, height: 150 }}
+                    src={favorite.image}
+                    alt="Profile image"
+                    />
+                  <Typography>{favorite.name}</Typography>
+                </AccordionDetails>
+                </Stack>
+              ))}
             </Accordion>
+          </Card>
             <Button size="large" sx={{ color: "#000" }} onClick={handleLogout}>
               <LogoutIcon />
             </Button>
-          </Card>
+              </Stack>
         </Grid>
         <Grid item xs={6}>
-          <Grid container direction="column">
+          <Grid container>
             <Typography variant="h2">Your Games</Typography>
             <Grid item>
-              <Stack direction="row" alignItems="center" spacing={2} width="70">
-                <Card sx={{ height: 500, width: 300 }}>
+              <Stack
+                display="flex"
+                flexDirection="row"
+                justifyContent="space-evenly"
+              >
+                <Card sx={{ height: 500, width: 450 }}>
                   <div>
                     <CardMedia
                       sx={{ height: 350 }}
                       image="https://m.media-amazon.com/images/I/81KUccM8azL._AC_UF1000,1000_QL80_.jpg"
-                      title="prueba"
+                      title="Nombre del juego"
                     />
                     <Typography variant="h6">Super Smash Bros Brawl</Typography>
                     <Typography variant="subtitle2">Plataforms:</Typography>
@@ -178,30 +204,12 @@ const Profile = () => {
                     </Typography>
                   </div>
                 </Card>
-                <Card sx={{ height: 500, width: 300 }}>
+                <Card sx={{ height: 500, width: 450 }}>
                   <div>
                     <CardMedia
                       sx={{ height: 350 }}
                       image="https://m.media-amazon.com/images/I/81KUccM8azL._AC_UF1000,1000_QL80_.jpg"
-                      title="prueba"
-                    />
-                    <Typography variant="h6">Super Smash Bros Brawl</Typography>
-                    <Typography variant="subtitle2">Plataforms:</Typography>
-                    <Typography variant="overline">
-                      Wii, Wii U, Nintendo Switch
-                    </Typography>
-                    <Typography variant="subtitle2">Genres:</Typography>
-                    <Typography variant="overline">
-                      Action, Adventure, Multiplayer
-                    </Typography>
-                  </div>
-                </Card>
-                <Card sx={{ height: 500, width: 300 }}>
-                  <div>
-                    <CardMedia
-                      sx={{ height: 350 }}
-                      image="https://m.media-amazon.com/images/I/81KUccM8azL._AC_UF1000,1000_QL80_.jpg"
-                      title="prueba"
+                      title="nombre del juego"
                     />
                     <Typography variant="h6">Super Smash Bros Brawl</Typography>
                     <Typography variant="subtitle2">Plataforms:</Typography>
