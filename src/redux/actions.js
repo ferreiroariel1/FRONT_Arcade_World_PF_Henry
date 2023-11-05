@@ -18,6 +18,10 @@ export const SET_USER_DATA = 'SET_USER_DATA';
 export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
 export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const CART_SHOPING = 'CART_SHOPING';
+export const DELETE_ITEM_CART = 'DELETE_ITEM_CART';
+export const ADD_NEWS_PURCHASED = 'ADD_NEWS_PURCHASED';
+export const ADD_TO_CART = 'ADD_TO_CART'
 
 export const getGames = ()=>{ 
   return async function(dispatch) {
@@ -177,6 +181,7 @@ export function setAuthenticated(isAuthenticated) {
     payload: isAuthenticated,
   };
 }
+
 export const addToFavorites = (game) => ({
   type: ADD_TO_FAVORITES,
   payload: game,
@@ -202,4 +207,56 @@ export const addComments = (gameComment) => ({
 //        });
 //     };
 //  };
+
+export const shoppingCartId = (id) => {
+  return async function(dispatch) {
+    try {
+      const dated = (await axios.get(`http://localhost:3001/videogame/${id}`)).data;
+      return dispatch({
+        type: CART_SHOPING,
+        payload: dated,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+}
+export const deleteItemCart = (payload) => {
+  return {
+    type: DELETE_ITEM_CART,
+    payload: payload,
+  };
+}
+
+export const addPurchades = (payload) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: ADD_NEWS_PURCHASED,
+        payload
+      });
+    } catch (error) {
+      console.log(error.message)
+      
+    }
+  };
+};
+
+export const addToCart = (payload) => {
+  return async function(dispatch) {
+    try {
+      // Realiza operaciones asíncronas si es necesario aquí antes de despachar la acción
+      // Por ejemplo, puedes realizar una solicitud de API antes de agregar al carrito.
+
+      // Despacha la acción una vez que las operaciones asíncronas se completen
+      return dispatch({
+        type: ADD_TO_CART,
+        payload: payload
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
 
