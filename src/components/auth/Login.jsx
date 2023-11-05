@@ -1,21 +1,20 @@
+import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from "react-redux";
 import { postLogin, setAuthenticated, setUserData  } from "../../redux/actions";
 import Swal from 'sweetalert2';
 import './auth.css'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-import { auth } from '../../firebase/config';
-
-
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
+  const { loginWithGoogle, resetPassword } = useAuth();
+  const [error, setError] = useState("");
    //para uso del form
    const { register, handleSubmit, formState: { errors, isDirty }, reset } = useForm();  
    //para uso de redux
    const navigate = useNavigate();
    const dispatch = useDispatch();
- 
    const onSubmit = handleSubmit((data) =>{
      dispatch(postLogin(data)).then((response) => {
        if(response.data.login === false){
@@ -54,19 +53,18 @@ const Login = () => {
            //Migración al profile
            navigate("/user/profile");
        }
-     });
+     });  
      reset(); 
     }
    )
-   const loginGoogle = () => {
-    const googleProvider = new GoogleAuthProvider()
-    console.log(auth.app);
-    return signInWithPopup(auth, googleProvider)
-  }
-   const handleGoogleLogin = async () => {
-    await loginGoogle()
-    navigate("/user/profile");
-   }
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle();
+      navigate("/user/profile");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
    return (
      <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
        <div className='inputBox'>
