@@ -1,12 +1,14 @@
 import axios from "axios";
 import { Button } from "@mui/material";
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
 
-export default function Purchased() {///prop:_ recive array de juegos
+export default function Purchased() {
 
-  const UserId = useSelector( s => s.userData.id )
+  const UserId = useSelector( s => s.userData)
+  // let userLocalLogin = JSON.parse(localStorage.getItem("login"));
+  // let UserId = userLocalLogin.user.Email;
+  // console.log(UserId);
   const shoppingCart = useSelector ( s => s.shoppingCart)
  
   const handleOnclickcarrito = async () => {
@@ -19,7 +21,6 @@ export default function Purchased() {///prop:_ recive array de juegos
     } catch (error) {
       console.log(error);
     }
-    //localStorage.setItem("videogameIds", JSON.stringify(videogameIds));
   };
   return (
     <div>
@@ -36,7 +37,4 @@ export default function Purchased() {///prop:_ recive array de juegos
       </Button>
     </div>
   );
-}
-Purchased.propTypes= {
-  carrPay: PropTypes.array.isRequired
 }

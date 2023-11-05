@@ -7,7 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Stack, Grid, Avatar, Box } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -49,6 +49,7 @@ const Profile = () => {
       localStorage.removeItem("login", JSON.stringify(userLocal));
       navigate("/");
       userLocal = "";
+      
     }
   };
   const uploadImageN = async (e) => {
@@ -126,8 +127,10 @@ const Profile = () => {
                   id="panel1a-header"
                 >
                   <Typography variant="h5" component="div">
+                    <Link to='/cart'>
                     <ShoppingCartIcon />
                     Your Cart
+                    </Link>
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
