@@ -6,36 +6,22 @@ import PersonIcon from '@mui/icons-material/Person';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import LocalMallSharpIcon from '@mui/icons-material/LocalMallSharp';
 import { useDispatch, useSelector } from 'react-redux'
-// import Chart from 'chart.js/auto';
 
 function ViewMain() {
     const dispatch=useDispatch()
     const game = useSelector((G)=>G?.games)
     const user = useSelector((U)=>U.user)
-    // const chartRef = useRef(null);
-
-    // useEffect(() => {
-    //   const ctx = chartRef.current.getContext('2d');
-  
-    //   new Chart(ctx, {
-    //     type: 'line', // Usamos el tipo de gráfico 'line' para crear un gráfico de área
-    //     data: {
-    //       labels: ['Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
-    //       datasets: [{
-    //         label: 'Dataset de Área',
-    //         data: [10, 20, 30, 25, 35], // Tus datos aquí
-    //         fill: true, // Rellenar área bajo la línea
-    //         borderColor: 'rgba(75, 192, 192, 1)', // Color del borde de la línea
-    //         backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color del área
-    //         tension: 0.4, // Controla la curvatura de la línea
-    //       }]
-    //     },
-    //     options: {
-    //       responsive: true, // Permite que el gráfico sea responsive
-  
-    //     }
-    //   });
-    // }, []);
+    const Counterpurchased=(users)=>{
+      let arrayConteiner=[]
+      users.forEach(objeto=>{
+        if(objeto.hasOwnProperty('purchased')){
+          arrayConteiner.push(objeto.purchased.length)
+        }
+      })
+     const sumapurchased=arrayConteiner.reduce((acc, valor) => acc + valor, 0)
+     return sumapurchased
+    }
+    const FPurchased=Counterpurchased(user)
     useEffect(()=>{
         dispatch(getGames())
         dispatch(GetUser())
@@ -113,7 +99,7 @@ function ViewMain() {
             <LocalMallSharpIcon sx={{ fontSize: 30}}/>
         </Box>
           <Typography variant='h6'>
-          0
+          {FPurchased}
                     </Typography>
             <Typography variant='p' component={'p'} color={'#cfd8dc'}>
                 Total Buys

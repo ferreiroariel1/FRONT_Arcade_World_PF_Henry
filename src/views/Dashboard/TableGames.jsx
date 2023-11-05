@@ -8,14 +8,15 @@ function TableGames() {
  const games=useSelector((g)=>g.games)
 
  const rows = games.map((G)=>{
+  console.log(G)
     return{
         id:G.id,
         Name:G.name,
         Price:'$/'+G.price,
         Plataforms:G.platforms[0],
         Genres:G.genres[0],
-        Released:G.released
-    
+        Released:G.released,
+        UpdatedAt:G.updatedAt
     }
  })
  const styleTable={
@@ -54,6 +55,7 @@ function TableGames() {
    { field: 'Genres' },
    { field: 'Plataforms' },
    {field:'Released'},
+   {field:'UpdatedAt'},
    {field:'Delete',
      headerName: 'Delete',
      renderCell: () => (
@@ -63,7 +65,7 @@ function TableGames() {
      )
    }
  ];
-
+  
   return (
    <Box sx={BoxMain} gap={2}>
     <Box sx={TitleBox} >

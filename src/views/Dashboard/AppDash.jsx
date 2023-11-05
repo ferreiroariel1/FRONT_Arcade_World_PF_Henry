@@ -58,7 +58,7 @@ function App() {
         </List>
       </Box>
       <Box>
-      <Button style={buttonCom}  variant="contained" onClick={() => { setIsSidebarOpen(!isSidebarOpen); handelrIcon(); }} >{Icon === true ? <ArrowBackIosNewIcon/> :<ArrowForwardIosIcon/>}</Button>
+      <Button style={buttonCom}  variant="contained" onClick={() => { setIsSidebarOpen(!isSidebarOpen); handelrIcon(); }} >{Icon === true ? <ArrowForwardIosIcon/> :<ArrowBackIosNewIcon/>}</Button>
       </Box>
       <Box width={'100%'}>
         {Component}
