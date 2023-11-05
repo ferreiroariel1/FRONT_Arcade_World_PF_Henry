@@ -21,6 +21,7 @@ import { useDispatch } from 'react-redux';
 import { removeFromFavorites } from '../../redux/actions'
 
 
+
 const Profile = () => {
   const dispatch = useDispatch();
   const removeFav = (id) => {
@@ -34,6 +35,7 @@ const Profile = () => {
   //parte del login
   let userLocal = localStorage.getItem("login");
   userLocal = userLocal ? JSON.parse(userLocal) : null;
+  console.log(userLocal);
 
   useEffect(() => {
     if ((userLocal && !userLocal.login) || userLocal === null) {
