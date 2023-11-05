@@ -23,6 +23,8 @@ import Grid from "@mui/material/Grid";
 import Filter from 'bad-words'
 var  filter = new Filter();
 import { addComments } from "../../redux/actions"
+import Pay from '../../components/cart/Pay.jsx'
+import { addToCart } from '../../redux/actions.js'
 
 const Details = () => {
   const dispatch = useDispatch();
@@ -57,6 +59,7 @@ const Details = () => {
 
   const gameDetails = useSelector((state) => state.gameId);
   const { id } = useParams();
+  console.log(gameDetails)
 
   useEffect(() => {
     dispatch(gameById(id));
@@ -69,6 +72,10 @@ const Details = () => {
 
   const reviews = useSelector(state => state.reviews);
   const gameComments = reviews.filter(review => review.id === id);
+  const handleAdd = () => {
+    console.log('aaaa');
+    dispatch(addToCart(gameDetails))
+  }
 
   return (
     <>
@@ -124,18 +131,12 @@ const Details = () => {
                 color="success"
                 size="medium"
                 startIcon={<AddIcon />}
+                onClick={handleAdd}
               >
                 Adds
               </Button>
-              <Button
-                variant="contained"
-                color="success"
-                size="medium"
-                endIcon={<ShopIcon />}
-                sx={{ marginLeft: "3px" }}
-              >
-                Buy
-              </Button>
+              
+              <Pay />
             </div>
           </Stack>
         </Stack>

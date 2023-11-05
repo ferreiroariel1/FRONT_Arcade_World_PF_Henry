@@ -3,6 +3,7 @@ import Chart from '/node_modules/chart.js/auto'
 import { Box } from "@mui/material";
 
 function Grafico({infoGame}) {
+  console.log(infoGame)
  const graficosGames=(arrs)=>{
   let arr=arrs.graphics;
   let contador = [0, 0, 0, 0, 0];
@@ -202,21 +203,21 @@ const porcentajesQualityPrice = PrecioCalidad(infoGame);
         <Box display='flex' sx={estilos} gap={12}>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}>{(porcentajesGraphics.reduce((a,b)=>a+b,0)/5).toFixed(1)}</h2>
+              <h2 style={{margin:'0'}}></h2>
               <p>Graphics</p>
             </div>
             <canvas id="GRAPHICS" ></canvas>
           </Box>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}>{(porcentajesGameplay.reduce((a,b)=>a+b,0)/5).toFixed(1)}</h2>
+              <h2 style={{margin:'0'}}></h2>
               <p>Game play</p>
             </div>
             <canvas id="GAMEPLAY" ></canvas>
           </Box>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}>{(porcentajesQualityPrice.reduce((a,b)=>a+b,0)/5).toFixed(1)}</h2>
+              <h2 style={{margin:'0'}}></h2>
               <p>Quality Price</p>
             </div>
             <canvas id="QUALITYPRICE" ></canvas>
