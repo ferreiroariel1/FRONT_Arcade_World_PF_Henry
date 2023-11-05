@@ -18,7 +18,7 @@ import Skeleton from "@mui/material/Skeleton";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Filter from 'bad-words'
 var  filter = new Filter();
@@ -142,7 +142,7 @@ const Details = () => {
       ) : (
         <Skeleton variant="rectangular" width={450} height={500} />
       )}
-   <Grafico />
+   <Grafico infoGame={gameDetails} />
       <Stack sx={{ textAlign: "center", marginTop: "20px" }}>
         <Typography variant="h6">Comments:</Typography>
         {/* {comments.map((comment, index) => (

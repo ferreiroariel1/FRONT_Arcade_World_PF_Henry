@@ -1,19 +1,68 @@
 import React,{useEffect} from "react";
 import Chart from '/node_modules/chart.js/auto'
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+
+function Grafico({infoGame}) {
+ const graficosGames=(arrs)=>{
+  let arr=arrs.graphics;
+  let contador = [0, 0, 0, 0, 0];
+
+  for (let i = 0; i < arr.length; i++) {
+    let numero = arr[i];
+    if (numero >= 1 && numero <= 5) {
+      contador[numero - 1]++;
+    }
+  }
+  const totalElementos = contador.reduce((acc, valor) => acc + valor, 0);
+  const porcentajes = contador.map(valor => parseFloat(((valor / totalElementos) * 5).toFixed(1)));
+
+  return porcentajes.reverse();
+}
+const GamesPlay=(arry)=>{
+  let arr=arry.gameplay;
+  let contadorr = [0, 0, 0, 0, 0];
+
+  for (let i = 0; i < arr.length; i++) {
+    let numero = arr[i];
+    if (numero >= 1 && numero <= 5) {
+      contadorr[numero - 1]++;
+    }
+  }
+  const totalElementos = contadorr.reduce((acc, valor) => acc + valor, 0);
+  const porcentajes = contadorr.map(valor => parseFloat(((valor / totalElementos) * 5).toFixed(1)));
+
+  return porcentajes.reverse();
+}
+const PrecioCalidad =(arrs)=>{
+  let arr=arrs.quality_price;
+  let contador = [0, 0, 0, 0, 0];
+
+  for (let i = 0; i < arr.length; i++) {
+    let numero = arr[i];
+    if (numero >= 1 && numero <= 5) {
+      contador[numero - 1]++;
+    }
+  }
+  const totalElementos = contador.reduce((acc, valor) => acc + valor, 0);
+  const porcentajes = contador.map(valor => parseFloat(((valor / totalElementos) * 5).toFixed(1)));
+
+  return porcentajes.reverse();
+}
+const porcentajesGraphics = graficosGames(infoGame);
+const porcentajesGameplay = GamesPlay(infoGame);
+const porcentajesQualityPrice = PrecioCalidad(infoGame);
 
 
-function Grafico() {
     useEffect(() => {
       const ctx = document.getElementById('GRAPHICS').getContext('2d');
 
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['1', '2', '3', '4', '5'],
+          labels: ['5','4','3','2','1'],
           datasets: [{
             label: 'Stars',
-            data: [4.5, 3.8, 4.2, 3.5, 4.0],
+            data: porcentajesGraphics,
             backgroundColor: '#4CAF50', // Color verde característico de Play Store
             borderWidth: 1, // Sin bordes
             borderRadius: 20,
@@ -52,10 +101,10 @@ function Grafico() {
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['1', '2', '3', '4', '5'],
+          labels: ['5','4','3','2','1'],
           datasets: [{
             label: 'Stars',
-            data: [4.5, 3.8, 4.2, 3.5, 4.0],
+            data: porcentajesGameplay,
             backgroundColor: '#4CAF50', // Color verde característico de Play Store
             borderWidth: 1, // Sin bordes
             borderRadius: 20,
@@ -94,10 +143,10 @@ function Grafico() {
       new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['1', '2', '3', '4', '5'],
+          labels: ['5','4','3','2','1'],
           datasets: [{
             label: 'Stars',
-            data: [4.5, 3.8, 4.2, 3.5, 4.0],
+            data: porcentajesQualityPrice,
             backgroundColor: '#4CAF50', // Color verde característico de Play Store
             borderWidth: 1, // Sin bordes
             borderRadius: 20,
@@ -149,31 +198,31 @@ function Grafico() {
       justifyContent: 'center',
       flexDirection:'column'
     }
-      return (<div>
+      return (  <div>
         <Box display='flex' sx={estilos} gap={12}>
-          <Box sx={estilosG} >
-          <div style={estiloss}>
-        <h2 style={{margin:'0'}}>2.5</h2>
-        <p>Graphics</p>
-          </div>
-        <canvas id="GRAPHICS" ></canvas>
-          </Box >
-        <Box sx={estilosG}>
-          <div style={estiloss}>
-        <h2 style={{margin:'0'}}>2.5</h2>
-        <p>Game play</p>
-          </div>
-        <canvas id="GAMEPLAY" ></canvas>
+          <Box sx={estilosG}>
+            <div style={estiloss}>
+              <h2 style={{margin:'0'}}>{(porcentajesGraphics.reduce((a,b)=>a+b,0)/5).toFixed(1)}</h2>
+              <p>Graphics</p>
+            </div>
+            <canvas id="GRAPHICS" ></canvas>
+          </Box>
+          <Box sx={estilosG}>
+            <div style={estiloss}>
+              <h2 style={{margin:'0'}}>{(porcentajesGameplay.reduce((a,b)=>a+b,0)/5).toFixed(1)}</h2>
+              <p>Game play</p>
+            </div>
+            <canvas id="GAMEPLAY" ></canvas>
+          </Box>
+          <Box sx={estilosG}>
+            <div style={estiloss}>
+              <h2 style={{margin:'0'}}>{(porcentajesQualityPrice.reduce((a,b)=>a+b,0)/5).toFixed(1)}</h2>
+              <p>Quality Price</p>
+            </div>
+            <canvas id="QUALITYPRICE" ></canvas>
+          </Box>
         </Box>
-        <Box sx={estilosG}>
-        <div style={estiloss}>
-        <h2 style={{margin:'0'}}>2.5</h2>
-        <p>Quality Price</p>
-          </div>
-          <canvas id="QUALITYPRICE" ></canvas>
-        </Box>
-      </Box>
-        </div>)
+      </div>)
 }
 
 export default Grafico
