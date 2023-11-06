@@ -23,6 +23,8 @@ export const DELETE_ITEM_CART = 'DELETE_ITEM_CART';
 export const ADD_NEWS_PURCHASED = 'ADD_NEWS_PURCHASED';
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const DELETE_ITEM = 'DELETE_ITEM'
+export const GET_USER='GET_USER'
+
 
 
 export const getGames = ()=>{ 
@@ -207,7 +209,6 @@ export const logout = () => async dispatch => {
     console.error('Error al cerrar la sesión:', error);
   }
 };
-
 export const deleteItemCart = (UserId) => {
   return {
     type: DELETE_ITEM_CART,
@@ -245,6 +246,19 @@ export const deleteItem = (cart) => {
     type: DELETE_ITEM,
     payload: cart
   };
+}
+export function GetUser(){
+  return async function(dispatch){
+   try {
+    const {data}= await axios.get('http://localhost:3001/user')
+    return dispatch({
+      type:GET_USER,
+      payload:data
+    })
+   } catch (error) {
+    console.log(error.message)
+   }
+  }
 }
 
 

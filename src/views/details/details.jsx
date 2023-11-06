@@ -134,8 +134,7 @@ const Details = () => {
                   Quality price: {gameDetails?.quality_price}
                 </Typography>
               </Stack>
-            </Card>
-            <Grafico />
+            </Card>         
           </Stack>
           <Stack textAlign="left" marginLeft="20px">
             <Typography variant="h3">{gameDetails.name}</Typography>
@@ -176,7 +175,7 @@ const Details = () => {
       ) : (
         <Skeleton variant="rectangular" width={450} height={500} />
       )}
-
+   <Grafico />
       <Stack sx={{ textAlign: "center", marginTop: "20px" }}>
         <Typography variant="h6">Comments:</Typography>
         {/* {comments.map((comment, index) => (

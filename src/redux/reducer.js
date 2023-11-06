@@ -22,7 +22,8 @@ const initialState = {
   userData: null,
   favorites: [],
   reviews:[],
-  shoppingCart: []
+  shoppingCart: [],
+  user:[]
   }  
  
  const rootReducer = (state=initialState, action)=> {
@@ -174,6 +175,11 @@ const initialState = {
         ...state,
         shoppingCart:action.payload
       }
+      case GET_USER:
+        return{
+          ...state,
+          user:action.payload
+        } 
     default:
       return {...state}  
   }

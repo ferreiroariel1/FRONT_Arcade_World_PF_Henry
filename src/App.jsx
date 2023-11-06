@@ -6,8 +6,9 @@ import Summary from './components/cart/summary.jsx';
 import Failed from './components/cart/failed.jsx';
 import Auth from './components/auth/Auth.jsx';
 import Profile from './components/profile/Profile.jsx';
+import AppdDash from './views/Dashboard/AppDash.jsx'//
 import Footer from './components/footer/Footer.jsx'
-import { AuthProvider } from "./context/AuthContext";
+import {AuthProvider}from './context/AuthContext.jsx'
 import './App.css'
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/cart/failed" element={<Failed/>} />
         <Route path="/auth" element={<Auth/>} />
         <Route path='/user/profile' element={<Profile/>}/>
+        <Route path='/Dashboard' element={<AppdDash/>}/>  
       </Routes>
       <Footer/>
       </AuthProvider>
