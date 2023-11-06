@@ -217,45 +217,8 @@ const Details = () => {
               </Card>
             </Stack>
             ))}
-            {/* <Stack textAlign='center' marginRight='20px'>
-              <Card sx={{ minWidth: 275, marginBottom:'20px'}}>
-                <CardContent sx={{textAlign: 'center', height:'200px', width:'400px'}}>
-                  <Stack alignItems='center'>
-                  <Avatar src={userLocalDetail?.user?.image}/>
-                  </Stack>
-                  <Typography textAlign="center" marginBottom='10px'>{userLocalDetail?.user?.nickname}</Typography>
-                  <Typography textAlign="center">{comments}</Typography>
-                </CardContent>
-              </Card>
-            </Stack>
-            <Stack textAlign='center' marginRight='20px'>
-              <Card sx={{ minWidth: 275, marginBottom:'20px'}}>
-                <CardContent sx={{textAlign: 'center', height:'200px', width:'400px'}}>
-                <Stack alignItems='center'>
-                  <Avatar src={userLocalDetail?.user?.image}/>
-                  </Stack>
-                  <Typography textAlign="center" marginBottom='10px'>{userLocalDetail?.user?.nickname}</Typography>
-                  <Typography textAlign="center">{comments}</Typography>
-                </CardContent>
-              </Card>
-            </Stack> */}
           </Grid>
     </>
   );
 };
 export default Details;
-
-
-//map del comentario:
-/*  {gameComments.map((comment, index) => (
-        <AccordionDetails key={index}>
-          <Avatar
-            sx={{ width: 150, height: 150 }}
-            src={comment.image}
-            alt="Profile image"
-          />
-          <Typography>{comment.message}</Typography>
-          <Typography>$100</Typography>
-        </AccordionDetails>
-      ))} 
-*/

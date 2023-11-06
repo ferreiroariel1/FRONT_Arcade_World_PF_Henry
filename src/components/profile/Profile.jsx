@@ -135,7 +135,7 @@ const Profile = () => {
                   </Typography>
                 </AccordionSummary>
                 {shoppingCart.map((shopping) => (
-                <Stack display='flex' alignItems='center' >
+                <Stack display='flex' alignItems='center' justifyContent='center' >
                 <AccordionDetails key={shopping.id}>
                   <Stack display='flex' alignItems='end'>
                     <IconButton onClick={() =>deleteItemCart(shopping.id)}><CloseIcon/></IconButton>
@@ -145,7 +145,7 @@ const Profile = () => {
                     src={shopping.image}
                     alt="Profile image"
                     />
-                  <Typography sx={{textAlign:'center'}} >{shopping.name}</Typography>
+                  <Typography sx={{textAlign:'center', wordWrap: 'break-word'}} >{shopping.name}</Typography>
                   <Typography sx={{textAlign:'center'}} >${shopping.price}</Typography>
                 </AccordionDetails>
                 </Stack>
@@ -177,7 +177,7 @@ const Profile = () => {
                     src={favorite.image}
                     alt="Profile image"
                     />
-                  <Typography sx={{textAlign:'center'}} >{favorite.name}</Typography>
+                  <Typography sx={{textAlign:'center', wordWrap: 'break-word'}} >{favorite.name}</Typography>
                 </AccordionDetails>
                 </Stack>
               ))}

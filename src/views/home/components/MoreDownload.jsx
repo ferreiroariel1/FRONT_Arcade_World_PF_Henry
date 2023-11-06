@@ -54,15 +54,15 @@ function MoreDownload({id,name,image,price}) {
       <Typography variant="h5" component="div">
         {name}
       </Typography>
-      <Box display='flex' gap={2}>
-      <Typography  style={priceStyle}>
-        $/{price}
-      </Typography>
-      <Link to={`/detail/${id}`}>
-        <Button variant="contained" endIcon={<InfoOutlinedIcon />}>
-  Detail
-</Button>
-   </Link>
+      <Box display='flex' gap={2} alignItems='baseline' >
+        <Typography  style={priceStyle}>
+          $/{price}
+        </Typography>
+        <Link to={`/detail/${id}`}>
+          <Button variant="contained" endIcon={<InfoOutlinedIcon />}>
+            Detail
+          </Button>
+        </Link>
       </Box>
     </CardContent>
   </Card>
