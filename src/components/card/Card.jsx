@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import style from "./Card.module.css";
-import { Stack, Typography, Card, CardMedia, CardContent, Grid, Box } from "@mui/material";
+import { Stack, Typography, Card, CardMedia, CardContent } from "@mui/material";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 function CardItem({ game }) {
