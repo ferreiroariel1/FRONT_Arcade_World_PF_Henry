@@ -30,23 +30,24 @@ export function AuthProvider({ children }) {
     const googleProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleProvider);
   };
-  useEffect(() => {
-    const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
-      const localData = { 
-        login: true,
-        user: {
-          image: currentUser.reloadUserInfo.photoUrl,
-          Email: currentUser.reloadUserInfo.email,
-          name: currentUser.reloadUserInfo.displayName.split(' ')[0],
-          lastname: currentUser.reloadUserInfo.displayName.split(' ')[1],
-          nickname: currentUser.reloadUserInfo.displayName
-        }
+  const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
+    const localData = { 
+      login: true,
+      user: {
+        image: currentUser.reloadUserInfo.photoUrl,
+        Email: currentUser.reloadUserInfo.email,
+        name: currentUser.reloadUserInfo.displayName.split(' ')[0],
+        lastname: currentUser.reloadUserInfo.displayName.split(' ')[1],
+        nickname: currentUser.reloadUserInfo.displayName,
+        uid: currentUser.uid
       }
-      console.log(localData);
-      localStorage.setItem('login', JSON.stringify(localData)) 
-      setUser(localData);
-    });
-    return () => unsubuscribe();
+    }
+    console.log(localData);
+    localStorage.setItem('login', JSON.stringify(localData)) 
+    setUser(localData);
+  });
+  useEffect(() => {
+   unsubuscribe();
   }, []);
 
   return (

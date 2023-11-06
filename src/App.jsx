@@ -5,7 +5,7 @@ import Cart from './components/cart/cart.jsx';
 import Auth from './components/auth/Auth.jsx';
 import Profile from './components/profile/Profile.jsx';
 import Footer from './components/footer/Footer.jsx'
-import { AuthProvider } from "./context/authContext.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 import './App.css'
 
 
