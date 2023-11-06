@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { gameById } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import Grafico from "./Grafico";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   Card,
@@ -12,25 +12,27 @@ import {
   Typography,
   Avatar
 } from "@mui/material";
-import ShopIcon from "@mui/icons-material/Shop";
 import AddIcon from "@mui/icons-material/Add";
 import Skeleton from "@mui/material/Skeleton";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Filter from 'bad-words'
 var  filter = new Filter();
 import { addComments } from "../../redux/actions"
+import Pay from '../../components/cart/Pay.jsx'
+import { addToCart } from '../../redux/actions.js'
 
 const Details = () => {
   const dispatch = useDispatch();
   const [comments, setComments] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const shoppingCart = useSelector((state) => state.shoppingCart);
   let userLocalDetail = localStorage.getItem("login");
   userLocalDetail = userLocalDetail ? JSON.parse(userLocalDetail) : null;
+  console.log(userLocalDetail);
 
   const handleButton = () => {
     if (userLocalDetail === null || userLocalDetail === "") {
@@ -57,7 +59,6 @@ const Details = () => {
 
   const gameDetails = useSelector((state) => state.gameId);
   const { id } = useParams();
-  console.log(gameDetails)
 
   useEffect(() => {
     dispatch(gameById(id));
@@ -70,6 +71,43 @@ const Details = () => {
 
   const reviews = useSelector(state => state.reviews);
   const gameComments = reviews.filter(review => review.id === id);
+
+  const showAlert = () => {
+    Swal.fire({
+      toast: true,
+      icon: "success",
+      title: "Product added to cart",
+      timer: 1200,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      position: "top",
+    });
+  };
+
+  const showAlert2 = () => {
+    Swal.fire({
+      toast: true,
+      icon: "warning",
+      title: "The product is already in the cart",
+      timer: 2000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      position: "top",
+    });
+  };
+
+  
+  const handleAdd = () => {
+    const found = shoppingCart.find(el => el.id === id)
+    if(!found) {
+      dispatch(addToCart(gameDetails))
+      showAlert();
+       } else {
+      showAlert2()
+  }
+ }
+ const updateShoppingCart = useSelector((state) => state.shoppingCart);
+ localStorage.setItem('cart', JSON.stringify(updateShoppingCart))
 
   return (
     <>
@@ -84,20 +122,19 @@ const Details = () => {
               />
               <Stack sx={{ textAlign: "left", marginLeft: "8px" }}>
                 <Typography variant="overline">
-                  Score:{gameDetails?.score}
+                  Score:
                 </Typography>
                 <Typography variant="overline">
-                  Graphics: {gameDetails.graphics}
+                  Graphics: {gameDetails?.graphics}
                 </Typography>
                 <Typography variant="overline">
-                  Gameplay: {gameDetails.gameplay}
+                  Gameplay: {gameDetails?.gameplay}
                 </Typography>
                 <Typography variant="overline">
-                  Quality price: {gameDetails.qualityPrice}
+                  Quality price: {gameDetails?.quality_price}
                 </Typography>
               </Stack>
-            </Card>
-            <Grafico />
+            </Card>         
           </Stack>
           <Stack textAlign="left" marginLeft="20px">
             <Typography variant="h3">{gameDetails.name}</Typography>
@@ -126,25 +163,19 @@ const Details = () => {
                 color="success"
                 size="medium"
                 startIcon={<AddIcon />}
+                onClick={handleAdd}
               >
                 Adds
               </Button>
-              <Button
-                variant="contained"
-                color="success"
-                size="medium"
-                endIcon={<ShopIcon />}
-                sx={{ marginLeft: "3px" }}
-              >
-                Buy
-              </Button>
+              
+              <Pay />
             </div>
           </Stack>
         </Stack>
       ) : (
         <Skeleton variant="rectangular" width={450} height={500} />
       )}
-
+   <Grafico />
       <Stack sx={{ textAlign: "center", marginTop: "20px" }}>
         <Typography variant="h6">Comments:</Typography>
         {/* {comments.map((comment, index) => (

@@ -1,12 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
-  sendPasswordResetEmail,
-  signInWithRedirect,
+  onAuthStateChanged
+  // sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../firebase/config";
 
@@ -20,42 +17,43 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const signup = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
-  const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
-  };
+
   const loginWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleProvider);
   };
-  const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
-    const localData = { 
-      login: true,
-      user: {
-        image: currentUser.reloadUserInfo.photoUrl,
-        Email: currentUser.reloadUserInfo.email,
-        name: currentUser.reloadUserInfo.displayName.split(' ')[0],
-        lastname: currentUser.reloadUserInfo.displayName.split(' ')[1],
-        nickname: currentUser.reloadUserInfo.displayName,
-        uid: currentUser.uid
-      }
+ 
+  const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser) {
+      // Actualizar el estado solo si el usuario cambia
+      setUser({
+        login: true,
+        user: {
+          image: currentUser.photoURL,
+          email: currentUser.email,
+          name: currentUser.displayName.split(' ')[0],
+          lastname: currentUser.displayName.split(' ')[1],
+          nickname: currentUser.displayName,
+          uid: currentUser.uid,
+        },
+      });
+    } else {
+      // Usuario no autenticado
+      setUser(null);
+      localStorage.removeItem("login");
     }
-    console.log(localData);
-    localStorage.setItem('login', JSON.stringify(localData)) 
-    setUser(localData);
+    // console.log(user);
+    localStorage.setItem('login', JSON.stringify(user)) 
   });
   useEffect(() => {
-   unsubuscribe();
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
     <authContext.Provider
       value={{
-        signup,
-        login,
-        user,
         loginWithGoogle,
         // resetPassword,
       }}

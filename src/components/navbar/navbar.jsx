@@ -21,7 +21,7 @@ function Navbar() {
     flexwrap: "wrap",
   };
   return (
-    <AppBar position="" sx={{ background: "#333" }} style={appbar}>
+    <AppBar position="" sx={{ background: "#263238" }} style={appbar}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Logo */}
