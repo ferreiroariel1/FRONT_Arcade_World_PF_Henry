@@ -4,7 +4,7 @@ import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID,
          FILTER_GAMES, RESET_GENRE_FILTER, RESET_PLATFORM_FILTER,
          SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE, ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES,
          ADD_COMMENT, DELETE_ITEM_CART, ADD_NEWS_PURCHASED, ADD_TO_CART, DELETE_ITEM,
-         LOGOUT } from './actions.js';
+         LOGOUT, GET_USER } from './actions.js';
                         
 const initialState = {
   games:[],
@@ -27,7 +27,7 @@ const initialState = {
   }  
  
  const rootReducer = (state=initialState, action)=> {
-  let allGamesFav, allGamesRemove, allComments; 
+  let allGamesFav, allGamesRemove, allComments, filtrado; 
   
   switch (action.type) {
     case GET_GAMES:
@@ -171,9 +171,10 @@ const initialState = {
       }
                 
     case DELETE_ITEM:
+      filtrado = state.shoppingCart.filter((el) => el.id !== action.payload);
       return{
         ...state,
-        shoppingCart:action.payload
+        shoppingCart: filtrado
       }
       case GET_USER:
         return{
