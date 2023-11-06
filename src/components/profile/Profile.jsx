@@ -29,6 +29,7 @@ const Profile = () => {
   }
   //llamada a favoritos
   const favorites = useSelector((state) => state.favorites);
+  const shoppingCart = useSelector((state) => state.shoppingCart);
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -83,9 +84,9 @@ const Profile = () => {
     width: 1,
   });
   return (
-    <Box sx={{ flexGrow: 1, height: "100vh" }}>
+    <Box sx={{ flexGrow: 1, minHeight: "100vh" }}>
       <Grid container spacing={3}>
-        <Grid item xs>
+        <Grid item xs >
           <Card sx={{ width: "100%" }}>
             <Stack direction="column" alignItems="center">
               <Stack marginLeft="299px" marginTop="5px" marginBottom="-20px">
@@ -120,7 +121,7 @@ const Profile = () => {
           </Card>
           <Stack marginTop="20px">
             <Card>
-              <Accordion>
+              <Accordion sx={{marginBottom: 'auto'}}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
@@ -133,21 +134,28 @@ const Profile = () => {
                     </Link>
                   </Typography>
                 </AccordionSummary>
-                <AccordionDetails>
+                {shoppingCart.map((shopping) => (
+                <Stack display='flex' alignItems='center' >
+                <AccordionDetails key={shopping.id}>
+                  <Stack display='flex' alignItems='end'>
+                    <IconButton onClick={() =>deleteItemCart(shopping.id)}><CloseIcon/></IconButton>
+                  </Stack>
                   <Avatar
                     sx={{ width: 150, height: 150 }}
-                    src="https://m.media-amazon.com/images/I/81KUccM8azL._AC_UF1000,1000_QL80_.jpg"
+                    src={shopping.image}
                     alt="Profile image"
-                  />
-                  <Typography>Super Smash Bros Brawl</Typography>
-                  <Typography>$100</Typography>
+                    />
+                  <Typography sx={{textAlign:'center'}} >{shopping.name}</Typography>
+                  <Typography sx={{textAlign:'center'}} >${shopping.price}</Typography>
                 </AccordionDetails>
+                </Stack>
+              ))}
               </Accordion>
             </Card>
           </Stack>
           <Stack marginTop='20px'>
           <Card>
-            <Accordion width='100vw'>
+            <Accordion sx={{marginBottom: 'auto'}}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -169,7 +177,7 @@ const Profile = () => {
                     src={favorite.image}
                     alt="Profile image"
                     />
-                  <Typography>{favorite.name}</Typography>
+                  <Typography sx={{textAlign:'center'}} >{favorite.name}</Typography>
                 </AccordionDetails>
                 </Stack>
               ))}

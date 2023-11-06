@@ -140,7 +140,7 @@ const Login = () => {
                   message: "Password is required",
                 },
                 minLength: {
-                  value: 8,
+                  value: 6,
                   message: "Password must be at least 8 characters",
                 },
               })}

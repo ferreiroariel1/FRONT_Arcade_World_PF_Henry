@@ -3,9 +3,9 @@ import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID,
          SET_SELECTED_PLATFORM, SET_AUTHENTICATED, SET_USER_DATA, RESET_FILTERS,
          FILTER_GAMES, RESET_GENRE_FILTER, RESET_PLATFORM_FILTER,
          SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE, ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES,
-         ADD_COMMENT, DELETE_ITEM_CART, ADD_NEWS_PURCHASED, ADD_TO_CART, DELETE_ITEM,GET_USER } from './actions.js';
+         ADD_COMMENT, DELETE_ITEM_CART, ADD_NEWS_PURCHASED, ADD_TO_CART, DELETE_ITEM,
+         LOGOUT } from './actions.js';
                         
-         
 const initialState = {
   games:[],
   allGames:[],
@@ -142,14 +142,18 @@ const initialState = {
                 ...state,
                 reviews: allComments
               }
-    
+      case LOGOUT:
+              return {
+                ...state,
+                favorites,
+                reviews,
+              };
     case DELETE_ITEM_CART:
       
       return {
         ...state,
         shoppingCart:[]
       };
-
     case ADD_NEWS_PURCHASED:
       return{
         ...state,
