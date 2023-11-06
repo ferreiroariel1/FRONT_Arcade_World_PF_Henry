@@ -18,14 +18,16 @@ import { styled } from "@mui/material/styles";
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch } from 'react-redux';
-import { removeFromFavorites } from '../../redux/actions'
-
-
+import { deleteItem, removeFromFavorites, deleteItemCart } from '../../redux/actions'
 
 const Profile = () => {
   const dispatch = useDispatch();
+
   const removeFav = (id) => {
     dispatch(removeFromFavorites(id));
+  }
+  const removeItemCart = (id) => {
+    dispatch(deleteItem(id));
   }
   //llamada a favoritos
   const favorites = useSelector((state) => state.favorites);
@@ -46,11 +48,13 @@ const Profile = () => {
   const handleLogout = () => {
     if (userLocal) {
       userLocal.login = false;
+      userLocal.user = null;
+      console.log(userLocal);
       // localStorage.setItem('login', JSON.stringify(userLocal));
-      localStorage.removeItem("login", JSON.stringify(userLocal));
+      localStorage.removeItem("login");
+      dispatch(deleteItemCart(shoppingCart))
       navigate("/");
       userLocal = "";
-      
     }
   };
   const uploadImageN = async (e) => {
@@ -129,8 +133,8 @@ const Profile = () => {
                 >
                   <Typography variant="h5" component="div">
                     <Link to='/cart'>
-                    <ShoppingCartIcon />
-                    Your Cart
+                    <ShoppingCartIcon sx={{color:'#000'}}/>
+                    <Typography color='#000' variant="h5">Your Cart</Typography> 
                     </Link>
                   </Typography>
                 </AccordionSummary>
@@ -138,7 +142,7 @@ const Profile = () => {
                 <Stack display='flex' alignItems='center' justifyContent='center' >
                 <AccordionDetails key={shopping.id}>
                   <Stack display='flex' alignItems='end'>
-                    <IconButton onClick={() =>deleteItemCart(shopping.id)}><CloseIcon/></IconButton>
+                    <IconButton onClick={() => removeItemCart(shopping.id)}><CloseIcon/></IconButton>
                   </Stack>
                   <Avatar
                     sx={{ width: 150, height: 150 }}

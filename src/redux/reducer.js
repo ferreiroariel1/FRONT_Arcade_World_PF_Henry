@@ -27,7 +27,7 @@ const initialState = {
   }  
  
  const rootReducer = (state=initialState, action)=> {
-  let allGamesFav, allGamesRemove, allComments; 
+  let allGamesFav, allGamesRemove, allComments, filtrado; 
   
   switch (action.type) {
     case GET_GAMES:
@@ -170,9 +170,10 @@ const initialState = {
       }
                 
     case DELETE_ITEM:
+      filtrado = state.shoppingCart.filter((el) => el.id !== action.payload);
       return{
         ...state,
-        shoppingCart:action.payload
+        shoppingCart: filtrado
       }
       case GET_USER:
         return{
