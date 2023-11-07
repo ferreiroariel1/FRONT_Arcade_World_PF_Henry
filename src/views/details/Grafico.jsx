@@ -72,10 +72,12 @@ const porcentajeGame=calcularPromedio(porcentajesGameplay)
 const  porcentajeQP=calcularPromedio(porcentajesQualityPrice)
 
   console.log(gameDetails)
-  const Stargraphics= gameDetails?.graphics
-  const Stargameplay= gameDetails?.gameplay
-  const Starquality_price= gameDetails?.quality_price
-
+  const Stargraphics= gameDetails?.graphics?.stars
+  const scoregraphics= gameDetails?.graphics?.score
+  const Stargameplay= gameDetails?.gameplay?.stars
+  const scoregameplay= gameDetails?.gameplay?.score
+  const Starquality_price= gameDetails?.quality_price?.stars
+  const scorequality_price= gameDetails?.quality_price?.score
     useEffect(() => {
       const ctx = document.getElementById('GRAPHICS').getContext('2d');
 
@@ -224,29 +226,25 @@ const  porcentajeQP=calcularPromedio(porcentajesQualityPrice)
       justifyContent: 'center',
       flexDirection:'column'
     }
-    // const grafico=Stargraphics.reduce((a,b)=>(a+b,0)/5).toFixed(1)
-    // const gameplay=Stargameplay.reduce((a,b)=>(a+b,0)/5).toFixed(1)
-    // const calidaPresio=Starquality_price.reduce((a,b)=>(a+b,0)/5).toFixed(1)
-    
       return (  <div>
         <Box display='flex' sx={estilos} gap={12}>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}>{grafico}</h2>
+              <h2 style={{margin:'0'}}>{scoregraphics}</h2>
               <p>Graphics</p>
             </div>
             <canvas id="GRAPHICS" ></canvas>
           </Box>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}>{gameplay}</h2>
+              <h2 style={{margin:'0'}}>{scoregameplay}</h2>
               <p>Game play</p>
             </div>
             <canvas id="GAMEPLAY" ></canvas>
           </Box>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}>{calidaPresio}</h2>
+              <h2 style={{margin:'0'}}>{scorequality_price}</h2>
               <p>Quality Price</p>
             </div>
             <canvas id="QUALITYPRICE" ></canvas>
