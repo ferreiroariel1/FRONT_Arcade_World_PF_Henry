@@ -4,7 +4,7 @@ import { GET_GAMES, GET_GAME_NAME, GET_GAME_ID,
          FILTER_GAMES, RESET_GENRE_FILTER, RESET_PLATFORM_FILTER,
          SORT_GAMES_ASC, SORT_GAMES_DESC, FILTER_GAMES_BY_PRICE, ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES,
          ADD_COMMENT, DELETE_ITEM_CART, ADD_NEWS_PURCHASED, ADD_TO_CART, DELETE_ITEM,
-         LOGOUT, GET_USER } from './actions.js';
+         LOGOUT, GET_USER, SET_SELECTED_PRICE } from './actions.js';
                         
 const initialState = {
   games:[],
@@ -23,7 +23,8 @@ const initialState = {
   favorites: [],
   reviews:[],
   shoppingCart: [],
-  user:[]
+  user:[],
+  selectedPrice: ""
   }  
  
  const rootReducer = (state=initialState, action)=> {
@@ -65,6 +66,11 @@ const initialState = {
       return {
       ...state,
       selectedPlatform: action.payload,
+      };
+    case SET_SELECTED_PRICE:
+      return {
+        ...state,
+        selectedPrice: action.payload,
       };
     case FILTER_GAMES:
       return {
@@ -129,7 +135,7 @@ const initialState = {
                 favorites: allGamesFav,
             };
     case REMOVE_FROM_FAVORITES:
-         allGamesRemove = state.favorites.filter(game => game.id !== action.payload);
+            allGamesRemove = state.favorites.filter(game => game.id !== action.payload);
               console.log("Remove:",allGamesRemove)
         return {
                 ...state,
@@ -162,7 +168,6 @@ const initialState = {
           purchased: [...state.userData.purchased, ...action.payload]
         }
       }
-
     case ADD_TO_CART:
          
        return {
