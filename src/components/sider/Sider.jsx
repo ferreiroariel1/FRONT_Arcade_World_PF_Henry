@@ -13,6 +13,7 @@ import {
   sortGamesAsc,
   sortGamesDesc,
   filterGamesByPrice,
+  setSelectedPrice
 } from "../../redux/actions";
 import { Stack, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";

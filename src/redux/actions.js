@@ -24,6 +24,7 @@ export const ADD_NEWS_PURCHASED = 'ADD_NEWS_PURCHASED';
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const DELETE_ITEM = 'DELETE_ITEM'
 export const GET_USER='GET_USER'
+export const SET_SELECTED_PRICE = 'SET_SELECTED_PRICE'
 
 
 
@@ -135,6 +136,8 @@ export const filterGames = () => {
         game.price <= selectedPrice
       );
     }
+    // Ordenar los juegos por precio de mayor a menor
+    filteredGames.sort((a, b) => b.price - a.price);
     dispatch({
       type: FILTER_GAMES,
       payload: filteredGames,

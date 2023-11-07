@@ -23,7 +23,8 @@ const initialState = {
   favorites: [],
   reviews:[],
   shoppingCart: [],
-  user:[]
+  user:[],
+  selectedPrice: ""
   }  
  
  const rootReducer = (state=initialState, action)=> {
