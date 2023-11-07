@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 
 export default function Purchased() {
@@ -27,11 +28,12 @@ export default function Purchased() {
       <Button
         variant="contained"
         color="success"
-        fullWidth
         sx={{
           minWidth: "100%",
+          marginLeft:'10px'
         }}
         onClick={handleOnclickcarrito}
+        endIcon={<CreditCardIcon/>}
       >
         Pay Now
       </Button>
