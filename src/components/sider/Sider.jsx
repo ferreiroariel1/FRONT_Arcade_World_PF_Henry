@@ -95,9 +95,9 @@ function Sider() {
         onChange={handlePlatformSelectChange}
         sx={{ '& .MuiSelect-select': { color: selectedPlatform ? '#fff' : '#000' } }}
       >
-        <MenuItem value="" sx={{ color: selectedPlatform === '' ? '#fff' : '#000' }}>All</MenuItem>
+        <MenuItem value="" sx={{ color: selectedPlatform === '' ? '#5c74ff' : '#000' }}>All</MenuItem>
         {allPlatformsArray.map((platformName, index) => (
-          <MenuItem key={index} value={platformName} sx={{ color: selectedPlatform === platformName ? '#fff' : '#000' }}>
+          <MenuItem key={index} value={platformName} sx={{ color: selectedPlatform === platformName ? '#5c74ff' : '#000' }}>
             {platformName}
           </MenuItem>
         ))}
