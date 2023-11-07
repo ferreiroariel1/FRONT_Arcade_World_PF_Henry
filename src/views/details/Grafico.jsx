@@ -17,6 +17,7 @@ function Grafico() {
   const Stargraphics= gameDetails?.graphics
   const Stargameplay= gameDetails?.gameplay
   const Starquality_price= gameDetails?.quality_price
+  
     useEffect(() => {
       const ctx = document.getElementById('GRAPHICS').getContext('2d');
 
