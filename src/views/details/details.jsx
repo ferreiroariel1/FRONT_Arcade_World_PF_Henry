@@ -121,7 +121,7 @@ const Details = () => {
                 title="prueba"
               />
               <Stack sx={{ textAlign: "left", marginLeft: "8px" }}>
-                <Typography variant="overline">
+                {/* <Typography variant="overline">
                   Score:
                 </Typography>
                 <Typography variant="overline">
@@ -132,7 +132,7 @@ const Details = () => {
                 </Typography>
                 <Typography variant="overline">
                   Quality price: {gameDetails?.quality_price}
-                </Typography>
+                </Typography> */}
               </Stack>
             </Card>         
           </Stack>
