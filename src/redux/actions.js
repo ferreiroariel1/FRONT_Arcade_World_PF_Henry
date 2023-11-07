@@ -110,9 +110,15 @@ export const setSelectedPlatform = (platform) => {
     payload: platform
   }
 };
+export const setSelectedPrice = (price) => {
+  return {
+    type: SET_SELECTED_PRICE,
+    payload: price
+  }
+};
 export const filterGames = () => {
   return (dispatch, getState) => {
-    const { allGames, selectedGenre, selectedPlatform } = getState();
+    const { allGames, selectedGenre, selectedPlatform, selectedPrice } = getState();
     let filteredGames = [...allGames]; // Crear una copia del array
     if (selectedGenre && selectedGenre !== "") {
       filteredGames = filteredGames.filter((game) =>
@@ -122,6 +128,11 @@ export const filterGames = () => {
     if (selectedPlatform && selectedPlatform !== "") {
       filteredGames = filteredGames.filter((game) =>
         game.platforms.includes(selectedPlatform)
+      );
+    }
+    if (selectedPrice && selectedPrice !== "") {
+      filteredGames = filteredGames.filter((game) =>
+        game.price <= selectedPrice
       );
     }
     dispatch({

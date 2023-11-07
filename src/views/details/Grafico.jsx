@@ -12,6 +12,7 @@ function Grafico() {
   useEffect(() => {
     dispatch(gameById(id));
   }, [dispatch, id]);
+
 console.log("detail", gameDetails)
  const graficosGames=(arrs)=>{
   let arr=arrs?.graphics;
@@ -69,6 +70,12 @@ function calcularPromedio(array) {
 const porcentajeG =calcularPromedio(porcentajesGraphics)
 const porcentajeGame=calcularPromedio(porcentajesGameplay)
 const  porcentajeQP=calcularPromedio(porcentajesQualityPrice)
+
+  console.log(gameDetails)
+  const Stargraphics= gameDetails?.graphics
+  const Stargameplay= gameDetails?.gameplay
+  const Starquality_price= gameDetails?.quality_price
+
     useEffect(() => {
       const ctx = document.getElementById('GRAPHICS').getContext('2d');
 
@@ -78,9 +85,9 @@ const  porcentajeQP=calcularPromedio(porcentajesQualityPrice)
           labels: ['5','4','3','2','1'],
           datasets: [{
             label: 'Stars',
-            data: porcentajesGraphics,
-            backgroundColor: '#4CAF50', // Color verde característico de Play Store
-            borderWidth: 1, // Sin bordes
+            data: Stargraphics,
+            backgroundColor: '#4CAF50', 
+            borderWidth: 1, 
             borderRadius: 20,
             barThickness: 16,
             borderColor: 'rgba(75, 192, 192, 1)',
@@ -90,27 +97,28 @@ const  porcentajeQP=calcularPromedio(porcentajesQualityPrice)
           indexAxis: 'y',
           scales: {
             x: {
-              display: false, // Oculta el eje x
+              display: false, 
             },
             y: {
               beginAtZero: true,
-              display: true, // Oculta el eje y
+              display: true, 
             }
           },
           plugins: {
             legend: {
-              display: false, // Oculta la leyenda
+              display: false, 
             }
           },
           layout: {
             padding: {
-              top: 0, // Elimina el espacio en la parte superior
-              bottom: 0, // Elimina el espacio en la parte inferior
+              top: 0,
+              bottom: 0, 
             }
           }
         }
       });
     }, []);
+
     useEffect(() => {
       const ctx = document.getElementById('GAMEPLAY').getContext('2d');
 
@@ -120,9 +128,9 @@ const  porcentajeQP=calcularPromedio(porcentajesQualityPrice)
           labels: ['5','4','3','2','1'],
           datasets: [{
             label: 'Stars',
-            data: porcentajesGameplay,
-            backgroundColor: '#4CAF50', // Color verde característico de Play Store
-            borderWidth: 1, // Sin bordes
+            data: Stargameplay,
+            backgroundColor: '#4CAF50',
+            borderWidth: 1, 
             borderRadius: 20,
             barThickness: 16,
             borderColor: 'rgba(75, 192, 192, 1)',
@@ -132,27 +140,28 @@ const  porcentajeQP=calcularPromedio(porcentajesQualityPrice)
           indexAxis: 'y',
           scales: {
             x: {
-              display: false, // Oculta el eje x
+              display: false, 
             },
             y: {
               beginAtZero: true,
-              display: true, // Oculta el eje y
+              display: true, 
             }
           },
           plugins: {
             legend: {
-              display: false, // Oculta la leyenda
+              display: false, 
             }
           },
           layout: {
             padding: {
-              top: 0, // Elimina el espacio en la parte superior
-              bottom: 0, // Elimina el espacio en la parte inferior
+              top: 0, 
+              bottom: 0, 
             }
           }
         }
       });
     }, []);
+
     useEffect(() => {
       const ctx = document.getElementById('QUALITYPRICE').getContext('2d');
 
@@ -162,9 +171,9 @@ const  porcentajeQP=calcularPromedio(porcentajesQualityPrice)
           labels: ['5','4','3','2','1'],
           datasets: [{
             label: 'Stars',
-            data: porcentajesQualityPrice,
-            backgroundColor: '#4CAF50', // Color verde característico de Play Store
-            borderWidth: 1, // Sin bordes
+            data: Starquality_price,
+            backgroundColor: '#4CAF50', 
+            borderWidth: 1, 
             borderRadius: 20,
             barThickness: 16,
             borderColor: 'rgba(75, 192, 192, 1)',
@@ -174,27 +183,28 @@ const  porcentajeQP=calcularPromedio(porcentajesQualityPrice)
           indexAxis: 'y',
           scales: {
             x: {
-              display: false, // Oculta el eje x
+              display: false, 
             },
             y: {
               beginAtZero: true,
-              display: true, // Oculta el eje y
+              display: true, 
             }
           },
           plugins: {
             legend: {
-              display: false, // Oculta la leyenda
+              display: false, 
             }
           },
           layout: {
             padding: {
-              top: 0, // Elimina el espacio en la parte superior
-              bottom: 0, // Elimina el espacio en la parte inferior
+              top: 0, 
+              bottom: 0, 
             }
           }
         }
       });
     }, []);
+
     const estilos={
       display:'flex',
       alignItems: 'center',
@@ -214,25 +224,29 @@ const  porcentajeQP=calcularPromedio(porcentajesQualityPrice)
       justifyContent: 'center',
       flexDirection:'column'
     }
+    // const grafico=Stargraphics.reduce((a,b)=>(a+b,0)/5).toFixed(1)
+    // const gameplay=Stargameplay.reduce((a,b)=>(a+b,0)/5).toFixed(1)
+    // const calidaPresio=Starquality_price.reduce((a,b)=>(a+b,0)/5).toFixed(1)
+    
       return (  <div>
         <Box display='flex' sx={estilos} gap={12}>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}>{porcentajeG}</h2>
+              <h2 style={{margin:'0'}}>{grafico}</h2>
               <p>Graphics</p>
             </div>
             <canvas id="GRAPHICS" ></canvas>
           </Box>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}> {porcentajeGame} </h2>
+              <h2 style={{margin:'0'}}>{gameplay}</h2>
               <p>Game play</p>
             </div>
             <canvas id="GAMEPLAY" ></canvas>
           </Box>
           <Box sx={estilosG}>
             <div style={estiloss}>
-              <h2 style={{margin:'0'}}> {porcentajeQP} </h2>
+              <h2 style={{margin:'0'}}>{calidaPresio}</h2>
               <p>Quality Price</p>
             </div>
             <canvas id="QUALITYPRICE" ></canvas>
