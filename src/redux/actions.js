@@ -31,7 +31,7 @@ export const SET_SELECTED_PRICE = 'SET_SELECTED_PRICE'
 export const getGames = ()=>{ 
   return async function(dispatch) {
   try {
-   const dataGm = (await axios.get('http://localhost:3001/videogame')).data;
+   const dataGm = (await axios.get('https://back-arcade-world-pf-henry.onrender.com/videogame')).data;
    return dispatch({
       type: GET_GAMES, 
       payload: dataGm
