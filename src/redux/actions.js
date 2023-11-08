@@ -46,7 +46,7 @@ export const getGames = ()=>{
 export const gameByName = (name)=> {
 return async function(dispatch) {
   try {
-    const {data} = await axios.get(`http://localhost:3001/videogame/?name=${name}`);
+    const {data} = await axios.get(`https://back-arcade-world-pf-henry.onrender.com/videogame/?name=${name}`);
             
       return dispatch({
       type: GET_GAME_NAME, 
@@ -61,7 +61,7 @@ return async function(dispatch) {
 export const gameById = (id)=> {
 return async function(dispatch) {
   try {
-    const dataId = (await axios.get(`http://localhost:3001/videogame/${id}`)).data;
+    const dataId = (await axios.get(`https://back-arcade-world-pf-henry.onrender.com/videogame/${id}`)).data;
 
       return dispatch({
       type: GET_GAME_ID,
@@ -76,7 +76,7 @@ return async function(dispatch) {
 export const gamePlataforms = ()=> {
   return async function(dispatch) {
     try {
-      const dataPl = (await axios.get('http://localhost:3001/platform')).data;
+      const dataPl = (await axios.get('https://back-arcade-world-pf-henry.onrender.com/platform')).data;
       return dispatch({
         type: GET_PLATFORMS,
         payload: dataPl
@@ -89,7 +89,7 @@ export const gamePlataforms = ()=> {
 export const gameGenres = ()=> {
   return async function(dispatch) {
     try {
-      const dataGn = (await axios.get('http://localhost:3001/genre')).data;
+      const dataGn = (await axios.get('https://back-arcade-world-pf-henry.onrender.com/genre')).data;
       return dispatch({
         type: GET_GENRES,
         payload: dataGn
@@ -176,14 +176,14 @@ export const resetFilters = () => {
 export function postRegister(payload){
   return async function(){
     const data = await
-    axios.post("http://localhost:3001/user/register",payload)
+    axios.post("https://back-arcade-world-pf-henry.onrender.com/user/register",payload)
     return data
   }
 }
 export function postLogin(payload){
   return async function(){
     const data = await
-    axios.post("http://localhost:3001/user/login",payload)
+    axios.post("https://back-arcade-world-pf-henry.onrender.com/user/login",payload)
     return data
   }
 }
@@ -264,7 +264,7 @@ export const deleteItem = (id) => {
 export function GetUser(){
   return async function(dispatch){
    try {
-    const {data}= await axios.get('http://localhost:3001/user')
+    const {data}= await axios.get('https://back-arcade-world-pf-henry.onrender.com/user')
     return dispatch({
       type:GET_USER,
       payload:data
