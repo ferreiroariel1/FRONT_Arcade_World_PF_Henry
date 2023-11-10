@@ -32,7 +32,7 @@ const Home = () => {
         <Carrusel imagenes={IMGcarrusel}  />
       </Box>
       <Typography variant="h3" component="h3" className="titulo" textAlign="center" color="beige" sx={{ margin: '1em 0em' }}>
-      <GradeIcon style={{ fontSize: 40 }}/>NEWSsss<GradeIcon style={{ fontSize: 40 }}/>
+      <GradeIcon style={{ fontSize: 40 }}/>NEWS<GradeIcon style={{ fontSize: 40 }}/>
       </Typography>
       <Box display="flex" justifyContent="space-around" flexWrap="wrap">
         {NewsGame?.map((games) => (
