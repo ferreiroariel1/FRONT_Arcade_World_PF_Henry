@@ -21,7 +21,7 @@ function Search() {
         fullWidth
         size='small'
         variant="standard"
-        placeholder="Search Game"
+        placeholder="hola funciono el cambio"
         value={valor}
         onChange={chageHandlers}
         sx={{ '& .MuiInputBase-input': { color: 'white' }}}
