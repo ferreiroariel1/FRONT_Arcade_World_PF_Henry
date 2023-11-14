@@ -28,8 +28,18 @@ function App() {
           <Route path="/auth" element={<Auth />} />
           <Route path='/user/profile' element={<Profile />} />
           <Route path='/Dashboard' element={<AppdDash />} />
-          {/* Agregar redirecciones aquí */}
-          <Route path='/old-route' element={<Navigate to='/new-route' />} />
+          
+          {/* Redirecciones para todas las rutas */}
+          <Route path='/old-about' element={<Navigate to='/about' />} />
+          <Route path='/old-store' element={<Navigate to='/store' />} />
+          <Route path='/old-detail/:id' element={<Navigate to='/detail/:id' />} />
+          <Route path='/old-cart' element={<Navigate to='/cart' />} />
+          <Route path='/old-cart/summary' element={<Navigate to='/cart/summary' />} />
+          <Route path='/old-cart/failed' element={<Navigate to='/cart/failed' />} />
+          <Route path='/old-auth' element={<Navigate to='/auth' />} />
+          <Route path='/old-user/profile' element={<Navigate to='/user/profile' />} />
+          <Route path='/old-Dashboard' element={<Navigate to='/Dashboard' />} />
+          
         </Routes>
         <Footer />
       </AuthProvider>
